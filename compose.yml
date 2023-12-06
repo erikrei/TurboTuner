@@ -1,0 +1,12 @@
+services:
+  client:
+    image: node:latest
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./client:/client
+    container_name: client
+    working_dir: /client
+    command: sh -c "npm install && npm run start"
+    environment:
+      - WATCHPACK_POLLING=true
