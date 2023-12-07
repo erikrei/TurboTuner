@@ -1,7 +1,14 @@
 import express from 'express';
 import session from 'express-session';
+import { TUser } from '../types';
 
 import { mongodbUri } from './connectToDatabase';
+
+declare module 'express-session' {
+    interface Session {
+        user: TUser
+    }
+}
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 const store = new MongoDBStore({
