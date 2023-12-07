@@ -3,3 +3,8 @@ export type TUser = {
     username: string,
     password: string
 }
+
+export type TValidInput = {
+    feedbackMsg: string,
+    statusCode: number
+}

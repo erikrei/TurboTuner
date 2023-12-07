@@ -1,7 +1,7 @@
 import cors from 'cors';
-import express from 'express';
+import { Router } from 'express';
 
-const corsRouter: express.Router = express.Router();
+const corsRouter: Router = Router();
 
 corsRouter.use(cors({
     origin: 'http://localhost:4200',
