@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+:root {
+    --auth-active-bg-color: #000814;
+    --auth-passive-bg-color: #001d3d;
+    --auth-focus-outline-color: #219ebc;
+}
+
+a {
+    text-decoration: none;
+}
