@@ -7,7 +7,7 @@ services:
       - ./client:/client
     container_name: client
     working_dir: /client
-    command: sh -c "npm install && npm run start"
+    command: sh -c "npm install && npm run start:container"
     environment:
       - WATCHPACK_POLLING=true
     depends_on:
