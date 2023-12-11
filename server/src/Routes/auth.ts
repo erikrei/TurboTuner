@@ -3,8 +3,9 @@ import mongoose from 'mongoose';
 import { MongoError } from 'mongodb';
 import bcrypt from 'bcryptjs';
 
-import { TUser, TValidInput } from '../types';
+import { TUser, TUserInfo, TValidInput } from '../types';
 import User from '../Models/User';
+import UserInfo from '../Models/UserInfo';
 import checkValidRegisterInputs from '../Helpers/checkValidRegisterInputs';
 
 const authRouter = Router();
@@ -18,7 +19,8 @@ authRouter.post('/register', async (req: Request, res: Response) => {
         try {
             const _id: string = new mongoose.Types.ObjectId().toHexString();
             const hashedPassword: string = bcrypt.hashSync(password);
-            const dbResponse = await User.create<TUser>({ _id, username, password: hashedPassword })
+            const userResponse = await User.create<TUser>({ _id, username, password: hashedPassword });
+            const userInfoResponse = await UserInfo.create<TUserInfo>({ _id, money: 0, points: 0 });
         } catch (error) {
             if ((error as MongoError).code === 11000) {
                 validInput.feedbackMsg = 'Benutzername ist bereits vergeben.';
