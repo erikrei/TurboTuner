@@ -1,6 +1,5 @@
-// import { useUserInfoContext } from "../Contexts/UserInfoContext";
 import { useContext } from "react";
-import { UserInfoContext } from "../Contexts/UserInfoContext";
+import { UserInfoContext } from "../Pages/DashboardLayout";
 
 export default function UserInformation() {
   const userInfo = useContext(UserInfoContext);
@@ -8,7 +7,9 @@ export default function UserInformation() {
   if (userInfo) {
     return (
       <section className="user-info">
-        <h2>Willkommen</h2>
+        <h2>
+          Willkommen <span>{userInfo.username}</span>
+        </h2>
         <p>
           Kontostand: <span>{userInfo.money}€</span>
         </p>
@@ -19,5 +20,5 @@ export default function UserInformation() {
     );
   }
 
-  return <h1>UserInformation mit leerem UserInfo Objekt</h1>;
+  return <h1>UserInfo Objekt konnte nicht geladen werden</h1>;
 }

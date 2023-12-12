@@ -20,7 +20,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
             const _id: string = new mongoose.Types.ObjectId().toHexString();
             const hashedPassword: string = bcrypt.hashSync(password);
             const userResponse = await User.create<TUser>({ _id, username, password: hashedPassword });
-            const userInfoResponse = await UserInfo.create<TUserInfo>({ _id, money: 0, points: 0 });
+            const userInfoResponse = await UserInfo.create<TUserInfo>({ _id, username, money: 0, points: 0 });
         } catch (error) {
             if ((error as MongoError).code === 11000) {
                 validInput.feedbackMsg = 'Benutzername ist bereits vergeben.';
@@ -56,18 +56,6 @@ authRouter.post('/login', async (req: Request, res: Response) => {
     }
 
     res.status(500).send('Login war aus unbekannten Gründen nicht erfolgreich.')
-})
-
-authRouter.get('/', (req: Request, res: Response) => {
-    if (req.session.user) {
-        return res.json({
-            isAuth: true
-        })
-    } else {
-        return res.json({
-            isAuth: false
-        })
-    }
 })
 
 export default authRouter;
