@@ -12,3 +12,9 @@ export type TUser = {
     username: string,
     password: string
 }
+
+export type TUserInfo = {
+    _id: string,
+    money: number,
+    points: number
+}

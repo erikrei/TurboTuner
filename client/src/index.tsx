@@ -7,7 +7,7 @@ import "./styles/index.css";
 import authLoader from "./Loaders/authLoader";
 
 import Authentication, { Login, Register } from "./Pages/Authentication";
-import Dashboard from "./Pages/Dashboard";
+import DashboardLayout from "./Pages/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: <DashboardLayout />,
     loader: authLoader,
   },
 ]);
