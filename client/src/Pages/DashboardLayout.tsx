@@ -1,27 +1,24 @@
 import { AxiosResponse } from "axios";
-import { useEffect } from "react";
-import { useLoaderData, Navigate, useNavigate, Outlet } from "react-router-dom";
-import { TAuthBoolean, TUserInfo } from "../types";
-
-import UserInfoProvider from "../Contexts/UserInfoContext";
+import { useState, createContext } from "react";
+import { useLoaderData, Outlet } from "react-router-dom";
+import { TUserInfo } from "../types";
 
 import UserInformation from "../Components/UserInformation";
 
+export const UserInfoContext = createContext<TUserInfo | null>(null);
+
 export default function DashboardLayout() {
   const loaderData: AxiosResponse = useLoaderData() as AxiosResponse;
-  const { isAuth }: TAuthBoolean = loaderData.data;
-  const navigate = useNavigate();
+  const initUserInfo: TUserInfo = loaderData.data;
 
-  useEffect(() => {
-    if (!isAuth) navigate("/");
-  }, []);
+  const [userInfo, setUserInfo] = useState<TUserInfo>(initUserInfo);
 
   return (
     <div className="dashboard-layout-container">
-      <UserInfoProvider>
+      <UserInfoContext.Provider value={userInfo}>
         <UserInformation />
         <Outlet />
-      </UserInfoProvider>
+      </UserInfoContext.Provider>
     </div>
   );
 }

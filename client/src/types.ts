@@ -15,6 +15,7 @@ export type TUser = {
 
 export type TUserInfo = {
     _id: string,
+    username: string,
     money: number,
     points: number
 }

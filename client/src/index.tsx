@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  Navigate,
+} from "react-router-dom";
 
 import "./styles/index.css";
 
-import authLoader from "./Loaders/authLoader";
+import userInfoLoader from "./Loaders/userInfoLoader";
 
 import Authentication, { Login, Register } from "./Pages/Authentication";
 import DashboardLayout from "./Pages/DashboardLayout";
@@ -13,7 +17,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <Authentication />,
-    loader: authLoader,
     children: [
       {
         path: "login",
@@ -28,7 +31,8 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout />,
-    loader: authLoader,
+    loader: userInfoLoader,
+    errorElement: <Navigate to="/" />,
   },
 ]);
 

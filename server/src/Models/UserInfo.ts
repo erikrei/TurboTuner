@@ -2,6 +2,10 @@ import { Schema, model } from 'mongoose';
 import { TUserInfo } from '../types';
 
 const UserInfoSchema = new Schema<TUserInfo>({
+    username: {
+        type: String,
+        required: true,
+    },
     money: {
         type: Number,
         required: true,
