@@ -4,9 +4,13 @@ import { MongoError } from 'mongodb';
 import bcrypt from 'bcryptjs';
 
 import { TUser, TUserInfo, TValidInput } from '../types';
+
 import User from '../Models/User';
 import UserInfo from '../Models/UserInfo';
+import UserSession from '../Models/UserSession';
+
 import checkValidRegisterInputs from '../Helpers/checkValidRegisterInputs';
+import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
 
 const authRouter = Router();
 
@@ -56,6 +60,19 @@ authRouter.post('/login', async (req: Request, res: Response) => {
     }
 
     res.status(500).send('Login war aus unbekannten Gründen nicht erfolgreich.')
+})
+
+authRouter.post('/logout', checkIfSessionHasUser, async (req, res) => {
+    const _id = req.sessionID;
+
+    try {
+        const userSessionResponse = await UserSession.findByIdAndDelete(_id);
+        return res.status(200).send('Benutzer wurde erfolgreich ausgeloggt.');
+    } catch (error) {
+        console.log(error);
+    }
+
+    res.status(500).send('Benutzer konnte aus unbekannten Gründen nicht ausgeloggt werden.');
 })
 
 export default authRouter;
