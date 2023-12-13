@@ -87,7 +87,7 @@ carRouter.post('/addToUserFirstCar', checkIfSessionHasUser, async (req: Request,
     try {
         const _id = getMongooseObjectId();
         const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name });
-        const userInfoResponse = await UserInfo.findByIdAndUpdate<TUserInfo>(user_id, { firstLogin: false });
+        const userInfoResponse = await UserInfo.findByIdAndUpdate<TUserInfo>(user_id, { firstLogin: false, activeCar: userCarResponse });
         return res.send(`Das Auto ${name} wurde erfolgreich hinzugefügt.`);
     } catch (error) {
         console.log(error);
