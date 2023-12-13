@@ -9,10 +9,13 @@ import {
 import "./styles/index.css";
 
 import userInfoLoader from "./Loaders/userInfoLoader";
+import userCarsLoader from "./Loaders/userCarsLoader";
 
 import Authentication, { Login, Register } from "./Pages/Authentication";
 import DashboardLayout from "./Pages/DashboardLayout";
 import FirstCarSelection from "./Pages/FirstCarSelection";
+
+import Garage from "./Components/Garage";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,13 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     loader: userInfoLoader,
     errorElement: <Navigate to="/" />,
+    children: [
+      {
+        path: "garage",
+        element: <Garage />,
+        loader: userCarsLoader,
+      },
+    ],
   },
 ]);
 

@@ -1,9 +1,10 @@
 div.dashboard-layout-container {
     background-image: url(../assets/dashboard_bg1737x1000.jpg);
     background-size: cover;
-    /* background-attachment: fixed; */
+    background-attachment: fixed;
     width: 100dvw;
     height: 100dvh;
+    overflow-x: hidden;
 
     &.first-car-selection {
         display: flex;
@@ -21,7 +22,7 @@ div.dashboard-layout-container {
 
             > article.car {
                 background-color: rgb(var(--auth-active-bg-color-rgb), 0.9);
-                box-shadow: 0.1rem 0.1rem .5rem 0.25rem var(--auth-focus-outline-color);
+                box-shadow: 0.1rem 0.1rem 0.5rem 0.25rem var(--auth-focus-outline-color);
                 border-radius: 0.5rem;
                 padding: 2rem;
                 display: flex;
@@ -102,4 +103,56 @@ div.dashboard-content-container {
     padding: 2rem;
     display: grid;
     grid-template-columns: 30% 1fr;
+    gap: 2rem;
+
+    > aside.app-sidebar {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+
+        > section.user-info {
+            > h2 {
+                margin-bottom: 1rem;
+            }
+
+            td {
+                padding-right: 1rem;
+            }
+        }
+
+        > nav {
+            > h2 {
+                text-align: center;
+                margin-bottom: 1rem;
+            }
+
+            > div.link-container {
+                color: white;
+                font-size: 1.2rem;
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                font-weight: bold;
+
+                > a {
+                    color: white;
+
+                    &:hover {
+                        color: var(--auth-focus-outline-color);
+                    }
+                }
+            }
+        }
+    }
+
+    > main {
+    }
+}
+
+.card-class {
+    color: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
+    box-shadow: 0.1rem 0.1rem 0.75rem 0.1rem white;
 }
