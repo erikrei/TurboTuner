@@ -1,5 +1,4 @@
 import { Router, Request, Response } from 'express';
-import mongoose from 'mongoose';
 import { MongoError } from 'mongodb';
 import bcrypt from 'bcryptjs';
 
@@ -11,6 +10,7 @@ import UserSession from '../Models/UserSession';
 
 import checkValidRegisterInputs from '../Helpers/checkValidRegisterInputs';
 import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
+import getMongooseObjectId from '../Helpers/getMongooseObjectId';
 
 const authRouter = Router();
 
@@ -21,7 +21,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
 
     if (validInput.statusCode === 201) {
         try {
-            const _id: string = new mongoose.Types.ObjectId().toHexString();
+            const _id: string = getMongooseObjectId();
             const hashedPassword: string = bcrypt.hashSync(password);
             const userResponse = await User.create<TUser>({ _id, username, password: hashedPassword });
             const userInfoResponse = await UserInfo.create<TUserInfo>({ _id, username, money: 0, points: 0 });
