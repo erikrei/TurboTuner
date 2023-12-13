@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { useState, createContext } from "react";
-import { useLoaderData, Outlet } from "react-router-dom";
+import { useLoaderData, Outlet, Navigate } from "react-router-dom";
 import { TUserInfo } from "../types";
 
 import "../styles/dashboard.css";
@@ -15,6 +15,8 @@ export default function DashboardLayout() {
   const initUserInfo: TUserInfo = loaderData.data;
 
   const [userInfo, setUserInfo] = useState<TUserInfo>(initUserInfo);
+
+  if (userInfo.firstLogin) return <Navigate to="/firstCar" />;
 
   return (
     <div className="dashboard-layout-container">

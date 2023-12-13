@@ -12,6 +12,7 @@ import userInfoLoader from "./Loaders/userInfoLoader";
 
 import Authentication, { Login, Register } from "./Pages/Authentication";
 import DashboardLayout from "./Pages/DashboardLayout";
+import FirstCarSelection from "./Pages/FirstCarSelection";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,12 @@ const router = createBrowserRouter([
         element: <Register />,
       },
     ],
+  },
+  {
+    path: "/firstCar",
+    element: <FirstCarSelection />,
+    loader: userInfoLoader,
+    errorElement: <Navigate to="/" />,
   },
   {
     path: "/dashboard",

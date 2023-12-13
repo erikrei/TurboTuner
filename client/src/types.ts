@@ -17,5 +17,15 @@ export type TUserInfo = {
     _id: string,
     username: string,
     money: number,
-    points: number
+    points: number,
+    firstLogin: boolean
+}
+
+export type TGeneralCar = {
+    _id: string,
+    name: string,
+    price: number,
+    description: string,
+    imgName: string,
+    imgAlt: string
 }
