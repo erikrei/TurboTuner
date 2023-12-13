@@ -9,7 +9,8 @@ export type TUserInfo = {
     username: string,
     money: number,
     points: number,
-    firstLogin: boolean
+    firstLogin: boolean,
+    activeCar?: TUserCar
 }
 
 export type TValidInput = {

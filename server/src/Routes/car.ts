@@ -12,6 +12,23 @@ import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
 
 const carRouter = Router();
 
+carRouter.put('/changeActiveCar', checkIfSessionHasUser, async (req: Request, res: Response) => {
+    const user_id = req.session.user._id;
+    const { car_id } = req.body;
+
+    try {
+        const activeCar = await UserCar.findById<TUserCar>(car_id);
+        const userInfoResponse = await UserInfo.findByIdAndUpdate(user_id, {
+            activeCar
+        }, { new: true })
+        return res.json(userInfoResponse);
+    } catch (error) {
+        console.log(error);
+    }
+
+    res.send('PUT /car/changeActiveCar');
+})
+
 carRouter.get('/allUser', checkIfSessionHasUser, async (req: Request, res: Response) => {
     const user_id = req.session.user._id;
 

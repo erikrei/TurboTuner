@@ -14,7 +14,14 @@ const UserInfoSchema = new Schema<TUserInfo>({
         type: Number,
         required: true
     },
-    firstLogin: Boolean
+    firstLogin: Boolean,
+    activeCar: {
+        type: {
+            _id: String,
+            name: String,
+        },
+        required: false
+    }
 }, { collection: 'userInfos' })
 
 export default model<TUserInfo>('UserInfoSchema', UserInfoSchema);
