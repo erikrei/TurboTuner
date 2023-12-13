@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Bungee+Outline&display=swap");
 
 *,
 *::before,
@@ -10,11 +10,32 @@
 }
 
 :root {
+    --black-purple: #11001c;
+    --black-purple-rgb: 17, 0, 28;
+    --light-purple: #3a015c;
+    --light-purple-rgb: 58, 1, 92;
     --auth-active-bg-color: #000814;
+    --auth-active-bg-color-rgb: 0, 8, 20;
     --auth-passive-bg-color: #001d3d;
     --auth-focus-outline-color: #219ebc;
+    --auth-focus-outline-color-rgb: 33, 158, 188;
 }
 
 a {
     text-decoration: none;
+}
+
+::-webkit-scrollbar {
+    width: 1rem;
+    /* background-color: var(--black-purple); */
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--black-purple);
+    border: 2px solid white;
+    border-radius: 0.5rem;
 }
