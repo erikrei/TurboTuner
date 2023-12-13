@@ -7,8 +7,14 @@ import "../styles/dashboard.css";
 
 import DashboardHeader from "../Components/DashboardHeader";
 import UserInformation from "../Components/UserInformation";
+import Navigation from "../Components/Navigation";
 
-export const UserInfoContext = createContext<TUserInfo | null>(null);
+type TUserInfoContext = {
+  userInfo: TUserInfo;
+  setUserInfo: React.Dispatch<React.SetStateAction<TUserInfo>>;
+};
+
+export const UserInfoContext = createContext<TUserInfoContext | null>(null);
 
 export default function DashboardLayout() {
   const loaderData: AxiosResponse = useLoaderData() as AxiosResponse;
@@ -22,11 +28,17 @@ export default function DashboardLayout() {
     <div className="dashboard-layout-container">
       <DashboardHeader />
       <div className="dashboard-content-container">
-        <UserInfoContext.Provider value={userInfo}>
-          <aside>
+        <UserInfoContext.Provider
+          value={{
+            userInfo,
+            setUserInfo,
+          }}
+        >
+          <aside className="app-sidebar">
             <UserInformation />
+            <Navigation />
           </aside>
-          <main>
+          <main className="card-class">
             <Outlet />
           </main>
         </UserInfoContext.Provider>
