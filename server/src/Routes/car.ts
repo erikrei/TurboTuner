@@ -1,10 +1,11 @@
 import { Router, Request, Response } from 'express';
 import { MongoError } from 'mongodb';
 
-import { TGeneralCar, TUserCar } from '../types';
+import { TGeneralCar, TUserCar, TUserInfo } from '../types';
 
 import GeneralCar from '../Models/GeneralCar';
 import UserCar from '../Models/UserCar';
+import UserInfo from '../Models/UserInfo';
 
 import getMongooseObjectId from '../Helpers/getMongooseObjectId';
 import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
@@ -60,6 +61,22 @@ carRouter.get('/general', async (req: Request, res: Response) => {
     }
 
     res.status(500).send('Unbekannter Fehler aufgetreten. Generelle Autos konnten nicht zurückgegeben werden.')
+})
+
+carRouter.post('/addToUserFirstCar', checkIfSessionHasUser, async (req: Request, res: Response) => {
+    const user_id = req.session.user._id;
+    const { name } = req.body;
+
+    try {
+        const _id = getMongooseObjectId();
+        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name });
+        const userInfoResponse = await UserInfo.findByIdAndUpdate<TUserInfo>(user_id, { firstLogin: false });
+        return res.send(`Das Auto ${name} wurde erfolgreich hinzugefügt.`);
+    } catch (error) {
+        console.log(error);
+    }
+
+    res.send(500).send('Unbekannter Fehler aufgetreten. Auto konnte dem Benutzer nicht hinzugefügt werden.')
 })
 
 carRouter.post('/addGeneralCar', async (req: Request, res: Response) => {

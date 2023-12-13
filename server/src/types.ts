@@ -8,7 +8,8 @@ export type TUserInfo = {
     _id: string,
     username: string,
     money: number,
-    points: number
+    points: number,
+    firstLogin: boolean
 }
 
 export type TValidInput = {

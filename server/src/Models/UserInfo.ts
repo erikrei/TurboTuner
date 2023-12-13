@@ -13,7 +13,8 @@ const UserInfoSchema = new Schema<TUserInfo>({
     points: {
         type: Number,
         required: true
-    }
+    },
+    firstLogin: Boolean
 }, { collection: 'userInfos' })
 
 export default model<TUserInfo>('UserInfoSchema', UserInfoSchema);

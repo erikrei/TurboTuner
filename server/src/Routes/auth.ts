@@ -24,7 +24,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
             const _id: string = getMongooseObjectId();
             const hashedPassword: string = bcrypt.hashSync(password);
             const userResponse = await User.create<TUser>({ _id, username, password: hashedPassword });
-            const userInfoResponse = await UserInfo.create<TUserInfo>({ _id, username, money: 0, points: 0 });
+            const userInfoResponse = await UserInfo.create<TUserInfo>({ _id, username, money: 100000, points: 0, firstLogin: true });
         } catch (error) {
             if ((error as MongoError).code === 11000) {
                 validInput.feedbackMsg = 'Benutzername ist bereits vergeben.';
