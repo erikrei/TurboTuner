@@ -25,7 +25,7 @@ carRouter.get('/allUser', checkIfSessionHasUser, async (req: Request, res: Respo
     res.send('GET /car/allUser');
 })
 
-carRouter.get('/:id', async (req: Request, res: Response) => {
+carRouter.get('/allCars/:id', async (req: Request, res: Response) => {
     const car_id = req.params.id;
 
     try {
