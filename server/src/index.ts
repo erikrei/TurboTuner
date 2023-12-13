@@ -9,6 +9,7 @@ import loggingRouter from './Helpers/logRequestInfo';
 
 import authRouter from './Routes/auth';
 import userInfoRouter from './Routes/userInfo';
+import carRouter from './Routes/car';
 
 const app: Express = express();
 const PORT: number = 3000;
@@ -20,6 +21,7 @@ app.use(loggingRouter);
 
 app.use('/auth', authRouter);
 app.use('/userInfo', userInfoRouter);
+app.use('/car', carRouter);
 
 app.listen(PORT, () => {
     console.log(getCurrentTime(), `Server auf Port '${PORT}' gestartet`);
