@@ -5,58 +5,54 @@ div.dashboard-layout-container {
     width: 100dvw;
     height: 100dvh;
     overflow-x: hidden;
+}
 
-    &.first-car-selection {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 5rem;
-        color: white;
+div.dashboard-layout-container.first-car-selection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5rem;
+    color: white;
+}
 
-        > section.cards-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            margin-top: 2rem;
-            width: 50%;
+.first-car-selection > section.cards-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    width: 50%;
+}
 
-            > article.car {
-                background-color: rgb(var(--auth-active-bg-color-rgb), 0.9);
-                box-shadow: 0.1rem 0.1rem 0.5rem 0.25rem var(--auth-focus-outline-color);
-                border-radius: 0.5rem;
-                padding: 2rem;
-                display: flex;
-                gap: 2rem;
-                transition:
-                    background-color 0.5s,
-                    color 0.5s;
+.first-car-selection > section.cards-container > article.car {
+    background-color: rgb(var(--auth-active-bg-color-rgb), 0.9);
+    box-shadow: 0.1rem 0.1rem 0.5rem 0.25rem var(--auth-focus-outline-color);
+    border-radius: 0.5rem;
+    padding: 2rem;
+    display: flex;
+    gap: 2rem;
+    transition:
+        background-color 0.5s,
+        color 0.5s;
+}
 
-                &:hover {
-                    background-color: rgb(var(--auth-active-bg-color-rgb), 1);
-                    color: var(--auth-focus-outline-color);
-                    cursor: pointer;
-                }
+.first-car-selection > section.cards-container > article.car:hover {
+    background-color: rgb(var(--auth-active-bg-color-rgb), 1);
+    color: var(--auth-focus-outline-color);
+    cursor: pointer;
+}
 
-                > img {
-                    width: 20rem;
-                }
+.first-car-selection > section.cards-container > article.car > img {
+    width: 20rem;
+}
 
-                > section.car-description {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 1rem;
+.first-car-selection > section.cards-container > article.car > section.car-description {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
-                    > p {
-                        line-height: 1.4;
-                        letter-spacing: 1px;
-                    }
-                }
-
-                .loading-circle {
-                    margin: 2rem auto;
-                }
-            }
-        }
+    > p {
+        line-height: 1.4;
+        letter-spacing: 1px;
     }
 }
 
@@ -67,36 +63,36 @@ header {
     justify-content: space-between;
     align-items: center;
     position: relative;
+}
 
-    > h1 {
-        font-family: "Bungee Outline", sans-serif;
-        font-size: 3rem;
+header > h1 {
+    font-family: "Bungee Outline", sans-serif;
+    font-size: 3rem;
 
-        position: absolute;
-        display: flex;
-        left: 50%;
-        top: 1rem;
-        transform: translateX(-50%);
-    }
+    position: absolute;
+    display: flex;
+    left: 50%;
+    top: 1rem;
+    transform: translateX(-50%);
+}
 
-    section.time-container {
-        display: flex;
-        align-items: center;
-        margin-left: 2rem;
-        gap: 0.5rem;
-        font-size: 1.2rem;
-    }
+header > section.time-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+}
 
-    > svg {
-        width: 2rem;
-        height: 2rem;
-        margin: 2rem;
-        fill: red;
+header > svg {
+    width: 2rem;
+    height: 2rem;
+    margin: 2rem;
+    fill: red;
+}
 
-        &:hover {
-            cursor: pointer;
-        }
-    }
+header > svg:hover {
+    cursor: pointer;
 }
 
 div.dashboard-content-container {
@@ -104,38 +100,39 @@ div.dashboard-content-container {
     display: grid;
     grid-template-columns: 30% 1fr;
     gap: 2rem;
+}
 
-    > aside.app-sidebar {
-        display: flex;
-        gap: 1rem;
-        flex-direction: column;
+div.dashboard-content-container > aside.app-sidebar {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+}
 
-        > section.user-info {
-            > h2 {
-                margin-bottom: 1rem;
-            }
+div.dashboard-content-container > aside.app-sidebar > section.user-info {
+}
 
-            td {
-                padding-right: 1rem;
-            }
-        }
-    }
+div.dashboard-content-container > aside.app-sidebar > section.user-info > h2 {
+    margin-bottom: 1rem;
+}
 
-    > main {
-        align-self: flex-start;
+div.dashboard-content-container > aside.app-sidebar > section.user-info td {
+    padding-right: 1rem;
+}
 
-        > h1 {
-            color: var(--auth-focus-outline-color);
-            display: inline-block;
-            background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
-            font-variant: small-caps;
-            padding: 0.5rem 3rem;
-            border-top-left-radius: 1rem;
-            border-top-right-radius: 1rem;
-            margin-left: 4rem;
-            border: 2px solid var(--auth-focus-outline-color);
-        }
-    }
+div.dashboard-content-container > main {
+    align-self: flex-start;
+}
+
+div.dashboard-content-container > main > h1 {
+    color: var(--auth-focus-outline-color);
+    display: inline-block;
+    background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
+    font-variant: small-caps;
+    padding: 0.5rem 3rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
+    margin-left: 4rem;
+    border: 2px solid var(--auth-focus-outline-color);
 }
 
 .card-class {
