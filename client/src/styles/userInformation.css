@@ -1,0 +1,24 @@
+div.user-info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    color: white;
+    background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
+    padding: 1rem;
+    border: 2px solid white;
+
+    > div.info-container {
+        display: flex;
+        flex-direction: column;
+
+        > p.info-category {
+            font-size: 0.9rem;
+        }
+
+        > p.info-value {
+            margin-left: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--auth-focus-outline-color);
+        }
+    }
+}

@@ -8,8 +8,7 @@ import NavigationLink from "./NavigationLink";
 
 export default function Navigation() {
   return (
-    <nav className="card-class">
-      <h2>Navigation</h2>
+    <nav>
       <NavigationLink
         icon={<FaHome />}
         linkName="Dashboard"
