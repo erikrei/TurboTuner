@@ -119,40 +119,29 @@ div.dashboard-content-container {
                 padding-right: 1rem;
             }
         }
-
-        > nav {
-            > h2 {
-                text-align: center;
-                margin-bottom: 1rem;
-            }
-
-            > div.link-container {
-                color: white;
-                font-size: 1.2rem;
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                font-weight: bold;
-
-                > a {
-                    color: white;
-
-                    &:hover {
-                        color: var(--auth-focus-outline-color);
-                    }
-                }
-            }
-        }
     }
 
     > main {
+        align-self: flex-start;
+
+        > h1 {
+            color: var(--auth-focus-outline-color);
+            display: inline-block;
+            background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
+            font-variant: small-caps;
+            padding: 0.5rem 3rem;
+            border-top-left-radius: 1rem;
+            border-top-right-radius: 1rem;
+            margin-left: 4rem;
+            border: 2px solid var(--auth-focus-outline-color);
+        }
     }
 }
 
 .card-class {
-    color: white;
+    color: var(--auth-focus-outline-color);
     padding: 2rem;
     border-radius: 1rem;
     background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
-    box-shadow: 0.1rem 0.1rem 0.75rem 0.1rem white;
+    border: 2px solid var(--auth-focus-outline-color);
 }

@@ -1,24 +1,37 @@
-section.user-car-container {
+/* section.user-car-container {
     display: flex;
     flex-direction: column;
     gap: 2rem;
-
-    > h2 {
-        text-align: center;
-        padding: 0rem 1rem 1rem 0rem;
-        color: var(--auth-focus-outline-color);
-        border-bottom: 3px solid var(--auth-focus-outline-color);
-        font-variant: small-caps;
-        font-size: 4rem;
-        margin-bottom: 2rem;
-    }
-
+    
     > div.car-container {
         display: flex;
         gap: 1rem;
 
         > img {
             max-width: 20rem;
+        }
+
+        
+    }
+} */
+
+section.user-car-container {
+    background-color: rgba(var(--auth-active-bg-color-rgb), 0.8);
+    border-radius: 1rem;
+    border: 2px solid var(--auth-focus-outline-color);
+    margin-top: -2px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    > div.car-container {
+        color: var(--auth-focus-outline-color);
+        display: flex;
+        gap: 1rem;
+
+        > img {
+            width: 20rem;
         }
 
         > div.car-options {
@@ -35,7 +48,7 @@ section.user-car-container {
 
                     &:hover {
                         cursor: pointer;
-                        color: var(--auth-focus-outline-color)
+                        color: var(--auth-focus-outline-color);
                     }
                 }
 

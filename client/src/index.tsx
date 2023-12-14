@@ -15,7 +15,11 @@ import Authentication, { Login, Register } from "./Pages/Authentication";
 import DashboardLayout from "./Pages/DashboardLayout";
 import FirstCarSelection from "./Pages/FirstCarSelection";
 
-import Garage from "./Components/Garage";
+import Garage from "./Pages/Garage";
+import Tuning from "./Pages/Tuning";
+import Dashboard from "./Pages/Dashboard";
+import Market from "./Pages/Market";
+import Race from "./Pages/Race";
 
 const router = createBrowserRouter([
   {
@@ -45,9 +49,25 @@ const router = createBrowserRouter([
     errorElement: <Navigate to="/" />,
     children: [
       {
+        index: true,
+        element: <Dashboard />,
+      },
+      {
         path: "garage",
         element: <Garage />,
         loader: userCarsLoader,
+      },
+      {
+        path: "tuning",
+        element: <Tuning />,
+      },
+      {
+        path: "market",
+        element: <Market />,
+      },
+      {
+        path: "race",
+        element: <Race />,
       },
     ],
   },

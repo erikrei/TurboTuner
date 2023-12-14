@@ -7,7 +7,7 @@ import "../styles/garage.css";
 
 import { TUserCar, TUserInfo } from "../types";
 
-import { UserInfoContext } from "../Pages/DashboardLayout";
+import { UserInfoContext } from "./DashboardLayout";
 
 export default function Garage() {
   const loaderData: AxiosResponse = useLoaderData() as AxiosResponse;
@@ -38,29 +38,31 @@ export default function Garage() {
   }
 
   return (
-    <section className="user-car-container">
-      <h2>Garage</h2>
-      {userCars.map((car) => (
-        <div className="car-container" key={car._id}>
-          <img
-            src={`${process.env.PUBLIC_URL}/assets/${car.name}.png`}
-            alt={`${car.name}`}
-          />
-          <div className="car-options">
-            <h2>
-              {car.name}
-              {activeCarId === car._id ? (
-                <span>Aktiv</span>
-              ) : (
-                <button onClick={() => handleActiveCarClick(car._id)}>
-                  auswählen
-                </button>
-              )}
-            </h2>
+    <>
+      <h1>Garage</h1>
+      <section className="user-car-container">
+        {userCars.map((car) => (
+          <div className="car-container" key={car._id}>
+            <img
+              src={`${process.env.PUBLIC_URL}/assets/${car.name}.png`}
+              alt={`${car.name}`}
+            />
+            <div className="car-options">
+              <h2>
+                {car.name}
+                {activeCarId === car._id ? (
+                  <span>Aktiv</span>
+                ) : (
+                  <button onClick={() => handleActiveCarClick(car._id)}>
+                    auswählen
+                  </button>
+                )}
+              </h2>
+            </div>
           </div>
-        </div>
-      ))}
-      <Toaster position="bottom-right"/>
-    </section>
+        ))}
+        <Toaster position="bottom-right" />
+      </section>
+    </>
   );
 }
