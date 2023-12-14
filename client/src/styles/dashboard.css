@@ -68,7 +68,6 @@ header {
 header > h1 {
     font-family: "Bungee Outline", sans-serif;
     font-size: 3rem;
-
     position: absolute;
     display: flex;
     left: 50%;
@@ -108,17 +107,6 @@ div.dashboard-content-container > aside.app-sidebar {
     flex-direction: column;
 }
 
-div.dashboard-content-container > aside.app-sidebar > section.user-info {
-}
-
-div.dashboard-content-container > aside.app-sidebar > section.user-info > h2 {
-    margin-bottom: 1rem;
-}
-
-div.dashboard-content-container > aside.app-sidebar > section.user-info td {
-    padding-right: 1rem;
-}
-
 div.dashboard-content-container > main {
     align-self: flex-start;
 }
@@ -132,13 +120,5 @@ div.dashboard-content-container > main > h1 {
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
     margin-left: 4rem;
-    border: 2px solid var(--auth-focus-outline-color);
-}
-
-.card-class {
-    color: var(--auth-focus-outline-color);
-    padding: 2rem;
-    border-radius: 1rem;
-    background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
     border: 2px solid var(--auth-focus-outline-color);
 }
