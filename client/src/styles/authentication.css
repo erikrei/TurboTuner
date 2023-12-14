@@ -1,105 +1,105 @@
 div.auth-container {
     width: 100dvw;
     height: 100dvh;
+}
 
-    img {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
-        filter: brightness(0.5);
+div.auth-container img {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    filter: brightness(0.5);
+}
+
+section.authentication {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5rem;
+    padding: 5rem;
+
+    > nav {
+        display: flex;
+        width: 25rem;
+
+        > a {
+            flex: 1;
+            display: inline-block;
+            padding: 2rem;
+            text-align: center;
+            background-color: var(--auth-passive-bg-color);
+            color: white;
+            font-size: 1.2rem;
+            transition: 1s background-color;
+
+            &.active {
+                background-color: var(--auth-active-bg-color);
+                font-weight: bold;
+            }
+
+            &:hover {
+                background-color: var(--auth-active-bg-color);
+            }
+        }
     }
 
-    > section.authentication {
-        width: 100%;
-        height: 100%;
+    > form {
+        color: white;
+        position: relative;
         display: flex;
         flex-direction: column;
-        align-items: center;
-        gap: 5rem;
-        padding: 5rem;
+        gap: 1rem;
+        padding: 3rem;
+        background-color: var(--auth-active-bg-color);
+        border-radius: 1rem;
+        border: 2px solid var(--auth-focus-outline-color);
+        box-shadow: 0.3rem 0.3rem var(--auth-focus-outline-color);
 
-        > nav {
+        > label {
             display: flex;
-            width: 25rem;
+            flex-direction: column;
+            font-variant: small-caps;
+            gap: 0.5rem;
+            font-size: 1.1rem;
 
-            > a {
-                flex: 1;
-                display: inline-block;
-                padding: 2rem;
-                text-align: center;
-                background-color: var(--auth-passive-bg-color);
-                color: white;
+            > input {
+                color: var(--auth-active-bg-color);
                 font-size: 1.2rem;
-                transition: 1s background-color;
+                font-weight: bold;
+                border-radius: 0.25rem;
+                padding: 0.25rem;
+                border: none;
 
-                &.active {
-                    background-color: var(--auth-active-bg-color);
-                    font-weight: bold;
-                }
-
-                &:hover {
-                    background-color: var(--auth-active-bg-color);
+                &:focus {
+                    outline: var(--auth-focus-outline-color) solid;
                 }
             }
         }
 
-        > form {
+        > button[type="submit"] {
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 0.5rem;
             color: white;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-            padding: 3rem;
             background-color: var(--auth-active-bg-color);
-            border-radius: 1rem;
-            border: 2px solid var(--auth-focus-outline-color);
-            box-shadow: 0.3rem 0.3rem var(--auth-focus-outline-color);
+            border: 1px solid var(--auth-focus-outline-color);
+            transition:
+                0.5s background-color,
+                0.5s color;
+            letter-spacing: 2px;
+            font-variant: small-caps;
+            box-shadow: 0.1rem 0.1rem var(--auth-focus-outline-color);
 
-            > label {
-                display: flex;
-                flex-direction: column;
-                font-variant: small-caps;
-                gap: 0.5rem;
-                font-size: 1.1rem;
-
-                > input {
-                    color: var(--auth-active-bg-color);
-                    font-size: 1.2rem;
-                    font-weight: bold;
-                    border-radius: 0.25rem;
-                    padding: 0.25rem;
-                    border: none;
-
-                    &:focus {
-                        outline: var(--auth-focus-outline-color) solid;
-                    }
-                }
-            }
-
-            > button[type="submit"] {
-                font-size: 1.2rem;
-                font-weight: bold;
-                padding: 0.5rem;
-                border: none;
-                border-radius: 0.5rem;
-                color: white;
-                background-color: var(--auth-active-bg-color);
-                border: 1px solid var(--auth-focus-outline-color);
-                transition:
-                    0.5s background-color,
-                    0.5s color;
-                letter-spacing: 2px;
-                font-variant: small-caps;
-                box-shadow: 0.1rem 0.1rem var(--auth-focus-outline-color);
-
-                &:hover {
-                    cursor: pointer;
-                    color: var(--auth-active-bg-color);
-                    background-color: var(--auth-focus-outline-color);
-                }
+            &:hover {
+                cursor: pointer;
+                color: var(--auth-active-bg-color);
+                background-color: var(--auth-focus-outline-color);
             }
         }
     }
