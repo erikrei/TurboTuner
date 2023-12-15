@@ -9,6 +9,7 @@ import UserInfo from '../Models/UserInfo';
 
 import getMongooseObjectId from '../Helpers/getMongooseObjectId';
 import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
+import basicTuningComponents from '../Helpers/basicTuningComponents';
 
 const carRouter = Router();
 
@@ -60,7 +61,7 @@ carRouter.post('/addToUser', checkIfSessionHasUser, async (req: Request, res: Re
 
     try {
         const _id = getMongooseObjectId();
-        const userCarResponse = UserCar.create<TUserCar>({ _id, user_id, name })
+        const userCarResponse = UserCar.create<TUserCar>({ _id, user_id, name, tuning_components: basicTuningComponents() })
         return res.send(`Das Auto ${name} wurde erfolgreich hinzugefügt.`);
     } catch (error) {
         console.log(error);
@@ -86,7 +87,7 @@ carRouter.post('/addToUserFirstCar', checkIfSessionHasUser, async (req: Request,
 
     try {
         const _id = getMongooseObjectId();
-        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name });
+        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name, tuning_components: basicTuningComponents() });
         const userInfoResponse = await UserInfo.findByIdAndUpdate<TUserInfo>(user_id, { firstLogin: false, activeCar: userCarResponse });
         return res.send(`Das Auto ${name} wurde erfolgreich hinzugefügt.`);
     } catch (error) {
