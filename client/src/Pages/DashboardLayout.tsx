@@ -38,7 +38,7 @@ export default function DashboardLayout() {
             <UserInformation />
             <Navigation />
           </aside>
-          <main className="">
+          <main>
             <Outlet />
           </main>
         </UserInfoContext.Provider>
