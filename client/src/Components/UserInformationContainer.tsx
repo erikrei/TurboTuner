@@ -8,6 +8,10 @@ export default function UserInformationContainer({ userInfo }: Props) {
   return (
     <div className="user-info-content">
       <div className="info-container">
+        <p className="info-category">Benutzername</p>
+        <p className="info-value">{userInfo.username}</p>
+      </div>
+      <div className="info-container">
         <p className="info-category">Kontostand</p>
         <p className="info-value">{userInfo.money} €</p>
       </div>

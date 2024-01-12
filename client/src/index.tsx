@@ -16,7 +16,7 @@ import DashboardLayout from "./Pages/DashboardLayout";
 import FirstCarSelection from "./Pages/FirstCarSelection";
 
 import Garage from "./Pages/Garage";
-import Tuning from "./Pages/Tuning";
+import Tuning from "./Pages/Tuning/Tuning";
 import Dashboard from "./Pages/Dashboard";
 import Market from "./Pages/Market";
 import Race from "./Pages/Race";
@@ -46,7 +46,7 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout />,
     loader: userInfoLoader,
-    errorElement: <Navigate to="/" />,
+    // errorElement: <Navigate to="/" />,
     children: [
       {
         index: true,

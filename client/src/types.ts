@@ -34,5 +34,30 @@ export type TGeneralCar = {
 export type TUserCar = {
     _id: string,
     name: string,
-    user_id?: string,
+    user_id: string,
+    tuning_components: TUserCarTuningComponent[],
+    tuning_information?: TUserCarTuningInformation
 }
+
+export type TUserCarTuningComponent = {
+    _id: string,
+    component_name: string,
+    component_level: number
+}
+
+export type TUserCarTuningInformation = {
+    component_name: string,
+    new_component_level: number,
+    tuning_start: number,
+    tuning_end: number
+}
+
+export type TRemaining = {
+    showTime: boolean;
+    feedbackMessage: string;
+    time?: {
+        hours: number;
+        minutes: number;
+        seconds: number;
+    }
+};
