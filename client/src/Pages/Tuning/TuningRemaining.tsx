@@ -5,6 +5,8 @@ import { useTuningContext } from "../../Contexts/TuningContext";
 
 import { TRemaining, TUserCar } from "../../types";
 
+import TuningCancel from "./TuningCancel";
+
 type TuningRemainingProps = {
   tuning_end: number;
 };
@@ -15,7 +17,7 @@ export default function TuningRemaining({ tuning_end }: TuningRemainingProps) {
 
   const [remainingTime, setRemainingTime] = useState<TRemaining>({
     showTime: true,
-    feedbackMessage: "Tuningzeit wird berechnet...",
+    feedbackMessage: "Tuningdauer wird berechnet...",
     time: undefined,
   });
 
@@ -39,7 +41,7 @@ export default function TuningRemaining({ tuning_end }: TuningRemainingProps) {
   useEffect(() => {
     setRemainingTime({
       ...remainingTime,
-      feedbackMessage: "Tuningzeit wird berechnet...",
+      feedbackMessage: "Tuningdauer wird berechnet...",
       time: undefined,
     });
     const remainingInterval = setInterval(() => {
@@ -91,6 +93,7 @@ export default function TuningRemaining({ tuning_end }: TuningRemainingProps) {
           </p>
         </>
       )}
+      <TuningCancel hideButton={!remainingTime.time} />
     </div>
   );
 }

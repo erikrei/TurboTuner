@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import ReactLoading from "react-loading";
 import axios from "axios";
 
 import { useTuningContext } from "../../Contexts/TuningContext";
@@ -12,7 +13,10 @@ export default function TuningSelectedCar() {
   const { userCars, setUserCars, selectedCarId, selectedCar } =
     useTuningContext();
 
-  function handleTuningClick(component: TUserCarTuningComponent) {
+  function handleTuningClick(
+    component: TUserCarTuningComponent,
+    fast_tuning: boolean = false
+  ) {
     selectedCar &&
       axios
         .put(
@@ -20,6 +24,7 @@ export default function TuningSelectedCar() {
           {
             component_name: component.component_name,
             new_component_level: component.component_level + 1,
+            fast_tuning,
           },
           {
             withCredentials: true,
@@ -66,7 +71,7 @@ export default function TuningSelectedCar() {
   }, [selectedCarId]);
 
   if (!selectedCar) {
-    return <h1>Ausgewähltes Auto konnte nicht geladen werden.</h1>;
+    return <ReactLoading type="spin" color="#219ebc" />;
   }
 
   return (

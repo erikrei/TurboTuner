@@ -39,10 +39,17 @@ export type TUserCar = {
     tuning_information?: TUserCarTuningInformation
 }
 
+export type TUserCarTuningCancel = {
+    userCarResponse: TUserCar;
+    moneyToReturn: number
+}
+
 export type TUserCarTuningComponent = {
     _id: string,
     component_name: string,
-    component_level: number
+    component_level: number,
+    tuning_cost: number,
+    tuning_time: number
 }
 
 export type TUserCarTuningInformation = {

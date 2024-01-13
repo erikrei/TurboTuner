@@ -5,39 +5,36 @@ import { TUserCarTuningComponent, TUserInfo } from "../../types";
 
 import { UserInfoContext } from "../DashboardLayout";
 
-import { useTuningContext } from "../../Contexts/TuningContext";
-
-import getTuningCost from "../../Helpers/getTuningCost";
-import getDisableButton from "../../Helpers/getDisableButton";
+import TuningComponentTime from "./TuningComponentTime";
+import TuningButton from "./TuningButton";
 
 type TuningCarComponentProps = {
   component: TUserCarTuningComponent;
-  handleTuning: (component: TUserCarTuningComponent) => void;
+  handleTuning: (
+    component: TUserCarTuningComponent,
+    fast_tuning?: boolean
+  ) => void;
 };
 
 export default function TuningCarComponent({
   component,
   handleTuning,
 }: TuningCarComponentProps) {
-  const { selectedCar } = useTuningContext();
   const userInfo = useContext(UserInfoContext);
   const money = userInfo?.userInfo.money;
 
-  const component_price = getTuningCost(component);
+  const component_price = component.tuning_cost;
 
-  const disableButton = getDisableButton(
-    selectedCar?.tuning_information,
-    money,
-    component_price
-  );
-
-  function handleTuningCost() {
-    money &&
+  function handleTuningCost(fast_tuning: boolean = false) {
+    if (money) {
+      const moneyToSpend = fast_tuning
+        ? component_price * 1.3
+        : component_price;
       axios
         .put(
           "http://localhost:3000/userInfo",
           {
-            money: money - component_price,
+            money: money - moneyToSpend,
           },
           {
             withCredentials: true,
@@ -46,6 +43,7 @@ export default function TuningCarComponent({
         .then(({ data }: { data: TUserInfo }) => {
           userInfo.setUserInfo(data);
         });
+    }
   }
 
   return (
@@ -53,15 +51,21 @@ export default function TuningCarComponent({
       <p>COMPONENT_NAME: {component.component_name}</p>
       <p>COMPONENT_LEVEL: {component.component_level}</p>
       <p>TUNING_COST: {component_price} €</p>
-      <button
-        onClick={() => {
-          handleTuning(component);
-          handleTuningCost();
-        }}
-        disabled={disableButton}
-      >
-        {component.component_name} tunen
-      </button>
+      <p>FAST_TUNING_COST: {component_price * 1.3} €</p>
+      <TuningComponentTime tuningTime={component.tuning_time} />
+      <TuningButton
+        component={component}
+        handleTuning={handleTuning}
+        handleTuningCost={handleTuningCost}
+        userMoney={money}
+      />
+      <TuningButton
+        component={component}
+        handleTuning={handleTuning}
+        handleTuningCost={handleTuningCost}
+        fast_tuning={true}
+        userMoney={money}
+      />
     </div>
   );
 }
