@@ -46,3 +46,18 @@ export type TUserCarTuningInformation = {
     tuning_end: number,
     fast_tuning?: boolean
 }
+
+export type TRaceUser = {
+    username: string;
+    user_id: string;
+}
+
+export type TRaceTime = {
+    hours: number,
+    minutes: number
+}
+
+export type TRaceInformation = {
+    users: TRaceUser[];
+    race_time: TRaceTime
+}
