@@ -34,12 +34,15 @@ export type TUserCar = {
 
 export type TUserCarTuningComponents = {
     component_name: string,
-    component_level: number
+    component_level: number,
+    tuning_cost: number,
+    tuning_time: number
 }
 
 export type TUserCarTuningInformation = {
     component_name: string,
     new_component_level: number,
     tuning_start: number,
-    tuning_end: number
+    tuning_end: number,
+    fast_tuning?: boolean
 }
