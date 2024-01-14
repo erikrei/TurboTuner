@@ -78,4 +78,42 @@ raceRouter.post('/apply', checkIfSessionHasUser, async (req: Request, res: Respo
     }
 })
 
+raceRouter.post('/unapply', checkIfSessionHasUser, async (req: Request, res: Response) => {
+    const user_id = String(req.session.user._id);
+    const { hours, minutes }: TRaceTime = req.body;
+
+    try {
+        const raceInfoResponse = await RaceInfo.find();
+
+        if (raceInfoResponse) {
+            const currentRace = raceInfoResponse.find((race) => race.race_time.hours === hours && race.race_time.minutes === minutes);
+
+            if (currentRace) {
+                currentRace.users = currentRace.users.filter((user) => user.user_id !== user_id);
+                await currentRace.save();
+                return res.json(raceInfoResponse);
+            } else {
+                res.status(404).send('Rennen mit angegebenen Zeiten wurde nicht gefunden');
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+raceRouter.post('/emptyAllRaces', async (req: Request, res: Response) => {
+    try {
+        const raceInfoResponse = await RaceInfo.find();
+        raceInfoResponse.map(async (race) => {
+            race.users = [];
+            await race.save();
+        });
+
+        return res.json(raceInfoResponse);
+
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 export default raceRouter;

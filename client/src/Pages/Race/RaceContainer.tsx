@@ -1,10 +1,15 @@
 import { useContext } from "react";
 import axios from "axios";
 
+import toast, { Toaster } from "react-hot-toast";
+
+import timeFormatted from "../../Helpers/timeFormatted";
+
 import { UserInfoContext } from "../DashboardLayout";
 import { TRace, TRaceUser } from "../../types";
 
 import RaceApplyButton from "./RaceApplyButton";
+import RaceApplyInformation from "./RaceApplyInformation";
 
 type RaceContainerProps = {
   race: TRace;
@@ -13,6 +18,8 @@ type RaceContainerProps = {
 
 export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
   const userId = useContext(UserInfoContext)?.userInfo._id;
+
+  const now = new Date();
 
   let hasApplied: undefined | TRaceUser;
 
@@ -30,7 +37,50 @@ export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
         },
         { withCredentials: true }
       )
-      .then(({ data }: { data: TRace[] }) => setRaces(data));
+      .then(({ data }: { data: TRace[] }) => {
+        setRaces(data);
+        const formattedTime = timeFormatted(
+          race.race_time.hours,
+          race.race_time.minutes
+        );
+        toast(`Erfolgreich zum Rennen um ${formattedTime} angemeldet.`, {
+          position: "bottom-right",
+          style: {
+            backgroundColor: "green",
+            color: "white",
+            fontWeight: "bold",
+          },
+          duration: 2000,
+        });
+      });
+  }
+
+  function handleUnApplyRaceClick(race: TRace) {
+    axios
+      .post(
+        "http://localhost:3000/race/unapply",
+        {
+          hours: race.race_time.hours,
+          minutes: race.race_time.minutes,
+        },
+        { withCredentials: true }
+      )
+      .then(({ data }: { data: TRace[] }) => {
+        setRaces(data);
+        const formattedTime = timeFormatted(
+          race.race_time.hours,
+          race.race_time.minutes
+        );
+        toast(`Erfolgreich vom Rennen um ${formattedTime} abgemeldet.`, {
+          position: "bottom-right",
+          style: {
+            backgroundColor: "lightblue",
+            color: "black",
+            fontWeight: "bold",
+          },
+          duration: 2000,
+        });
+      });
   }
 
   return (
@@ -39,10 +89,14 @@ export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
         Rennen um: {race.race_time.hours} Uhr {race.race_time.minutes} min
       </p>
       {hasApplied ? (
-        <p>Du bist zu diesem Rennen bereits angemeldet. </p>
+        <RaceApplyInformation
+          race={race}
+          handleUnApply={handleUnApplyRaceClick}
+        />
       ) : (
         <RaceApplyButton handleApply={handleApplyRaceClick} race={race} />
       )}
+      <Toaster />
     </div>
   );
 }
