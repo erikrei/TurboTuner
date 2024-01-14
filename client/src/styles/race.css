@@ -1,0 +1,10 @@
+section.races-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    > div.single-race-container {
+        border: 1px solid white;
+        padding: 1rem;
+    }
+}

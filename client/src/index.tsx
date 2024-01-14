@@ -10,6 +10,7 @@ import "./styles/index.css";
 
 import userInfoLoader from "./Loaders/userInfoLoader";
 import userCarsLoader from "./Loaders/userCarsLoader";
+import racesLoader from "./Loaders/racesLoader";
 
 import Authentication, { Login, Register } from "./Pages/Authentication";
 import DashboardLayout from "./Pages/DashboardLayout";
@@ -19,7 +20,7 @@ import Garage from "./Pages/Garage";
 import Tuning from "./Pages/Tuning/Tuning";
 import Dashboard from "./Pages/Dashboard";
 import Market from "./Pages/Market";
-import Race from "./Pages/Race";
+import Race from "./Pages/Race/Race";
 
 const router = createBrowserRouter([
   {
@@ -68,6 +69,7 @@ const router = createBrowserRouter([
       {
         path: "race",
         element: <Race />,
+        loader: racesLoader,
       },
     ],
   },

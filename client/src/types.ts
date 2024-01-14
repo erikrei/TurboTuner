@@ -68,3 +68,19 @@ export type TRemaining = {
         seconds: number;
     }
 };
+
+export type TRaceUser = {
+    username: string;
+    user_id: string;
+}
+
+export type TRaceTime = {
+    hours: number,
+    minutes: number
+}
+
+export type TRace = {
+    users: TRaceUser[],
+    race_time: TRaceTime,
+    _id: string
+}
