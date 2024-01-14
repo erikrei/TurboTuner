@@ -5,34 +5,18 @@ import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
 import RaceInfo from '../Models/RaceInfo';
 import UserInfo from '../Models/UserInfo';
 
-import { TRaceTime, TUserInfo, TRaceUser, TRaceInformation } from '../types';
+import { TRaceTime, TUserInfo } from '../types';
 
 const raceRouter = Router();
 
-raceRouter.get('/', checkIfSessionHasUser, async (req: Request, res: Response) => {
-    const user_id = String(req.session.user._id);
-    const { hours, minutes }: TRaceTime = req.body;
-
+raceRouter.get('/', async (req: Request, res: Response) => {
     try {
-        const raceInfoResponse = await RaceInfo.findOne<TRaceInformation>({
-            race_time: {
-                hours,
-                minutes
-            }
-        })
+        const raceInfoResponse = await RaceInfo.find();
 
         if (!raceInfoResponse) {
-            return res.status(404).send('Rennen wurde nicht gefunden');
-        }
-
-        if (raceInfoResponse.users.find((user) => user.user_id === user_id)) {
-            return res.json({
-                appliedToRace: true
-            })
+            return res.status(404).send('Die Rennen konnten nicht gefunden werden.');
         } else {
-            return res.json({
-                appliedToRace: false
-            })
+            return res.json(raceInfoResponse);
         }
 
     } catch (error) {
@@ -71,37 +55,24 @@ raceRouter.post('/apply', checkIfSessionHasUser, async (req: Request, res: Respo
     }
 
     try {
-        const raceInfoResponse = await RaceInfo.findOne({
-            race_time: {
-                hours,
-                minutes
-            }
-        });
+        const raceInfoResponse = await RaceInfo.find();
 
-        const userInfoResponse = await UserInfo.findById<TUserInfo>(user_id);
+        if (raceInfoResponse) {
+            const currentRace = raceInfoResponse.find((race) => race.race_time.hours === hours && race.race_time.minutes === minutes)
 
-        if (userInfoResponse) {
-            const raceUserInfo: TRaceUser = {
-                user_id: userInfoResponse._id,
-                username: userInfoResponse.username
-            }
+            if (currentRace) {
+                const userInfoResponse = await UserInfo.findById<TUserInfo>(user_id);
 
-            if (raceInfoResponse) {
-                if (raceInfoResponse.users.find((user) => user.user_id === user_id)) {
-                    return res.status(400).send('Benutzer bereits zum Rennen angemeldet.');
-                }
+                userInfoResponse && currentRace.users.push({ user_id, username: userInfoResponse.username })
 
-                raceInfoResponse.users.push(raceUserInfo);
+                await currentRace.save();
 
-                await raceInfoResponse.save();
-
-                return res.send('Erfolgreich zum Rennen angemeldet.');
+                return res.json(raceInfoResponse);
             } else {
-                return res.status(404).send('Rennen wurde nicht gefunden.');
+                return res.status(404).send('Kein Rennen mit angegebenen Zeiten gefunden')
             }
-        } else {
-            return res.status(404).send('Benutzer nicht gefunden.');
         }
+
     } catch (error) {
         console.log(error);
     }

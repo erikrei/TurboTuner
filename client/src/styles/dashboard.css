@@ -122,3 +122,12 @@ div.dashboard-content-container > main > h1 {
     margin-left: 4rem;
     border: 2px solid var(--auth-focus-outline-color);
 }
+
+div.dashboard-content-container > main > section {
+    margin-top: -2px;
+    color: var(--auth-focus-outline-color);
+    background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
+    border: 2px solid var(--auth-focus-outline-color);
+    padding: 2rem;
+    border-radius: 1rem;
+}
