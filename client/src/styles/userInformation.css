@@ -1,3 +1,7 @@
+p.loader-text {
+    color: white;
+}
+
 div.user-info-content {
     display: flex;
     flex-direction: column;

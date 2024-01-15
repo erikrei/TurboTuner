@@ -1,6 +1,4 @@
-import { useContext } from "react";
-
-import { UserInfoContext } from "../DashboardLayout";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 type MarketGeneralCarBuyButtonProps = {
   price: number;
@@ -11,7 +9,7 @@ export default function MarketGeneralCarBuyButton({
   price,
   handleBuy,
 }: MarketGeneralCarBuyButtonProps) {
-  const userInfo = useContext(UserInfoContext)?.userInfo;
+  const { userInfo } = useUserInfo();
 
   let disableButton: boolean = false;
 

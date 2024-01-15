@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import axios from "axios";
 
 import { TUserCarTuningComponent, TUserInfo } from "../../types";
 
-import { UserInfoContext } from "../DashboardLayout";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 import TuningComponentTime from "./TuningComponentTime";
 import TuningButton from "./TuningButton";
@@ -20,8 +19,8 @@ export default function TuningCarComponent({
   component,
   handleTuning,
 }: TuningCarComponentProps) {
-  const userInfo = useContext(UserInfoContext);
-  const money = userInfo?.userInfo.money;
+  const { userInfo, setUserInfo } = useUserInfo();
+  const money = userInfo?.money;
 
   const component_price = component.tuning_cost;
 
@@ -41,7 +40,7 @@ export default function TuningCarComponent({
           }
         )
         .then(({ data }: { data: TUserInfo }) => {
-          userInfo.setUserInfo(data);
+          setUserInfo(data);
         });
     }
   }

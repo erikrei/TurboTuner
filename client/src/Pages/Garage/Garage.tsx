@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import axios, { AxiosResponse } from "axios";
 import { useLoaderData } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
@@ -7,14 +7,14 @@ import "../../styles/garage.css";
 
 import { TUserCar, TUserInfo } from "../../types";
 
-import { UserInfoContext } from "../DashboardLayout";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 export default function Garage() {
   const loaderData: AxiosResponse = useLoaderData() as AxiosResponse;
   const [userCars, setUserCars] = useState<TUserCar[]>(loaderData.data);
 
-  const userInfoContext = useContext(UserInfoContext);
-  const activeCarId = userInfoContext?.userInfo.activeCar._id;
+  const { userInfo, setUserInfo } = useUserInfo();
+  const activeCarId = userInfo?.activeCar._id;
 
   function handleActiveCarClick(car_id: string) {
     axios
@@ -26,7 +26,7 @@ export default function Garage() {
         { withCredentials: true }
       )
       .then(({ data }: { data: TUserInfo }) => {
-        userInfoContext?.setUserInfo(data);
+        setUserInfo && setUserInfo(data);
         toast.success(`${data.activeCar.name} wurde ausgewählt.`, {
           duration: 2000,
           style: {

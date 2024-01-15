@@ -5,7 +5,6 @@ import MarketCard from "./MarketCard";
 import "../../styles/market.css";
 
 export default function Market() {
-  console.log("TEST");
   return (
     <div className="market-container content-container">
       <h1 className="content-headline">Markt</h1>
