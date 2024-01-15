@@ -111,19 +111,19 @@ div.dashboard-content-container > main {
     align-self: flex-start;
 }
 
-div.dashboard-content-container > main > h1 {
-    color: var(--auth-focus-outline-color);
-    display: inline-block;
-    background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
+div.dashboard-content-container > main h1.content-headline {
+    text-align: center;
+    font-size: 3rem;
+    color: white;
+    margin-bottom: 1rem;
+    background-color: rgba(var(--auth-active-bg-color-rgb), 0.5);
     font-variant: small-caps;
     padding: 0.5rem 3rem;
-    border-top-left-radius: 1rem;
-    border-top-right-radius: 1rem;
-    margin-left: 4rem;
-    border: 2px solid var(--auth-focus-outline-color);
+    border-radius: 0.5rem;
+    border: 2px solid white;
 }
 
-div.dashboard-content-container > main > section {
+div.dashboard-content-container > main > section.tmp-bg {
     margin-top: -2px;
     color: var(--auth-focus-outline-color);
     background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);

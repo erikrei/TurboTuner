@@ -21,7 +21,9 @@ export type TValidInput = {
 export type TGeneralCar = {
     _id: string,
     name: string,
-    price: number
+    price: number,
+    description: string,
+    imgSrc: string
 }
 
 export type TUserCar = {

@@ -22,13 +22,19 @@ export type TUserInfo = {
     activeCar: TUserCar
 }
 
+export type TMarketCard = {
+    name: string,
+    imgSrc: string,
+    description: string,
+    path: string
+}
+
 export type TGeneralCar = {
     _id: string,
     name: string,
     price: number,
     description: string,
-    imgName: string,
-    imgAlt: string
+    imgSrc: string
 }
 
 export type TUserCar = {

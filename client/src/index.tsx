@@ -11,15 +11,17 @@ import "./styles/index.css";
 import userInfoLoader from "./Loaders/userInfoLoader";
 import userCarsLoader from "./Loaders/userCarsLoader";
 import racesLoader from "./Loaders/racesLoader";
+import generalCarsLoader from "./Loaders/generalCarsLoader";
 
 import Authentication, { Login, Register } from "./Pages/Authentication";
 import DashboardLayout from "./Pages/DashboardLayout";
 import FirstCarSelection from "./Pages/FirstCarSelection";
 
-import Garage from "./Pages/Garage";
+import Garage from "./Pages/Garage/Garage";
 import Tuning from "./Pages/Tuning/Tuning";
 import Dashboard from "./Pages/Dashboard";
-import Market from "./Pages/Market";
+import Market from "./Pages/Market/Market";
+import MarketDealer from "./Pages/Market/MarketDealer";
 import Race from "./Pages/Race/Race";
 
 const router = createBrowserRouter([
@@ -65,6 +67,11 @@ const router = createBrowserRouter([
       {
         path: "market",
         element: <Market />,
+      },
+      {
+        path: "market/dealer",
+        element: <MarketDealer />,
+        loader: generalCarsLoader,
       },
       {
         path: "race",

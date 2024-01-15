@@ -31,8 +31,7 @@ export default function CarCard({ carName }: { carName: string }) {
     <article className="car" onClick={handleSelectFirstCar}>
       {carInformation && (
         <img
-          src={`${process.env.PUBLIC_URL}/assets/${carInformation.imgName}`}
-          alt={carInformation.imgAlt}
+          src={`${process.env.PUBLIC_URL}/assets/${carInformation.imgSrc}`}
         />
       )}
       <section className="car-description">

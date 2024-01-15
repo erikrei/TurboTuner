@@ -8,9 +8,9 @@ import TuningSelectCars from "./TuningSelectCars";
 export default function Tuning() {
   return (
     <TuningContextProvider>
-      <h1>Tuning</h1>
+      <h1 className="content-headline">Tuning</h1>
       <TuningSelectCars />
-      <section className="selected-car-container">
+      <section className="selected-car-container tmp-bg">
         <TuningSelectedCar />
       </section>
     </TuningContextProvider>
