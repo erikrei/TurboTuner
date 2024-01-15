@@ -1,7 +1,6 @@
-import { useContext } from "react";
 import axios from "axios";
 import { useTuningContext } from "../../Contexts/TuningContext";
-import { UserInfoContext } from "../DashboardLayout";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 import { TUserCarTuningCancel } from "../../types";
 
@@ -11,7 +10,7 @@ type TuningCancelProps = {
 
 export default function TuningCancel({ hideButton }: TuningCancelProps) {
   const { selectedCarId, userCars, setUserCars } = useTuningContext();
-  const userInfo = useContext(UserInfoContext);
+  const { userInfo, setUserInfo } = useUserInfo();
 
   function handleCancelTuningClick() {
     axios
@@ -29,10 +28,11 @@ export default function TuningCancel({ hideButton }: TuningCancelProps) {
             }
           });
         setUserCars(newUserCars);
-        userInfo?.setUserInfo({
-          ...userInfo.userInfo,
-          money: userInfo.userInfo.money + data.moneyToReturn,
-        });
+        userInfo &&
+          setUserInfo({
+            ...userInfo,
+            money: userInfo.money + data.moneyToReturn,
+          });
       });
   }
 

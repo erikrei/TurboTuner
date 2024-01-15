@@ -1,10 +1,9 @@
-import { useContext } from "react";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
 import { TGeneralCar } from "../../types";
 
-import { UserInfoContext } from "../DashboardLayout";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 import MarketGeneralCarBuyButton from "./MarketGeneralCarBuyButton";
 
@@ -15,7 +14,7 @@ type MarketGeneralCarContainerProps = {
 export default function MarketGeneralCarContainer({
   generalCar,
 }: MarketGeneralCarContainerProps) {
-  const userInfo = useContext(UserInfoContext);
+  const { userInfo, setUserInfo } = useUserInfo();
 
   function handleBuyGeneralCarClick() {
     axios
@@ -29,9 +28,9 @@ export default function MarketGeneralCarContainer({
       )
       .then(({ data }: { data: string }) => {
         userInfo &&
-          userInfo.setUserInfo({
-            ...userInfo.userInfo,
-            money: userInfo.userInfo.money - generalCar.price,
+          setUserInfo({
+            ...userInfo,
+            money: userInfo.money - generalCar.price,
           });
         toast.success(data, {
           style: {

@@ -1,11 +1,11 @@
-import { useContext } from "react";
 import axios from "axios";
 
 import toast, { Toaster } from "react-hot-toast";
 
 import timeFormatted from "../../Helpers/timeFormatted";
 
-import { UserInfoContext } from "../DashboardLayout";
+import { useUserInfo } from "../../Contexts/UserInfoContext";
+
 import { TRace, TRaceUser } from "../../types";
 
 import RaceApplyButton from "./RaceApplyButton";
@@ -17,9 +17,7 @@ type RaceContainerProps = {
 };
 
 export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
-  const userId = useContext(UserInfoContext)?.userInfo._id;
-
-  const now = new Date();
+  const userId = useUserInfo().userInfo?._id;
 
   let hasApplied: undefined | TRaceUser;
 

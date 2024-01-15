@@ -1,16 +1,17 @@
-import { useContext } from "react";
-import { UserInfoContext } from "../Pages/DashboardLayout";
+import { Navigate } from "react-router-dom";
 
 import "../styles/userInformation.css";
 
 import UserInformationContainer from "./UserInformationContainer";
 
-export default function UserInformation() {
-  const userInfo = useContext(UserInfoContext)?.userInfo;
+import { useUserInfo } from "../Contexts/UserInfoContext";
 
-  if (userInfo) {
-    return <UserInformationContainer userInfo={userInfo} />;
+export default function UserInformation() {
+  const userInfo = useUserInfo().userInfo;
+
+  if (userInfo?.firstLogin) {
+    return <Navigate to="/firstCar" />;
   }
 
-  return <h1>UserInfo Objekt konnte nicht geladen werden</h1>;
+  return <UserInformationContainer />;
 }

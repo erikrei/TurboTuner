@@ -1,10 +1,14 @@
-import { TUserInfo } from "../types";
+import { useUserInfo } from "../Contexts/UserInfoContext";
 
-type Props = {
-  userInfo: TUserInfo;
-};
+export default function UserInformationContainer() {
+  const { userInfo } = useUserInfo();
 
-export default function UserInformationContainer({ userInfo }: Props) {
+  if (!userInfo) {
+    return (
+      <p className="loader-text">Benutzerinformationen werden geladen...</p>
+    );
+  }
+
   return (
     <div className="user-info-content">
       <div className="info-container">
