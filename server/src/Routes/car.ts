@@ -57,12 +57,19 @@ carRouter.get('/allCars/:id', async (req: Request, res: Response) => {
 
 carRouter.post('/addToUser', checkIfSessionHasUser, async (req: Request, res: Response) => {
     const user_id = req.session.user._id;
-    const { name } = req.body;
+    const { name, price }: TGeneralCar = req.body;
 
     try {
         const _id = getMongooseObjectId();
-        const userCarResponse = UserCar.create<TUserCar>({ _id, user_id, name, tuning_components: basicTuningComponents() })
-        return res.send(`Das Auto ${name} wurde erfolgreich hinzugefügt.`);
+        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name, tuning_components: basicTuningComponents() })
+
+        const userInfoResponse = await UserInfo.findByIdAndUpdate(user_id, {
+            $inc: {
+                money: -price
+            }
+        }, { new: true })
+
+        return res.send(`Das Auto ${name} wurde erfolgreich gekauft.`);
     } catch (error) {
         console.log(error);
     }
@@ -98,11 +105,11 @@ carRouter.post('/addToUserFirstCar', checkIfSessionHasUser, async (req: Request,
 })
 
 carRouter.post('/addGeneralCar', async (req: Request, res: Response) => {
-    const { name, price } = req.body;
+    const { name, price, description, imgSrc }: TGeneralCar = req.body;
 
     try {
         const _id = getMongooseObjectId();
-        const generalCarResponse = await GeneralCar.create<TGeneralCar>({ _id, name, price });
+        const generalCarResponse = await GeneralCar.create<TGeneralCar>({ _id, name, price, description, imgSrc });
         return res.send('Auto wurde erfolgreich in der Datenbank gespeichert.');
     } catch (error) {
         if ((error as MongoError).code === 11000) {

@@ -15,8 +15,8 @@ export default function Race() {
 
   return (
     <>
-      <h1>Rennen</h1>
-      <section className="races-container">
+      <h1 className="content-headline">Rennen</h1>
+      <section className="races-container tmp-bg">
         {races.map((race) => (
           <RaceContainer key={race._id} race={race} setRaces={setRaces} />
         ))}

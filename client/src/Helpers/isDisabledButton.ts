@@ -21,7 +21,7 @@ export default function isDisabledButton(tuning_information: TUserCarTuningInfor
         tuning_cost = tuning_cost * 1.3;
     }
 
-    if (currentMoney && currentMoney < tuning_cost) {
+    if ((currentMoney || currentMoney === 0) && currentMoney < tuning_cost) {
         disabledButtonInformation.disabledButton = true;
         disabledButtonInformation.disabledFeedback = 'Zu wenig Geld.';
     }

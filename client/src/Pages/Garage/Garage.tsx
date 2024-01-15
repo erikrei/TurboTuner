@@ -3,11 +3,11 @@ import axios, { AxiosResponse } from "axios";
 import { useLoaderData } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
-import "../styles/garage.css";
+import "../../styles/garage.css";
 
-import { TUserCar, TUserInfo } from "../types";
+import { TUserCar, TUserInfo } from "../../types";
 
-import { UserInfoContext } from "./DashboardLayout";
+import { UserInfoContext } from "../DashboardLayout";
 
 export default function Garage() {
   const loaderData: AxiosResponse = useLoaderData() as AxiosResponse;
@@ -39,7 +39,7 @@ export default function Garage() {
 
   return (
     <>
-      <h1>Garage</h1>
+      <h1 className="content-headline">Garage</h1>
       <section className="user-car-container">
         {userCars.map((car) => (
           <div className="car-container" key={car._id}>

@@ -1,0 +1,116 @@
+div.market-container {
+    padding: 0rem 2rem;
+
+    section.market-cards-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        > article.market-card-container {
+            border-radius: 1rem;
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+
+            > section.market-card-text {
+                border-radius: 1rem;
+                color: #f5f1ed;
+                padding: 2rem;
+                backdrop-filter: brightness(30%);
+
+                > h2 {
+                    letter-spacing: 1px;
+                    margin-bottom: 0.5rem;
+                }
+
+                > p {
+                    line-height: 1.5;
+                    font-size: 1.05rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                > a {
+                    background-color: #540d6e;
+                    padding: 0.5rem 1rem;
+                    border-radius: 0.5rem;
+                    color: white;
+
+                    &:hover {
+                        font-weight: bold;
+                    }
+                }
+
+                > span {
+                    background-color: #131313;
+                    padding: 0.5rem 1rem;
+                    border-radius: 0.5rem;
+                    &:hover {
+                        font-weight: normal;
+                        cursor: not-allowed;
+                    }
+                }
+            }
+        }
+    }
+}
+
+main.general-cars-container {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: rgba(var(--auth-active-bg-color-rgb), 0.5);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 2px solid white;
+    color: white;
+
+    > article.general-car {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+
+        > img {
+            width: 30%;
+        }
+
+        > div.general-car-text {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            > p:last-child {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            span.general-car-price {
+                background-color: var(--auth-focus-outline-color);
+                padding: 0.25rem 0.75rem;
+                border-radius: 0.5rem;
+                font-weight: bold;
+                font-size: 1.1rem;
+            }
+
+            span.error {
+                color: red;
+            }
+
+            button {
+                padding: 0rem 1rem;
+                font-weight: bold;
+                font-size: 1rem;
+
+                &:hover {
+                    cursor: pointer;
+                }
+
+                &:disabled {
+                    &:hover {
+                        cursor: not-allowed;
+                    }
+                }
+            }
+        }
+    }
+}
