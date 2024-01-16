@@ -45,7 +45,10 @@ export default function MarketGeneralCarContainer({
     <article className="general-car">
       <img src={`${process.env.PUBLIC_URL}/assets/${generalCar.imgSrc}`} />
       <div className="general-car-text">
-        <h2>{generalCar.name}</h2>
+        <h2>
+          {generalCar.name}{" "}
+          <span className="general-car-class">Klasse {generalCar.quality}</span>
+        </h2>
         <p>{generalCar.description}</p>
         <p>
           Preis <span className="general-car-price">{generalCar.price} €</span>

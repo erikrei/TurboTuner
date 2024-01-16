@@ -22,8 +22,9 @@ export type TGeneralCar = {
     _id: string,
     name: string,
     price: number,
+    quality: 1 | 2 | 3 | 4 | 5,
     description: string,
-    imgSrc: string
+    imgSrc: string,
 }
 
 export type TUserCar = {

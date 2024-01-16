@@ -105,11 +105,11 @@ carRouter.post('/addToUserFirstCar', checkIfSessionHasUser, async (req: Request,
 })
 
 carRouter.post('/addGeneralCar', async (req: Request, res: Response) => {
-    const { name, price, description, imgSrc }: TGeneralCar = req.body;
+    const { name, price, description, imgSrc, quality }: TGeneralCar = req.body;
 
     try {
         const _id = getMongooseObjectId();
-        const generalCarResponse = await GeneralCar.create<TGeneralCar>({ _id, name, price, description, imgSrc });
+        const generalCarResponse = await GeneralCar.create<TGeneralCar>({ _id, name, price, description, imgSrc, quality });
         return res.send('Auto wurde erfolgreich in der Datenbank gespeichert.');
     } catch (error) {
         if ((error as MongoError).code === 11000) {
