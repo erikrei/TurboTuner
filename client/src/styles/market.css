@@ -54,7 +54,7 @@ div.market-container {
 }
 
 main.general-cars-container {
-    margin-top: 2rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
     gap: 2rem;
@@ -82,6 +82,19 @@ main.general-cars-container {
                 display: flex;
                 align-items: center;
                 gap: 0.5rem;
+            }
+
+            > h2 {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            span.general-car-class {
+                font-size: 0.9rem;
+                background-color: var(--auth-focus-outline-color);
+                padding: 0.2rem 0.4rem;
+                border-radius: 1rem;
             }
 
             span.general-car-price {
@@ -112,5 +125,24 @@ main.general-cars-container {
                 }
             }
         }
+    }
+}
+
+section.class-information {
+    background-color: rgba(var(--light-purple-rgb), 0.9);
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: white;
+
+    > svg {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    > p {
+        line-height: 1.3;
     }
 }

@@ -8,7 +8,8 @@ const GeneralCarSchema = new Schema<TGeneralCar>({
     },
     price: Number,
     description: String,
-    imgSrc: String
+    imgSrc: String,
+    quality: Number
 }, { collection: 'generalCars' });
 
 export default model<TGeneralCar>('GeneralCarSchema', GeneralCarSchema);

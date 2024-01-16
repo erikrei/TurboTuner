@@ -12,7 +12,7 @@
 :root {
     --black-purple: #11001c;
     --black-purple-rgb: 17, 0, 28;
-    --light-purple: #3a015c;
+    --light-purple: rgb(58, 1, 92);
     --light-purple-rgb: 58, 1, 92;
     --auth-active-bg-color: #000814;
     --auth-active-bg-color-rgb: 0, 8, 20;
