@@ -4,6 +4,8 @@ import RaceInfo from '../Models/RaceInfo';
 
 import getCurrentTime from '../Helpers/getCurrentTime';
 
+import UserInfo from '../Models/UserInfo';
+
 export function runRaces() {
     cron.schedule('*/15 * * * *', async () => {
         const currentTime = new Date();
@@ -27,9 +29,23 @@ export function runRaces() {
                 console.log('Keine Benutzer zum Rennen angemeldet.');
             } else {
                 console.log('Folgende Benutzer sind zum Rennen angemeldet: ');
-                raceInfoResponse.users.map((user) => console.log(user.username));
+                raceInfoResponse.users.map(async (user) => {
+                    console.log(user.username);
+                    try {
+                        await UserInfo.findByIdAndUpdate(user.user_id, {
+                            $inc: {
+                                money: 50000
+                            }
+                        });
+                    } catch (error) {
+                        console.log(error);
+                    }
+                });
             }
 
+            raceInfoResponse.users = [];
+
+            await raceInfoResponse.save();
 
         } catch (error) {
             console.log(error);
