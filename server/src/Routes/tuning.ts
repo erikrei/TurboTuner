@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { Error } from 'mongoose';
 
-import { TGeneralCar, TUserCar } from '../types';
+import { TGeneralCar, TUserCar, TUserCarTuningComponents } from '../types';
 
 import UserCar from '../Models/UserCar';
 import UserInfo from '../Models/UserInfo';
@@ -118,6 +118,36 @@ tuningRouter.put('/cancel/:id', checkIfSessionHasUser, async (req: Request, res:
     } catch (error) {
         console.log(error);
     }
+})
+
+tuningRouter.put('/dev/finish/:id', async (req: Request, res: Response) => {
+    const car_id = req.params.id;
+    const { component_name, component_level } = req.body;
+
+    const userCarResponse = await UserCar.findById(car_id);
+
+    if (userCarResponse) {
+        const generalCarResponse = await GeneralCar.findOne({
+            name: userCarResponse.name
+        })
+
+        if (generalCarResponse) {
+            const car_quality = generalCarResponse.quality;
+
+            const tuning_component_to_change = userCarResponse.tuning_components.find((component) => component.component_name === component_name);
+
+            if (tuning_component_to_change) {
+                tuning_component_to_change.component_level = component_level;
+                tuning_component_to_change.tuning_cost = getTuningCost(component_level + 1, car_quality);
+                tuning_component_to_change.tuning_time = getTuningTime(component_level + 1, false, car_quality);
+                tuning_component_to_change.tuning_improvement = getTuningImprovement(component_name, component_level, car_quality);
+            }
+
+            await userCarResponse.save();
+
+            return res.json(userCarResponse);
+        } else return res.send('Generelles Auto mit gegebenem Namen ' + userCarResponse.name + ' nicht gefunden.');
+    } else return res.status(404).send('Auto mit gegebener ID ' + car_id + ' nicht gefunden.');
 })
 
 export default tuningRouter;
