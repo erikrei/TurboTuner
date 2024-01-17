@@ -25,6 +25,7 @@ export default function TuningSelectedCar() {
             component_name: component.component_name,
             new_component_level: component.component_level + 1,
             fast_tuning,
+            car_name: selectedCar.name,
           },
           {
             withCredentials: true,
