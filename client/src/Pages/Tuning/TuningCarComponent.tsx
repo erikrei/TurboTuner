@@ -52,6 +52,7 @@ export default function TuningCarComponent({
       <p>TUNING_COST: {component_price} €</p>
       <p>FAST_TUNING_COST: {component_price * 1.3} €</p>
       <TuningComponentTime tuningTime={component.tuning_time} />
+      <p>VERBESSERUNG: {component.tuning_improvement / 1000} Sekunden</p>
       <TuningButton
         component={component}
         handleTuning={handleTuning}

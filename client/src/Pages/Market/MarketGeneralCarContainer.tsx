@@ -22,7 +22,6 @@ export default function MarketGeneralCarContainer({
         "http://localhost:3000/car/addToUser",
         {
           name: generalCar.name,
-          price: generalCar.price,
         },
         { withCredentials: true }
       )

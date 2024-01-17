@@ -58,15 +58,20 @@ carRouter.get('/allCars/:id', async (req: Request, res: Response) => {
 
 carRouter.post('/addToUser', checkIfSessionHasUser, async (req: Request, res: Response) => {
     const user_id = req.session.user._id;
-    const { name, price }: TGeneralCar = req.body;
+    const { name }: TGeneralCar = req.body;
 
     try {
+        const generalCarResponse = await GeneralCar.findOne<TGeneralCar>({
+            name
+        }) as TGeneralCar;
+
         const _id = getMongooseObjectId();
-        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name, tuning_components: basicTuningComponents() })
+
+        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name, tuning_components: basicTuningComponents(generalCarResponse.quality) })
 
         const userInfoResponse = await UserInfo.findByIdAndUpdate(user_id, {
             $inc: {
-                money: -price
+                money: -generalCarResponse.price
             }
         }, { new: true })
 

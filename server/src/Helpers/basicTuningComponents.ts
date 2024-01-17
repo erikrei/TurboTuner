@@ -2,10 +2,11 @@ import { TUserCarTuningComponents } from "../types";
 
 import getTuningTime from '../Helpers/getTuningTime';
 import getTuningCost from '../Helpers/getTuningCost';
+import getTuningImprovement from "./getTuningImprovement";
 
 const tuning_components_names = ["Motor", "Tank"];
 
-export default function basicTuningComponents(): TUserCarTuningComponents[] {
+export default function basicTuningComponents(quality: number = 3): TUserCarTuningComponents[] {
     const tuning_components: TUserCarTuningComponents[] = [];
 
     tuning_components_names.forEach((name) => {
@@ -13,7 +14,8 @@ export default function basicTuningComponents(): TUserCarTuningComponents[] {
             component_name: name,
             component_level: 1,
             tuning_cost: getTuningCost(2),
-            tuning_time: getTuningTime(2)
+            tuning_time: getTuningTime(2),
+            tuning_improvement: getTuningImprovement(name, 1, quality)
         })
     })
 
