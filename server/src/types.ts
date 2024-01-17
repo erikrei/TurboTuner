@@ -23,6 +23,7 @@ export type TGeneralCar = {
     name: string,
     price: number,
     quality: 1 | 2 | 3 | 4 | 5,
+    startTime: number,
     description: string,
     imgSrc: string,
 }
