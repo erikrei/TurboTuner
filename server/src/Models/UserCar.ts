@@ -8,7 +8,8 @@ const UserCarSchema = new Schema<TUserCar>({
         component_name: String,
         component_level: Number,
         tuning_cost: Number,
-        tuning_time: Number
+        tuning_time: Number,
+        tuning_improvement: Number
     }],
     tuning_information: {
         type: {

@@ -57,7 +57,8 @@ export type TUserCarTuningComponent = {
     component_name: string,
     component_level: number,
     tuning_cost: number,
-    tuning_time: number
+    tuning_time: number,
+    tuning_improvement: number
 }
 
 export type TUserCarTuningInformation = {

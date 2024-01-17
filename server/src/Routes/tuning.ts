@@ -1,14 +1,16 @@
 import { Router, Request, Response } from 'express';
 import { Error } from 'mongoose';
 
-import { TUserCar } from '../types';
+import { TGeneralCar, TUserCar } from '../types';
 
 import UserCar from '../Models/UserCar';
 import UserInfo from '../Models/UserInfo';
+import GeneralCar from '../Models/GeneralCar';
 
 import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
 import getTuningTime from '../Helpers/getTuningTime';
 import getTuningCost from '../Helpers/getTuningCost';
+import getTuningImprovement from '../Helpers/getTuningImprovement';
 
 const tuningRouter = Router();
 
@@ -16,8 +18,8 @@ tuningRouter.put('/car/:id', checkIfSessionHasUser, async (req: Request, res: Re
     const car_id: string = req.params.id;
     const { component_name, new_component_level, fast_tuning } = req.body;
     const tuning_start = new Date().getTime();
-    const tuning_end = fast_tuning ? tuning_start + getTuningTime(new_component_level, true) : tuning_start + getTuningTime(new_component_level);
-    // const tuning_end = tuning_start + 100000;
+    // const tuning_end = fast_tuning ? tuning_start + getTuningTime(new_component_level, true) : tuning_start + getTuningTime(new_component_level);
+    const tuning_end = tuning_start + 5000;
 
     try {
         return res.json(await UserCar.findByIdAndUpdate<TUserCar>(car_id, {
@@ -42,6 +44,10 @@ tuningRouter.put('/finish/:id', checkIfSessionHasUser, async (req: Request, res:
     try {
         const userCarResponse = await UserCar.findById(car_id);
 
+        const generalCarResponse = await GeneralCar.findOne({
+            name: userCarResponse?.name
+        }) as TGeneralCar;
+
         if (userCarResponse && userCarResponse.tuning_information) {
             const { component_name, new_component_level, tuning_end } = userCarResponse.tuning_information;
 
@@ -52,6 +58,7 @@ tuningRouter.put('/finish/:id', checkIfSessionHasUser, async (req: Request, res:
                 tuning_component.component_level = new_component_level;
                 tuning_component.tuning_cost = getTuningCost(new_component_level + 1);
                 tuning_component.tuning_time = getTuningTime(new_component_level + 1);
+                tuning_component.tuning_improvement = getTuningImprovement(component_name, new_component_level, generalCarResponse.quality)
             };
 
             userCarResponse.tuning_information = undefined;
