@@ -13,8 +13,8 @@ export default function basicTuningComponents(quality: number = 3): TUserCarTuni
         tuning_components.push({
             component_name: name,
             component_level: 1,
-            tuning_cost: getTuningCost(2),
-            tuning_time: getTuningTime(2),
+            tuning_cost: getTuningCost(2, quality),
+            tuning_time: getTuningTime(2, false, quality),
             tuning_improvement: getTuningImprovement(name, 1, quality)
         })
     })

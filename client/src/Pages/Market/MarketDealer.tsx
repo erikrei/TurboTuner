@@ -19,7 +19,9 @@ export default function MarketDealer() {
           Die Klasse des Autos beschreibt die Qualität. Eine höhere Klasse
           bedeutet, dass das Auto einen schnelleren Startwert besitzt.
           Zusätzlich sind die Verbesserungen höher als die der niedrigeren
-          Klassen, jedoch aber auch teurer.
+          Klassen, jedoch dauern diese länger und sind teurer. Die
+          Verbesserungen einer niedrigeren Klasse sind billiger und werden
+          schneller fertig gestellt.
         </p>
       </section>
       <main className="general-cars-container">

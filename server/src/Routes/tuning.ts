@@ -16,12 +16,19 @@ const tuningRouter = Router();
 
 tuningRouter.put('/car/:id', checkIfSessionHasUser, async (req: Request, res: Response) => {
     const car_id: string = req.params.id;
-    const { component_name, new_component_level, fast_tuning } = req.body;
+    const { component_name, new_component_level, fast_tuning, car_name } = req.body;
     const tuning_start = new Date().getTime();
-    // const tuning_end = fast_tuning ? tuning_start + getTuningTime(new_component_level, true) : tuning_start + getTuningTime(new_component_level);
-    const tuning_end = tuning_start + 5000;
 
     try {
+
+        const generalCarResponse = await GeneralCar.findOne({
+            name: car_name
+        }) as TGeneralCar;
+
+        const car_quality = generalCarResponse.quality;
+
+        const tuning_end = tuning_start + getTuningTime(new_component_level, fast_tuning, car_quality);
+
         return res.json(await UserCar.findByIdAndUpdate<TUserCar>(car_id, {
             tuning_information: {
                 component_name,
@@ -49,15 +56,15 @@ tuningRouter.put('/finish/:id', checkIfSessionHasUser, async (req: Request, res:
         }) as TGeneralCar;
 
         if (userCarResponse && userCarResponse.tuning_information) {
-            const { component_name, new_component_level, tuning_end } = userCarResponse.tuning_information;
+            const { component_name, new_component_level, tuning_end, fast_tuning } = userCarResponse.tuning_information;
 
             if (tuning_end > new Date().getTime()) return res.status(403).send('Tuning des Autos ist noch nicht fertiggestellt.');
 
             const tuning_component = userCarResponse.tuning_components.find((component) => component.component_name === component_name);
             if (tuning_component) {
                 tuning_component.component_level = new_component_level;
-                tuning_component.tuning_cost = getTuningCost(new_component_level + 1);
-                tuning_component.tuning_time = getTuningTime(new_component_level + 1);
+                tuning_component.tuning_cost = getTuningCost(new_component_level + 1, generalCarResponse.quality);
+                tuning_component.tuning_time = getTuningTime(new_component_level + 1, false, generalCarResponse.quality);
                 tuning_component.tuning_improvement = getTuningImprovement(component_name, new_component_level, generalCarResponse.quality)
             };
 

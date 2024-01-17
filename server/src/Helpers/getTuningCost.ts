@@ -1,4 +1,7 @@
-export default function getTuningCost(new_component_level: number): number {
+import getQualityMultiplicator from "./getQualityMultiplicator";
+
+export default function getTuningCost(new_component_level: number, quality: number = 3): number {
     const cost = 4000 * new_component_level;
-    return cost + (cost * .1);
+    const qualityMultiplicator = getQualityMultiplicator(quality);
+    return (cost + (cost * .1)) * qualityMultiplicator;
 }
