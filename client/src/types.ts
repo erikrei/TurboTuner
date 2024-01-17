@@ -35,7 +35,8 @@ export type TGeneralCar = {
     price: number,
     description: string,
     imgSrc: string,
-    quality: 1 | 2 | 3 | 4 | 5
+    quality: 1 | 2 | 3 | 4 | 5,
+    startTime: number
 }
 
 export type TUserCar = {

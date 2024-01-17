@@ -10,6 +10,7 @@ import UserInfo from '../Models/UserInfo';
 import getMongooseObjectId from '../Helpers/getMongooseObjectId';
 import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
 import basicTuningComponents from '../Helpers/basicTuningComponents';
+import getStartTimeOfCar from '../Helpers/getStartTimeOfCar';
 
 const carRouter = Router();
 
@@ -106,10 +107,11 @@ carRouter.post('/addToUserFirstCar', checkIfSessionHasUser, async (req: Request,
 
 carRouter.post('/addGeneralCar', async (req: Request, res: Response) => {
     const { name, price, description, imgSrc, quality }: TGeneralCar = req.body;
+    const startTime = getStartTimeOfCar(quality);
 
     try {
         const _id = getMongooseObjectId();
-        const generalCarResponse = await GeneralCar.create<TGeneralCar>({ _id, name, price, description, imgSrc, quality });
+        const generalCarResponse = await GeneralCar.create<TGeneralCar>({ _id, name, price, description, imgSrc, quality, startTime });
         return res.send('Auto wurde erfolgreich in der Datenbank gespeichert.');
     } catch (error) {
         if ((error as MongoError).code === 11000) {
