@@ -66,3 +66,13 @@ export type TRaceInformation = {
     users: TRaceUser[];
     race_time: TRaceTime
 }
+
+export type TRaceRankingUser = {
+    ranking: number
+    username: string
+    winnings: number
+}
+
+export type TRaceRanking = {
+    users: TRaceRankingUser[]
+}

@@ -7,7 +7,7 @@ type TComponentData = {
     component_value_above_200: number
 }
 
-const componentsData: TComponentData[] = [
+export const componentsData: TComponentData[] = [
     {
         component_name: 'Motor',
         component_base_value: 5000,
