@@ -29,8 +29,8 @@ app.use('/car', carRouter);
 app.use('/tuning', tuningRouter);
 app.use('/race', raceRouter);
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
     console.log(getCurrentTime(), `Server auf Port '${PORT}' gestartet`);
-    connectToDatabase();
+    await connectToDatabase();
     runRaces();
 })
