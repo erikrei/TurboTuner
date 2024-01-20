@@ -24,6 +24,31 @@ raceRouter.get('/', async (req: Request, res: Response) => {
     }
 })
 
+raceRouter.get('/ranking', checkIfSessionHasUser, async (req, res) => {
+    const { hours, minutes }: TRaceTime = req.body;
+
+    if (hours === undefined || minutes === undefined) {
+        return res.status(400).send('Die Startzeit des Rennens muss angegeben werden.');
+    }
+
+    try {
+        const raceInfoResponse = await RaceInfo.findOne({
+            race_time: {
+                hours,
+                minutes
+            }
+        })
+
+        if (raceInfoResponse) {
+            return res.json(raceInfoResponse.race_ranking);
+        } else {
+            return res.status(404).send('Rennen mit angegebenen Zeiten nicht gefunden.');
+        }
+    } catch(error) {
+        console.log(error);
+    }
+})
+
 raceRouter.post('/add/race', async (req: Request, res: Response) => {
     const { hours, minutes }: TRaceTime = req.body;
 

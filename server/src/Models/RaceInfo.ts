@@ -9,6 +9,18 @@ const RaceInfoSchema = new Schema<TRaceInformation>({
     race_time: {
         hours: Number,
         minutes: Number
+    },
+    race_ranking: {
+        required: false,
+        type: {
+            users: [{
+                ranking: Number,
+                username: String,
+                winnings: Number,
+                claimedWinnings: Boolean,
+                carTime: String
+            }]
+        }
     }
 }, { collection: 'races' })
 

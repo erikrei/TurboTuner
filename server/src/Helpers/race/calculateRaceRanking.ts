@@ -10,7 +10,7 @@ export type TTmpUser = {
     time: number
 }
 
-export default async function calculateRaceRanking(users: TRaceUser[]): Promise<TRaceRanking | null> {
+export default async function calculateRaceRanking(users: TRaceUser[]): Promise<TRaceRanking | undefined> {
     let usersWithTime: TTmpUser[] = [];
 
     try {
@@ -28,7 +28,7 @@ export default async function calculateRaceRanking(users: TRaceUser[]): Promise<
             }
         }
 
-        usersWithTime = usersWithTime.sort((a, b) => b.time - a.time);
+        usersWithTime = usersWithTime.sort((a, b) => a.time - b.time);
 
         return getRaceRanking(usersWithTime);
 
@@ -36,5 +36,5 @@ export default async function calculateRaceRanking(users: TRaceUser[]): Promise<
         console.log(error);
     }
 
-    return null;
+    return undefined;
 }
