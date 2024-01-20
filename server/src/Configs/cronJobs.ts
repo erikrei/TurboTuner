@@ -4,26 +4,18 @@ import RaceInfo from '../Models/RaceInfo';
 
 import getCurrentTime from '../Helpers/getCurrentTime';
 import calculateRaceRanking from '../Helpers/race/calculateRaceRanking';
-import getCarStartTime from '../Helpers/car/getCarStartTime';
 
 export function runRaces() {
-    cron.schedule('* * * * * *', async () => {
+    cron.schedule('*/15 * * * *', async () => {
         const currentTime = new Date();
 
         console.log(`Rennen um: ${getCurrentTime()}`);
 
         try {
-            // const raceInfoResponse = await RaceInfo.findOne({
-            //     race_time: {
-            //         hours: currentTime.getHours(),
-            //         minutes: currentTime.getMinutes()
-            //     }
-            // })
-
             const raceInfoResponse = await RaceInfo.findOne({
                 race_time: {
-                    hours: 0,
-                    minutes: 0
+                    hours: currentTime.getHours(),
+                    minutes: currentTime.getMinutes()
                 }
             })
 
@@ -35,13 +27,19 @@ export function runRaces() {
             if (!raceInfoResponse.users.length) {
                 console.log('Keine Benutzer zum Rennen angemeldet.');
             } else {
-                console.log(await calculateRaceRanking(raceInfoResponse.users));
+                const raceRanking = await calculateRaceRanking(raceInfoResponse.users)
+                raceInfoResponse.race_ranking = raceRanking;
+
+                if (raceRanking) {
+                    raceRanking.users.map((user) => {
+                        console.log(`${user.ranking}. ${user.username} ${user.carTime} (${user.winnings} €)`)
+                    })
+                }
+
+                raceInfoResponse.users = [];
+
+                await raceInfoResponse.save();
             }
-
-            // raceInfoResponse.users = [];
-
-            // await raceInfoResponse.save();
-
         } catch (error) {
             console.log(error);
         }
