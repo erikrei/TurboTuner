@@ -88,8 +88,22 @@ export type TRaceTime = {
     minutes: number
 }
 
-export type TRace = {
+export type TRaceInformation = {
     users: TRaceUser[],
     race_time: TRaceTime,
+    race_ranking?: TRaceRanking
     _id: string
+}
+
+
+export type TRaceRankingUser = {
+    ranking: number
+    username: string
+    winnings: number
+    claimedWinnings: boolean
+    carTime: string
+}
+
+export type TRaceRanking = {
+    users: TRaceRankingUser[]
 }

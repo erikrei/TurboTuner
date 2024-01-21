@@ -2,18 +2,19 @@ import axios from "axios";
 
 import toast, { Toaster } from "react-hot-toast";
 
-import timeFormatted from "../../Helpers/timeFormatted";
+import timeFormatted from "../../Helpers/getTimeFormatted";
 
 import { useUserInfo } from "../../Contexts/UserInfoContext";
 
-import { TRace, TRaceUser } from "../../types";
+import { TRaceInformation, TRaceUser } from "../../types";
 
 import RaceApplyButton from "./RaceApplyButton";
 import RaceApplyInformation from "./RaceApplyInformation";
+import RaceRankingLink from "./RaceRankingLink";
 
 type RaceContainerProps = {
-  race: TRace;
-  setRaces: React.Dispatch<React.SetStateAction<TRace[]>>;
+  race: TRaceInformation;
+  setRaces: React.Dispatch<React.SetStateAction<TRaceInformation[]>>;
 };
 
 export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
@@ -25,7 +26,7 @@ export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
     hasApplied = race.users.find((user) => user.user_id === userId);
   }
 
-  function handleApplyRaceClick(race: TRace) {
+  function handleApplyRaceClick(race: TRaceInformation) {
     axios
       .post(
         "http://localhost:3000/race/apply",
@@ -35,7 +36,7 @@ export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
         },
         { withCredentials: true }
       )
-      .then(({ data }: { data: TRace[] }) => {
+      .then(({ data }: { data: TRaceInformation[] }) => {
         setRaces(data);
         const formattedTime = timeFormatted(
           race.race_time.hours,
@@ -53,7 +54,7 @@ export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
       });
   }
 
-  function handleUnApplyRaceClick(race: TRace) {
+  function handleUnApplyRaceClick(race: TRaceInformation) {
     axios
       .post(
         "http://localhost:3000/race/unapply",
@@ -63,7 +64,7 @@ export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
         },
         { withCredentials: true }
       )
-      .then(({ data }: { data: TRace[] }) => {
+      .then(({ data }: { data: TRaceInformation[] }) => {
         setRaces(data);
         const formattedTime = timeFormatted(
           race.race_time.hours,
@@ -94,6 +95,7 @@ export default function RaceContainer({ race, setRaces }: RaceContainerProps) {
       ) : (
         <RaceApplyButton handleApply={handleApplyRaceClick} race={race} />
       )}
+      {race.race_ranking ? <RaceRankingLink raceTime={race.race_time} /> : <p>Keine letzten Ergebnisse vorhanden</p>}
       <Toaster />
     </div>
   );

@@ -23,6 +23,7 @@ import Dashboard from "./Pages/Dashboard";
 import Market from "./Pages/Market/Market";
 import MarketDealer from "./Pages/Market/MarketDealer";
 import Race from "./Pages/Race/Race";
+import RaceRanking from "./Pages/Race/RaceRanking";
 
 const router = createBrowserRouter([
   {
@@ -78,6 +79,10 @@ const router = createBrowserRouter([
         element: <Race />,
         loader: racesLoader,
       },
+      {
+        path: "race/ranking",
+        element: <RaceRanking />
+      }
     ],
   },
 ]);
