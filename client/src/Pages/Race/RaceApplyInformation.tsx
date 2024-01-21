@@ -1,8 +1,8 @@
-import { TRace } from "../../types";
+import { TRaceInformation } from "../../types";
 
 type RaceApplyInformationProps = {
-  race: TRace;
-  handleUnApply: (race: TRace) => void;
+  race: TRaceInformation;
+  handleUnApply: (race: TRaceInformation) => void;
 };
 
 export default function RaceApplyInformation({

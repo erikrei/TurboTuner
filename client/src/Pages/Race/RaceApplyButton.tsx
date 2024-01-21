@@ -1,13 +1,17 @@
-import { TRace } from "../../types";
+import { TRaceInformation } from "../../types";
 
 type RaceApplyButtonProps = {
-  race: TRace;
-  handleApply: (race: TRace) => void;
+  race: TRaceInformation;
+  handleApply: (race: TRaceInformation) => void;
 };
 
 export default function RaceApplyButton({
   race,
   handleApply,
 }: RaceApplyButtonProps) {
-  return <button onClick={() => handleApply(race)}>Zum Rennen anmelden</button>;
+  return (
+    <div>
+      <button onClick={() => handleApply(race)}>Zum Rennen anmelden</button>
+    </div>
+  );
 }

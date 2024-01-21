@@ -1,4 +1,4 @@
-export default function timeFormatted(hours: number, minutes: number): string {
+export default function getTimeFormatted(hours: number, minutes: number): string {
     let formatted = '';
     if (hours < 10) {
         formatted += `[0${hours}:`;

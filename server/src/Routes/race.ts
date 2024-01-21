@@ -24,8 +24,9 @@ raceRouter.get('/', async (req: Request, res: Response) => {
     }
 })
 
-raceRouter.get('/ranking', checkIfSessionHasUser, async (req, res) => {
-    const { hours, minutes }: TRaceTime = req.body;
+raceRouter.get('/ranking/:hours/:minutes', checkIfSessionHasUser, async (req, res) => {
+    const hours = Number(req.params.hours);
+    const minutes = Number(req.params.minutes);
 
     if (hours === undefined || minutes === undefined) {
         return res.status(400).send('Die Startzeit des Rennens muss angegeben werden.');
@@ -44,7 +45,7 @@ raceRouter.get('/ranking', checkIfSessionHasUser, async (req, res) => {
         } else {
             return res.status(404).send('Rennen mit angegebenen Zeiten nicht gefunden.');
         }
-    } catch(error) {
+    } catch (error) {
         console.log(error);
     }
 })

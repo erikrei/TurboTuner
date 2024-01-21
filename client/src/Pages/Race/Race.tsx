@@ -3,14 +3,14 @@ import { useLoaderData } from "react-router-dom";
 
 import "../../styles/race.css";
 
-import { TRace } from "../../types";
+import { TRaceInformation } from "../../types";
 import { AxiosResponse } from "axios";
 
 import RaceContainer from "./RaceContainer";
 
 export default function Race() {
   const racesData = useLoaderData() as AxiosResponse;
-  const [races, setRaces] = useState<TRace[]>(racesData.data);
+  const [races, setRaces] = useState<TRaceInformation[]>(racesData.data);
   races.sort((a, b) => a.race_time.hours - b.race_time.hours);
 
   return (
