@@ -3,6 +3,7 @@ import session from 'express-session';
 import { TUser } from '../types';
 
 import { mongodbUri } from './connectToDatabase';
+import { mongodbUriCloud } from './connectToDatabaseCloud';
 
 declare module 'express-session' {
     interface Session {

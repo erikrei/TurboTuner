@@ -2,6 +2,7 @@ import express, { Express } from 'express';
 import getCurrentTime from './Helpers/getCurrentTime';
 
 import connectToDatabase from './Configs/connectToDatabase';
+import connectToDatabaseCloud from './Configs/connectToDatabaseCloud';
 
 import corsRouter from './Configs/cors';
 import sessionRouter from './Configs/saveSession';
@@ -32,5 +33,6 @@ app.use('/race', raceRouter);
 app.listen(PORT, async () => {
     console.log(getCurrentTime(), `Server auf Port '${PORT}' gestartet`);
     await connectToDatabase();
+    // await connectToDatabaseCloud();
     runRaces();
 })
