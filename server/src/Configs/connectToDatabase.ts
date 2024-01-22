@@ -1,9 +1,7 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
 import mongoose from 'mongoose';
 import getCurrentTime from '../Helpers/getCurrentTime';
 
-export const mongodbUri: string = `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_NAME}.6tm5dsv.mongodb.net/?retryWrites=true&w=majority`;
+export const mongodbUri: string = `mongodb://admin:12345@db:27017/test?authSource=admin`;
 
 export default async function connectToDatabase() {
     return mongoose.connect(mongodbUri)
