@@ -10,3 +10,27 @@ section.races-container {
         padding: 1rem;
     }
 }
+
+section.race-ranking-container {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+
+    > button.get-race-winnings {
+        font-size: 1.1rem;
+        font-weight: bold;
+        padding: .5rem 1rem;
+        border: none;
+
+        &:hover {
+            background-color: lightgrey;
+            cursor: pointer;
+        }
+
+        &:disabled {
+            background-color: #111111;
+            color: white;
+            cursor: not-allowed;
+        }
+    }
+}

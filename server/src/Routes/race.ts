@@ -50,6 +50,51 @@ raceRouter.get('/ranking/:hours/:minutes', checkIfSessionHasUser, async (req, re
     }
 })
 
+raceRouter.put('/claim', checkIfSessionHasUser, async (req: Request, res: Response) => {
+    const { hours, minutes, username, winnings } = req.body;
+
+    try {
+        const raceInfoResponse = await RaceInfo.findOne({
+            race_time: {
+                hours,
+                minutes
+            }
+        })
+
+        if (raceInfoResponse) {
+            const raceRanking = raceInfoResponse.race_ranking;
+
+            if (raceRanking) {
+                const rankingUser = raceRanking.users.find((user) => user.username === username);
+
+                if (rankingUser) {
+                    rankingUser.claimedWinnings = true;
+
+                    await raceInfoResponse.save();
+                } else {
+                    return res.status(404).send('Angegebener Benutzer nicht im Ranking des Rennens enthalten.');
+                }
+            } else {
+                return res.status(404).send('Angegebenes Rennen enthält kein Ranking.');
+            }
+        } else {
+            return res.status(404).send('Rennen mit angegebenen Zeiten wurde nicht gefunden.');
+        }
+
+        await UserInfo.findOneAndUpdate({
+            username
+        }, {
+            $inc: {
+                money: winnings
+            }
+        })
+
+        return res.json(raceInfoResponse.race_ranking);
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 raceRouter.post('/add/race', async (req: Request, res: Response) => {
     const { hours, minutes }: TRaceTime = req.body;
 
