@@ -12,7 +12,7 @@ export default function RaceRankingContainer({
   return (
     <>
       {ranking.users.map((user) => (
-        <RaceRankingUser user={user} />
+        <RaceRankingUser key={user._id} user={user} />
       ))}
     </>
   );

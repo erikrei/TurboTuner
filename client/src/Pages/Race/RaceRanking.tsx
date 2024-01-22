@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import getTimeFormatted from "../../Helpers/getTimeFormatted";
 
 import RaceRankingContainer from "./RaceRankingContainer";
+import RaceRankingWinnings from "./RaceRankingWinnings";
 
 export default function RaceRanking() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -30,6 +31,14 @@ export default function RaceRanking() {
         Ranking <span>von {timeFormatted}</span>
       </h1>
       <section className="race-ranking-container tmp-bg">
+        {ranking && (
+          <RaceRankingWinnings
+            users={ranking.users}
+            setRanking={setRanking}
+            hours={hours}
+            minutes={minutes}
+          />
+        )}
         {ranking && <RaceRankingContainer ranking={ranking} />}
       </section>
     </>

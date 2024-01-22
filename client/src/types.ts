@@ -102,6 +102,7 @@ export type TRaceRankingUser = {
     winnings: number
     claimedWinnings: boolean
     carTime: string
+    _id: string
 }
 
 export type TRaceRanking = {
