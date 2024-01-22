@@ -19,7 +19,7 @@ export type TValidInput = {
 }
 
 export type TGeneralCar = {
-    _id: string,
+    // _id: string,
     name: string,
     price: number,
     quality: 1 | 2 | 3 | 4 | 5,
