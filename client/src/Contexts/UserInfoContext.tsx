@@ -14,12 +14,12 @@ type UserInfoProviderProps = {
   children: ReactNode;
 };
 
-type TUserInfoContext = {
+type UserInfoContext = {
   userInfo: TUserInfo | null;
   setUserInfo: React.Dispatch<React.SetStateAction<TUserInfo | null>>;
 };
 
-const UserInfoContext = createContext<TUserInfoContext | null>(null);
+const UserInfoContext = createContext<UserInfoContext | null>(null);
 
 export default function UserInfoProvider({ children }: UserInfoProviderProps) {
   const [userInfo, setUserInfo] = useState<TUserInfo | null>(null);

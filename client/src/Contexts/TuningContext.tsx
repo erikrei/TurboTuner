@@ -2,11 +2,11 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { TUserCar } from "../types";
 
-type TTuningContextProviderProps = {
+type TuningContextProviderProps = {
   children: React.ReactNode;
 };
 
-type TTuningContext = {
+type TuningContext = {
   userCars: TUserCar[] | null;
   setUserCars: React.Dispatch<React.SetStateAction<TUserCar[] | null>>;
   selectedCarId: string | null;
@@ -14,11 +14,11 @@ type TTuningContext = {
   selectedCar: TUserCar | null | undefined;
 };
 
-export const TuningContext = createContext<null | TTuningContext>(null);
+export const TuningContext = createContext<null | TuningContext>(null);
 
 export default function TuningContextProvider({
   children,
-}: TTuningContextProviderProps) {
+}: TuningContextProviderProps) {
   const [userCars, setUserCars] = useState<TUserCar[] | null>(null);
   const [selectedCarId, setSelectedCarId] = useState<string | null>(null);
   const selectedCar =

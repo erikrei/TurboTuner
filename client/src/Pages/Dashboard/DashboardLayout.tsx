@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
 
-import "../styles/dashboard.css";
+import "../../styles/dashboard.css";
 
-import DashboardHeader from "../Components/DashboardHeader";
-import UserInformation from "../Components/UserInformation";
-import Navigation from "../Components/Navigation";
+import DashboardHeader from "./DashboardHeader";
+import UserInformation from "../../Components/UserInformation";
+import Navigation from "../Navigation/Navigation";
 
-import UserInfoProvider from "../Contexts/UserInfoContext";
+import UserInfoProvider from "../../Contexts/UserInfoContext";
 
 export default function DashboardLayout() {
   return (

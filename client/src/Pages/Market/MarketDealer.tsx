@@ -27,7 +27,7 @@ export default function MarketDealer() {
       <main className="general-cars-container">
         {generalCars.map((generalCar) => (
           <MarketGeneralCarContainer
-            key={generalCar._id}
+            key={generalCar.name}
             generalCar={generalCar}
           />
         ))}
