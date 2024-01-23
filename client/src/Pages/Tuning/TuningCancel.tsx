@@ -32,6 +32,7 @@ export default function TuningCancel({ hideButton }: TuningCancelProps) {
           setUserInfo({
             ...userInfo,
             money: userInfo.money + data.moneyToReturn,
+            points: userInfo.points - Math.round(data.moneyToReturn / 1000)
           });
       });
   }
