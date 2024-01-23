@@ -34,6 +34,7 @@ export default function TuningCarComponent({
           "http://localhost:3000/userInfo",
           {
             money: money - moneyToSpend,
+            points: userInfo.points + Math.round(moneyToSpend / 1000)
           },
           {
             withCredentials: true,
