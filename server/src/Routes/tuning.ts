@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { Error } from 'mongoose';
 
-import { TGeneralCar, TUserCar, TUserCarTuningComponents } from '../types';
+import { TGeneralCar, TUserCar } from '../types';
 
 import UserCar from '../Models/UserCar';
 import UserInfo from '../Models/UserInfo';
@@ -97,11 +97,12 @@ tuningRouter.put('/cancel/:id', checkIfSessionHasUser, async (req: Request, res:
             }
 
             const tuning_component = userCarResponse.tuning_components.find((component) => component.component_name === userCarResponse.tuning_information?.component_name)
-            const moneyToReturn = userCarResponse.tuning_information.fast_tuning && tuning_component ? tuning_component?.tuning_cost * 1.3 : tuning_component?.tuning_cost;
+            const moneyToReturn = userCarResponse.tuning_information.fast_tuning && tuning_component ? tuning_component?.tuning_cost * 1.3 : tuning_component?.tuning_cost as number;
 
             const userInfoResponse = await UserInfo.findByIdAndUpdate(user_id, {
                 $inc: {
-                    money: moneyToReturn
+                    money: moneyToReturn,
+                    points: Math.round(-moneyToReturn / 1000)
                 }
             })
 
