@@ -13,13 +13,13 @@ import userCarsLoader from "./Loaders/userCarsLoader";
 import racesLoader from "./Loaders/racesLoader";
 import generalCarsLoader from "./Loaders/generalCarsLoader";
 
-import Authentication, { Login, Register } from "./Pages/Authentication";
-import DashboardLayout from "./Pages/DashboardLayout";
-import FirstCarSelection from "./Pages/FirstCarSelection";
+import Authentication, { Login, Register } from "./Pages/Authentication/Authentication";
+import DashboardLayout from "./Pages/Dashboard/DashboardLayout";
+import FirstCarSelection from "./Pages/FirstCarSelection/FirstCarSelection";
 
 import Garage from "./Pages/Garage/Garage";
 import Tuning from "./Pages/Tuning/Tuning";
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 import Market from "./Pages/Market/Market";
 import MarketDealer from "./Pages/Market/MarketDealer";
 import Race from "./Pages/Race/Race";
@@ -50,7 +50,6 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout />,
     loader: userInfoLoader,
-    // errorElement: <Navigate to="/" />,
     children: [
       {
         index: true,

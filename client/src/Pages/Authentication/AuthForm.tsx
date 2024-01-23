@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios, { AxiosError, AxiosResponse } from "axios";
+import axios, { AxiosError } from "axios";
 import toast, { Toaster } from "react-hot-toast";
 
-import { TAuthForm, TUser } from "../types";
+import { TUser, TUserInfo } from "../../types";
 
-export default function AuthForm({ type, btnName }: TAuthForm) {
+type AuthFormProps = {
+  type: string;
+};
+
+export default function AuthForm({ type }: AuthFormProps) {
   const navigate = useNavigate();
   const [user, setUser] = useState<TUser>({
     username: "",
@@ -14,12 +18,12 @@ export default function AuthForm({ type, btnName }: TAuthForm) {
 
   const toastSuccessStyles: React.CSSProperties = {
     backgroundColor: "green",
-    color: 'white'
+    color: "white",
   };
 
   const toastErrorStyles: React.CSSProperties = {
     backgroundColor: "red",
-    color: 'white'
+    color: "white",
   };
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -35,19 +39,11 @@ export default function AuthForm({ type, btnName }: TAuthForm) {
     event.preventDefault();
 
     axios
-      .post(`http://localhost:3000/auth/${type}`, user, {
+      .post(`http://localhost:3000/auth/login`, user, {
         withCredentials: true,
       })
-      .then((response: AxiosResponse) => {
-        toast.success(
-          `Erfolgreich eingeloggt als ${user.username}. Du wirst weitergeleitet...`,
-          {
-            style: toastSuccessStyles,
-          }
-        );
-        setTimeout(() => {
-          navigate("/dashboard");
-        }, 2000);
+      .then(({ data }: { data: TUserInfo }) => {
+        data.firstLogin ? navigate("/firstCar") : navigate("/dashboard");
       })
       .catch((error: AxiosError) => {
         if (error.response) {
@@ -64,17 +60,14 @@ export default function AuthForm({ type, btnName }: TAuthForm) {
     event.preventDefault();
 
     axios
-      .post(`http://localhost:3000/auth/${type}`, user, {
+      .post(`http://localhost:3000/auth/register`, user, {
         withCredentials: true,
       })
-      .then((response: AxiosResponse) => {
-        toast.success(
-          `Benutzer ${user.username} wurde erfolgreich registriert. Du kannst dich jetzt einloggen.`,
-          {
-            duration: 2000,
-            style: toastSuccessStyles,
-          }
-        );
+      .then(({ data }: { data: string }) => {
+        toast.success(data, {
+          duration: 2000,
+          style: toastSuccessStyles,
+        });
       })
       .catch((error: AxiosError) => {
         const feedbackMessage: string = error.response?.data as string;
@@ -112,7 +105,9 @@ export default function AuthForm({ type, btnName }: TAuthForm) {
           onChange={(event) => handleInputChange(event)}
         />
       </label>
-      <button type="submit">{btnName}</button>
+      <button type="submit">
+        {type === "login" ? "Einloggen" : "Registrieren"}
+      </button>
       <Toaster />
     </form>
   );

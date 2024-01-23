@@ -1,11 +1,11 @@
 import { AxiosResponse } from "axios";
 import { useLoaderData, Navigate } from "react-router-dom";
 
-import "../styles/dashboard.css";
+import "../../styles/dashboard.css";
 
-import CarCard from "../Components/CarCard";
+import CarCard from "./CarCard";
 
-import { TUserInfo } from "../types";
+import { TUserInfo } from "../../types";
 
 export default function FirstCarSelection() {
   const loaderData: AxiosResponse = useLoaderData() as AxiosResponse;

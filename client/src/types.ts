@@ -1,8 +1,3 @@
-export type TAuthForm = {
-    type: string,
-    btnName: string
-}
-
 export type TAuthBoolean = {
     isAuth: boolean
 }
@@ -30,7 +25,6 @@ export type TMarketCard = {
 }
 
 export type TGeneralCar = {
-    _id: string,
     name: string,
     price: number,
     description: string,

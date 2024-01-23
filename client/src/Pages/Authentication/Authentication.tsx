@@ -1,10 +1,10 @@
 import { Outlet, NavLink } from "react-router-dom";
-import AuthForm from "../Components/AuthForm";
+import AuthForm from "./AuthForm";
 
-import authBackground from "../assets/auth_bg1920x1280.jpg";
-import authBackgroundMobile from "../assets/auth_bg640x426.jpg";
+import authBackground from "../../assets/auth_bg1920x1280.jpg";
+import authBackgroundMobile from "../../assets/auth_bg640x426.jpg";
 
-import "../styles/authentication.css";
+import "../../styles/authentication.css";
 
 export default function Authentication() {
   return (
@@ -28,9 +28,9 @@ export default function Authentication() {
 }
 
 export function Login() {
-  return <AuthForm type="login" btnName="Einloggen" />;
+  return <AuthForm type="login" />;
 }
 
 export function Register() {
-  return <AuthForm type="register" btnName="Registrieren" />;
+  return <AuthForm type="register" />;
 }

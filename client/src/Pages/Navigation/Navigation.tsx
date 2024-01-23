@@ -1,7 +1,7 @@
 import { FaWarehouse, FaHome, FaStore, FaRoad } from "react-icons/fa";
 import { TbEngine } from "react-icons/tb";
 
-import "../styles/navigation.css";
+import "../../styles/navigation.css";
 
 import NavigationLink from "./NavigationLink";
 

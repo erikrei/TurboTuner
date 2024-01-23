@@ -56,6 +56,15 @@ div.dashboard-layout-container.first-car-selection {
     }
 }
 
+.first-car-selection > section.cards-container > div.first-car-loading-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: var(--auth-active-bg-color);
+}
+
 header {
     padding: 1rem;
     color: white;

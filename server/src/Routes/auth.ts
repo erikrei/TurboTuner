@@ -53,7 +53,8 @@ authRouter.post('/login', async (req: Request, res: Response) => {
         }
 
         req.session.user = dbResponse;
-        return res.status(200).json(dbResponse);
+        const userInfo = await UserInfo.findById(dbResponse._id);
+        return res.status(200).json(userInfo);
 
     } catch (error) {
         console.log(error);
