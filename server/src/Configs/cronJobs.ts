@@ -4,6 +4,7 @@ import RaceInfo from '../Models/RaceInfo';
 
 import getCurrentTime from '../Helpers/getCurrentTime';
 import calculateRaceRanking from '../Helpers/race/calculateRaceRanking';
+import addSavedRace from '../Helpers/race/addSavedRace';
 
 export function runRaces() {
     cron.schedule('*/15 * * * *', async () => {
@@ -26,6 +27,8 @@ export function runRaces() {
 
             if (!raceInfoResponse.users.length) {
                 console.log('Keine Benutzer zum Rennen angemeldet.');
+
+                addSavedRace(null);
             } else {
                 const raceRanking = await calculateRaceRanking(raceInfoResponse.users)
                 raceInfoResponse.race_ranking = raceRanking;
@@ -34,6 +37,7 @@ export function runRaces() {
                     raceRanking.users.map((user) => {
                         console.log(`${user.ranking}. ${user.username} ${user.carTime} (${user.winnings} €)`)
                     })
+                    await addSavedRace(raceRanking);
                 }
 
                 raceInfoResponse.users = [];
