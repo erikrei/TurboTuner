@@ -111,4 +111,9 @@ export type TPatchNotes = {
 export type TPatchNotesChanges = {
     subject: string,
     subject_changes: string[]
-} 
+}
+
+export type TSavedRace = {
+    race_ranking: TRaceRanking
+    race_time: number
+}

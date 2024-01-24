@@ -9,7 +9,7 @@ type BasicLoadingContainerProps = {
 export default function BasicLoadingContainer({
   loadingName,
   plural,
-  color
+  color = "#219ebc",
 }: BasicLoadingContainerProps) {
   return (
     <div className="basic-loading-container">

@@ -1,4 +1,4 @@
-import { TPatchNotesChanges } from "../../types";
+import { TPatchNotesChanges } from "../../../types";
 
 import DashboardPatchNotesChanges from "./DashboardPatchNotesChanges";
 

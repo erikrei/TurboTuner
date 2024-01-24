@@ -14,6 +14,7 @@ import carRouter from './Routes/car';
 import tuningRouter from './Routes/tuning';
 import raceRouter from './Routes/race';
 import patchNotesRouter from './Routes/patchnotes';
+import savedRaceRouter from './Routes/savedrace';
 
 import { runRaces } from './Configs/cronJobs';
 
@@ -30,7 +31,9 @@ app.use('/userInfo', userInfoRouter);
 app.use('/car', carRouter);
 app.use('/tuning', tuningRouter);
 app.use('/race', raceRouter);
-app.use('/patchnotes', patchNotesRouter)
+app.use('/patchnotes', patchNotesRouter);
+app.use('/savedrace', savedRaceRouter);
+
 
 app.listen(PORT, async () => {
     console.log(getCurrentTime(), `Server auf Port '${PORT}' gestartet`);

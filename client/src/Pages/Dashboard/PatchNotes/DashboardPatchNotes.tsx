@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-import { TPatchNotes } from "../../types";
+import { TPatchNotes } from "../../../types";
 
-import BasicLoadingContainer from "../../Components/BasicLoadingContainer";
+import BasicLoadingContainer from "../../../Components/BasicLoadingContainer";
 import DashboardPatchNotesHeader from "./DashboardPatchNotesHeader";
 import DashboardPatchNotesContent from "./DashboardPatchNotesContent";
 
@@ -22,7 +22,6 @@ export default function DashboardPatchNotes() {
       <BasicLoadingContainer
         loadingName="Patch Notizen"
         plural={true}
-        color="#219ebc"
       />
     );
   }

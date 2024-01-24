@@ -1,5 +1,6 @@
 import DashboardBanner from "./DashboardBanner";
-import DashboardPatchNotes from "./DashboardPatchNotes";
+import DashboardPatchNotes from "./PatchNotes/DashboardPatchNotes";
+import DashboardRennergebnis from "./Rennergebnis/DashboardRennergebnis";
 
 export default function Dashboard() {
   return (
@@ -7,6 +8,7 @@ export default function Dashboard() {
       <DashboardBanner />
       <section className="dashboard-content">
         <DashboardPatchNotes />
+        <DashboardRennergebnis />
       </section>
     </>
   );
