@@ -18,7 +18,7 @@ export default function DashboardLayout() {
             <UserInformation />
             <Navigation />
           </aside>
-          <main>
+          <main className="app-content">
             <Outlet />
           </main>
         </UserInfoProvider>

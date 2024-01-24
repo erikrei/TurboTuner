@@ -102,3 +102,13 @@ export type TRaceRankingUser = {
 export type TRaceRanking = {
     users: TRaceRankingUser[]
 }
+
+export type TPatchNotes = {
+    version: string
+    changes: TPatchNotesChanges[]
+}
+
+export type TPatchNotesChanges = {
+    subject: string,
+    subject_changes: string[]
+} 
