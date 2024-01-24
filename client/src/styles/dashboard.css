@@ -116,11 +116,11 @@ div.dashboard-content-container > aside.app-sidebar {
     flex-direction: column;
 }
 
-div.dashboard-content-container > main {
+main.app-content {
     align-self: flex-start;
 }
 
-div.dashboard-content-container > main h1.content-headline {
+main.app-content h1.content-headline {
     text-align: center;
     font-size: 3rem;
     color: white;
@@ -132,11 +132,88 @@ div.dashboard-content-container > main h1.content-headline {
     border: 2px solid white;
 }
 
-div.dashboard-content-container > main > section.tmp-bg {
+main.app-content > section.tmp-bg {
     margin-top: -2px;
     color: var(--auth-focus-outline-color);
     background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
     border: 2px solid var(--auth-focus-outline-color);
     padding: 2rem;
     border-radius: 1rem;
+}
+
+main.app-content > img.dashboard-banner {
+    width: 100%;
+    height: 15rem;
+    object-fit: cover;
+    border: 1px solid var(--auth-focus-outline-color);
+    border-bottom: none;
+}
+
+section.dashboard-content {
+    padding: 1rem;
+    color: var(--auth-focus-outline-color);
+    border: 1px solid var(--auth-focus-outline-color);
+    border-top: none;
+    background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
+}
+
+article.patch-notes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    letter-spacing: 1px;
+
+    div.patch-notes-header {
+        display: flex;
+        justify-content: space-between;
+
+        > h1 {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+
+            > span {
+                background-color: var(--auth-focus-outline-color);
+                padding: 0.25rem 1rem;
+                color: var(--auth-active-bg-color);
+                border-radius: 1rem;
+                font-size: 1.1rem;
+                font-weight: bold;
+            }
+        }
+
+        > span {
+            display: flex;
+            align-items: center;
+            font-size: 1.1rem;
+
+            &:hover {
+                font-weight: bold;
+                cursor: pointer;
+            }
+        }
+    }
+
+    div.patch-notes-content {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        > div.patch-notes-subject-container {
+
+            > p {
+                font-size: 1.5rem;
+            }
+
+            > ul {
+                padding-left: 2rem;
+
+                > li {
+                    line-height: 1.3;
+                    font-size: 1.05rem;
+                }
+            }
+        }
+    }
 }

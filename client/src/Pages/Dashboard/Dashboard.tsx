@@ -1,3 +1,13 @@
+import DashboardBanner from "./DashboardBanner";
+import DashboardPatchNotes from "./DashboardPatchNotes";
+
 export default function Dashboard() {
-  return <h1 className="content-headline">Dashboard</h1>;
+  return (
+    <>
+      <DashboardBanner />
+      <section className="dashboard-content">
+        <DashboardPatchNotes />
+      </section>
+    </>
+  );
 }

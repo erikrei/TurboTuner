@@ -27,6 +27,7 @@ a {
 
 img {
     max-width: 100%;
+    display: block;
 }
 
 ::-webkit-scrollbar {
@@ -42,4 +43,21 @@ img {
     background: var(--black-purple);
     border: 2px solid white;
     border-radius: 0.5rem;
+}
+
+/* GLOBAL STYLES */
+
+div.basic-loading-container {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+    > div {
+        display: flex;
+    }
+
+    > span {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
 }
