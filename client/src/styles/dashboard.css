@@ -168,6 +168,19 @@ section.dashboard-content {
         &:last-child {
             border-bottom: none;
         }
+
+        a.dashboard-link {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--auth-focus-outline-color);
+
+            &:hover {
+                text-decoration: underline;
+                font-weight: bold;
+            }
+        }
     }
 }
 
@@ -245,19 +258,6 @@ article.rennergebnis-container {
                 font-weight: bold;
             }
         }
-
-        > a {
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            color: var(--auth-focus-outline-color);
-
-            &:hover {
-                text-decoration: underline;
-                font-weight: bold;
-            }
-        }
     }
 
     > div.rennergebnis-content {
@@ -298,19 +298,6 @@ article.tuninganzeige-container {
         > p {
             font-size: 1.25rem;
             font-weight: bold;
-        }
-
-        > a {
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            color: var(--auth-focus-outline-color);
-
-            &:hover {
-                text-decoration: underline;
-                font-weight: bold;
-            }
         }
     }
 
@@ -375,6 +362,29 @@ article.tuninganzeige-container {
                     }
                 }
             }
+        }
+    }
+}
+
+article.rennencountdown-container {
+    > div.rennencountdown-header {
+        display: flex;
+        justify-content: space-between;
+
+        > p {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+    }
+
+    > div.rennencountdown-content {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        font-size: 1.25rem;
+
+        > svg {
+            font-size: 2rem;
         }
     }
 }

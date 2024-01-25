@@ -1,10 +1,10 @@
-import DashboardTuninganzeigeLink from "./DashboardTuninganzeigeLink";
+import DashboardLink from "../DashboardLink";
 
 export default function DashboardTuninganzeigeHeader() {
   return (
     <div className="tuninganzeige-header">
       <p>Derzeitige Tuningaufträge</p>
-      <DashboardTuninganzeigeLink />
+      <DashboardLink linkText="Zum Tuning" linkURL="tuning" />
     </div>
   );
 }

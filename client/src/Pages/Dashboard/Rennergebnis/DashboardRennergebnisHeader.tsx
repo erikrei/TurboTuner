@@ -1,7 +1,9 @@
 import { TRaceRankingUser } from "../../../types";
 
 import DashboardRennergebnisHeaderText from "./DashboardRennergebnisHeaderText";
-import DashboardRennergebnisLink from "./DashboardRennergebnisLink";
+// import DashboardRennergebnisLink from "./DashboardRennergebnisLink";
+
+import DashboardLink from "../DashboardLink";
 
 type DashboardRennergebnisHeaderProps = {
   race_time: number;
@@ -22,11 +24,12 @@ export default function DashboardRennergebnisHeader({
         hours={raceDateHours}
         minutes={raceDateMinutes}
       />
-      <DashboardRennergebnisLink
-        users={users}
-        hours={raceDateHours}
-        minutes={raceDateMinutes}
-      />
+      {users.length > 0 && (
+        <DashboardLink
+          linkText="Ranking ansehen"
+          linkURL={`race/ranking?hours=${raceDateHours}&minutes=${raceDateMinutes}`}
+        />
+      )}
     </div>
   );
 }
