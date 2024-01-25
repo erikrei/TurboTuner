@@ -6,8 +6,6 @@ import getCurrentTime from "../getCurrentTime";
 export default async function addSavedRace(race_ranking: TRaceRanking | null) {
     const dateNow = new Date();
     dateNow.setSeconds(0);
-    dateNow.setHours(20);
-    dateNow.setMinutes(0);
     const race_time = dateNow.getTime();
 
     try {

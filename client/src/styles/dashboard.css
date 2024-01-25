@@ -160,6 +160,10 @@ section.dashboard-content {
     > article {
         border-bottom: 1px solid var(--auth-focus-outline-color);
         padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        letter-spacing: 1px;
 
         &:last-child {
             border-bottom: none;
@@ -168,11 +172,6 @@ section.dashboard-content {
 }
 
 article.patch-notes-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    letter-spacing: 1px;
-
     div.patch-notes-header {
         display: flex;
         justify-content: space-between;
@@ -212,10 +211,10 @@ article.patch-notes-container {
 
         > div.patch-notes-subject-container {
             > p {
-                border-left: .25rem solid var(--auth-focus-outline-color);
+                border-left: 0.25rem solid var(--auth-focus-outline-color);
                 font-size: 1.5rem;
                 margin-bottom: 0.25rem;
-                padding-left: .5rem;
+                padding-left: 0.5rem;
             }
 
             > ul {
@@ -231,10 +230,6 @@ article.patch-notes-container {
 }
 
 article.rennergebnis-container {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
     > div.rennergebnis-header {
         display: flex;
         align-items: center;
@@ -290,6 +285,96 @@ article.rennergebnis-container {
             gap: 0.5rem;
             font-size: 1.5rem;
             font-weight: bold;
+        }
+    }
+}
+
+article.tuninganzeige-container {
+    > div.tuninganzeige-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.5rem;
+
+        > p {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        > a {
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            color: var(--auth-focus-outline-color);
+
+            &:hover {
+                text-decoration: underline;
+                font-weight: bold;
+            }
+        }
+    }
+
+    > div.tuninganzeige-content {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+
+        > div.tuninganzeige-car-container {
+            border: 1px solid var(--auth-focus-outline-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+
+            > div.tuninganzeige-car-header {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                > img {
+                    width: 5rem;
+                    height: 2.5rem;
+                }
+
+                > span {
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                }
+            }
+
+            > div.tuninganzeige-car-content {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+
+                > div.tuninganzeige-car-content-component {
+                    display: flex;
+                    align-items: center;
+                    font-size: 1.1rem;
+                    justify-content: center;
+                    font-weight: bold;
+                    gap: 0.5rem;
+                }
+
+                > div.tuninganzeige-car-content-time {
+                    display: flex;
+                    justify-content: end;
+
+                    > span {
+                        display: flex;
+                        align-items: center;
+
+                        &.finished {
+                            color: green;
+                        }
+
+                        &.pending {
+                            color: lightblue;
+                        }
+                    }
+                }
+            }
         }
     }
 }

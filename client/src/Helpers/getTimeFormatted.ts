@@ -1,4 +1,4 @@
-export default function getTimeFormatted(hours: number, minutes: number): string {
+export default function getTimeFormatted(hours: number, minutes: number, withParantheses?: boolean): string {
     let formatted = '';
     if (hours < 10) {
         formatted += `[0${hours}:`;
@@ -10,6 +10,11 @@ export default function getTimeFormatted(hours: number, minutes: number): string
         formatted += `00]`;
     } else {
         formatted += `${minutes}]`;
+    }
+
+    if (withParantheses) {
+        formatted = formatted.replace('[', '');
+        formatted = formatted.replace(']', '')
     }
 
     return formatted;
