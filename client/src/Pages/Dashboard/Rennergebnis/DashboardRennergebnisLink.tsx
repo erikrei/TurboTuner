@@ -3,8 +3,6 @@ import { PiArrowUpRightBold } from "react-icons/pi";
 
 import { TRaceRankingUser } from "../../../types";
 
-import { useUserInfo } from "../../../Contexts/UserInfoContext";
-
 type DashboardRennergebnisLinkProps = {
   users: TRaceRankingUser[];
   hours: number;
