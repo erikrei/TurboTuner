@@ -2,7 +2,8 @@ import GeneralCar from '../Models/GeneralCar';
 import RaceInfo from '../Models/RaceInfo';
 
 import { generalCars } from '../Data/generalCars';
-import { races } from '../Data/races';
+
+import getDatabaseRaces from '../Helpers/race/getDatabaseRaces';
 
 export default async function checkDatabaseData() {
     const generalCarResponse = await GeneralCar.find();
@@ -17,7 +18,7 @@ export default async function checkDatabaseData() {
 
     if (!raceInfoResponse.length) {
         console.log('Rennen werden in Datenbank laden...');
-        await RaceInfo.create(races);
+        await RaceInfo.create(getDatabaseRaces());
         console.log('Rennen wurden in die Datenbank geladen.')
     }
 }
