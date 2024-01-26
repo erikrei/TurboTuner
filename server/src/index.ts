@@ -1,4 +1,5 @@
 import express, { Express } from 'express';
+import setTimeZone from './Configs/setTimezone';
 import getCurrentTime from './Helpers/getCurrentTime';
 
 import connectToDatabase from './Configs/connectToDatabase';
@@ -36,6 +37,7 @@ app.use('/savedrace', savedRaceRouter);
 
 
 app.listen(PORT, async () => {
+    setTimeZone('Europe/Berlin');
     console.log(getCurrentTime(), `Server auf Port '${PORT}' gestartet`);
     await connectToDatabase();
     // await connectToDatabaseCloud();

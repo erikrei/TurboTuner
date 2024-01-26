@@ -13,5 +13,3 @@ export default async function getCarStartTime(carName: string): Promise<number> 
         return 0;
     }
 }
-
-// getCarStartTime("HorizonVista");

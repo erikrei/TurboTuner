@@ -8,6 +8,7 @@ import addSavedRace from '../Helpers/race/addSavedRace';
 
 export function runRaces() {
     cron.schedule('*/15 * * * *', async () => {
+
         const currentTime = new Date();
 
         console.log(`Rennen um: ${getCurrentTime()}`);
