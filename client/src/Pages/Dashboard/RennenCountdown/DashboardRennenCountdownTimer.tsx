@@ -10,7 +10,6 @@ export default function DashboardRennenCountdownTimer() {
     const timerInterval = setInterval(() => {
       setTimer(getRaceCountdownTime());
     }, 1000);
-    console.log(timer);
     return () => clearInterval(timerInterval);
   }, [timer]);
 
