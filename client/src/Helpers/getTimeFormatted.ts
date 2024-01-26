@@ -6,8 +6,8 @@ export default function getTimeFormatted(hours: number, minutes: number, withPar
         formatted += `[${hours}:`;
     }
 
-    if (minutes === 0) {
-        formatted += `00]`;
+    if (minutes < 10) {
+        formatted += `0${minutes}]`;
     } else {
         formatted += `${minutes}]`;
     }

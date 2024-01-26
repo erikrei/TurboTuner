@@ -133,11 +133,10 @@ main.app-content h1.content-headline {
 }
 
 main.app-content > section.tmp-bg {
-    margin-top: -2px;
     color: var(--auth-focus-outline-color);
     background-color: rgba(var(--auth-active-bg-color-rgb), 0.9);
     border: 2px solid var(--auth-focus-outline-color);
-    padding: 2rem;
+    padding: 1rem;
     border-radius: 1rem;
 }
 

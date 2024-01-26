@@ -18,13 +18,14 @@ export default function RaceRankingWinnings({
   setRanking,
 }: RaceRankingWinningsProps) {
   const { userInfo, setUserInfo } = useUserInfo();
-  let hasClaimed: boolean = true;
+  let hasClaimed: boolean | null = null;
   const rankingUser = users.find(
     (user) => user.username === userInfo?.username
   );
 
   if (rankingUser) {
     hasClaimed = rankingUser.claimedWinnings;
+  } else {
   }
 
   function handleClaimClick() {
@@ -50,7 +51,7 @@ export default function RaceRankingWinnings({
       });
   }
 
-  return (
+  return hasClaimed !== null ? (
     <button
       disabled={hasClaimed}
       className="get-race-winnings"
@@ -60,5 +61,7 @@ export default function RaceRankingWinnings({
         ? "Gewinn schon abgeholt"
         : `Gewinn abholen (${rankingUser?.winnings}€)`}
     </button>
+  ) : (
+    <span className="ranking-feedback">Nicht am Rennen teilgenommen</span>
   );
 }
