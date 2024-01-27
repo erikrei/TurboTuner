@@ -12,12 +12,17 @@ import userInfoLoader from "./Loaders/userInfoLoader";
 import userCarsLoader from "./Loaders/userCarsLoader";
 import racesLoader from "./Loaders/racesLoader";
 import generalCarsLoader from "./Loaders/generalCarsLoader";
+import scrapyardDataLoader from "./Loaders/scrapyardDataLoader";
 
-import Authentication, { Login, Register } from "./Pages/Authentication/Authentication";
+import Authentication, {
+  Login,
+  Register,
+} from "./Pages/Authentication/Authentication";
 import DashboardLayout from "./Pages/Dashboard/DashboardLayout";
 import FirstCarSelection from "./Pages/FirstCarSelection/FirstCarSelection";
 
 import Garage from "./Pages/Garage/Garage";
+import Scrapyard from "./Pages/Garage/Scrapyard/Scrapyard";
 import Tuning from "./Pages/Tuning/Tuning";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Market from "./Pages/Market/Market";
@@ -60,6 +65,11 @@ const router = createBrowserRouter([
         loader: userCarsLoader,
       },
       {
+        path: "garage/scrapyard/:car_id",
+        element: <Scrapyard />,
+        loader: ({ params }) => scrapyardDataLoader(params.car_id!),
+      },
+      {
         path: "tuning",
         element: <Tuning />,
       },
@@ -79,8 +89,8 @@ const router = createBrowserRouter([
       },
       {
         path: "race/ranking",
-        element: <RaceRanking />
-      }
+        element: <RaceRanking />,
+      },
     ],
   },
 ]);

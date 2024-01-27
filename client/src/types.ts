@@ -117,3 +117,8 @@ export type TSavedRace = {
     race_ranking: TRaceRanking
     race_time: number
 }
+
+export type TScrapyardCar = {
+    userCar: TUserCar,
+    scrapyardPrice: number
+}
