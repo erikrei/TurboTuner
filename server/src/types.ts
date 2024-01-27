@@ -19,7 +19,6 @@ export type TValidInput = {
 }
 
 export type TGeneralCar = {
-    // _id: string,
     name: string,
     price: number,
     quality: 1 | 2 | 3 | 4 | 5,
@@ -95,6 +94,9 @@ export type TSavedRace = {
     race_time: number
 }
 
-export type TScrapyardCar = TUserCar & {
+export type TScrapyardCar = Omit<TUserCar, 'user_id' | 'tuning_information'>;
+
+export type TScrapyardCarInformation = {
+    scrapyardCar: TScrapyardCar
     scrapyardPrice: number
 }

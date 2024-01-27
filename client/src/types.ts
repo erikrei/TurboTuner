@@ -118,7 +118,9 @@ export type TSavedRace = {
     race_time: number
 }
 
-export type TScrapyardCar = {
-    userCar: TUserCar,
+export type TScrapyardCar = Omit<TUserCar, 'user_id' | 'tuning_information'>;
+
+export type TScrapyardCarInformation = {
+    scrapyardCar: TScrapyardCar
     scrapyardPrice: number
 }
