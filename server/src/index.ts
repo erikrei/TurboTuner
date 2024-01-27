@@ -16,6 +16,7 @@ import tuningRouter from './Routes/tuning';
 import raceRouter from './Routes/race';
 import patchNotesRouter from './Routes/patchnotes';
 import savedRaceRouter from './Routes/savedrace';
+import scrapyardRouter from './Routes/scrapyard';
 
 import { runRaces } from './Configs/cronJobs';
 
@@ -34,6 +35,7 @@ app.use('/tuning', tuningRouter);
 app.use('/race', raceRouter);
 app.use('/patchnotes', patchNotesRouter);
 app.use('/savedrace', savedRaceRouter);
+app.use('/scrapyard', scrapyardRouter);
 
 
 app.listen(PORT, async () => {
