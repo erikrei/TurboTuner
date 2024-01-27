@@ -1,9 +1,9 @@
 import ScrapyardCarInformationComponent from "./ScrapyardCarInformationComponent";
 
-import { TUserCar } from "../../../types";
+import { TScrapyardCar } from "../../../types";
 
 type ScrapyardCarInformationProps = {
-  userCar: TUserCar;
+  userCar: TScrapyardCar;
 };
 
 export default function ScrapyardCarInformation({

@@ -4,6 +4,7 @@ import { TUserInfo, TGeneralCar } from '../types';
 import UserCar from '../Models/UserCar';
 import UserInfo from '../Models/UserInfo';
 import GeneralCar from '../Models/GeneralCar';
+import ScrappedCars from '../Models/ScrappedCars';
 
 import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
 import calculateScrapyardPrice from '../Helpers/car/calculateScrapyardPrice';
@@ -35,7 +36,7 @@ scrapyardRouter.get('/price/:car_id', checkIfSessionHasUser, async (req: Request
             }
 
             return res.json({
-                userCar: userCarResponse,
+                scrapyardCar: userCarResponse,
                 scrapyardPrice: calculateScrapyardPrice(userCarResponse.tuning_components, carQuality) + (generalCarResponse.price * .75)
             });
 
@@ -55,7 +56,12 @@ scrapyardRouter.delete('/:car_id/:car_cost', checkIfSessionHasUser, async (req: 
 
     try {
 
-        await UserCar.findByIdAndDelete(car_id);
+        const userCarResponse = await UserCar.findByIdAndDelete(car_id);
+
+        await ScrappedCars.create({
+            scrapyardCar: userCarResponse,
+            scrapyardPrice: car_cost
+        })
 
         const userInfoResponse = await UserInfo.findByIdAndUpdate(user_id, {
             $inc: {
