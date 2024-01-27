@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios, { AxiosResponse } from "axios";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, NavLink } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
 
 import "../../styles/garage.css";
@@ -48,16 +48,19 @@ export default function Garage() {
               alt={`${car.name}`}
             />
             <div className="car-options">
-              <h2>
-                {car.name}
-                {activeCarId === car._id ? (
-                  <span>Aktiv</span>
-                ) : (
+              <h2>{car.name}</h2>
+              {activeCarId === car._id ? (
+                <span>Aktiv</span>
+              ) : (
+                <>
                   <button onClick={() => handleActiveCarClick(car._id)}>
                     auswählen
                   </button>
-                )}
-              </h2>
+                  <NavLink to={`scrapyard/${car._id}`}>
+                    Auto verschrotten
+                  </NavLink>
+                </>
+              )}
             </div>
           </div>
         ))}

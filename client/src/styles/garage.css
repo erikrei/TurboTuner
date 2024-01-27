@@ -19,25 +19,29 @@ section.user-car-container > div.car-container > img {
     width: 20rem;
 }
 
-section.user-car-container > div.car-container > div.car-options > h2 {
-    display: flex;
-    gap: 0.5rem;
-}
+section.user-car-container > div.car-container > div.car-options {
+    > button {
+        align-self: flex-start;
+        color: white;
+        font-size: 0.8rem;
+        background: none;
+        border: none;
+        margin-right: .5rem;
 
-section.user-car-container > div.car-container > div.car-options > h2 > button {
-    align-self: flex-start;
-    color: white;
-    font-size: 0.8rem;
-    background: none;
-    border: none;
-}
+        &:hover {
+            cursor: pointer;
+            color: var(--auth-focus-outline-color);
+        }
+    }
 
-section.user-car-container > div.car-container > div.car-options > h2 > button:hover {
-    cursor: pointer;
-    color: var(--auth-focus-outline-color);
-}
+    > span,
+    a {
+        font-size: 0.8rem;
+        color: var(--auth-focus-outline-color);
+        font-weight: normal;
+    }
 
-section.user-car-container > div.car-container > div.car-options > h2 > span {
-    font-size: 0.8rem;
-    color: var(--auth-focus-outline-color);
+    > a:hover {
+        font-weight: bold;
+    }
 }
