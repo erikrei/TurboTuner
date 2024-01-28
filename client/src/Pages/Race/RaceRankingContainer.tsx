@@ -11,6 +11,7 @@ export default function RaceRankingContainer({
 }: RaceRankingContainerProps) {
   return (
     <>
+      <h2>Ranking</h2>
       {ranking.users.map((user) => (
         <RaceRankingUser key={user._id} user={user} />
       ))}

@@ -6,6 +6,7 @@ import { useUserInfo } from "../../Contexts/UserInfoContext";
 
 import TuningComponentTime from "./TuningComponentTime";
 import TuningButton from "./TuningButton";
+import TuningErrorFeedback from "./TuningErrorFeedback";
 
 type TuningCarComponentProps = {
   component: TUserCarTuningComponent;
@@ -20,6 +21,7 @@ export default function TuningCarComponent({
   handleTuning,
 }: TuningCarComponentProps) {
   const { userInfo, setUserInfo } = useUserInfo();
+
   const money = userInfo?.money;
 
   const component_price = component.tuning_cost;
@@ -34,7 +36,7 @@ export default function TuningCarComponent({
           "http://localhost:3000/userInfo",
           {
             money: money - moneyToSpend,
-            points: userInfo.points + Math.round(moneyToSpend / 1000)
+            points: userInfo.points + Math.round(moneyToSpend / 1000),
           },
           {
             withCredentials: true,
@@ -76,6 +78,10 @@ export default function TuningCarComponent({
           verbessert werden.
         </span>
       )}
+      <TuningErrorFeedback
+        component_price={component_price}
+        money={userInfo?.money}
+      />
     </div>
   );
 }
