@@ -42,9 +42,6 @@ export default function TuningButton({
       >
         {component.component_name} {fast_tuning && "schnell"} tunen
       </button>
-      {disableButton.disabledFeedback && (
-        <p>{disableButton.disabledFeedback}</p>
-      )}
     </div>
   );
 }
