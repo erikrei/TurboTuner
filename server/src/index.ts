@@ -17,6 +17,7 @@ import raceRouter from './Routes/race';
 import patchNotesRouter from './Routes/patchnotes';
 import savedRaceRouter from './Routes/savedrace';
 import scrapyardRouter from './Routes/scrapyard';
+import usedDealerRouter from './Routes/useddealer';
 
 import { runRaces } from './Configs/cronJobs';
 
@@ -36,6 +37,7 @@ app.use('/race', raceRouter);
 app.use('/patchnotes', patchNotesRouter);
 app.use('/savedrace', savedRaceRouter);
 app.use('/scrapyard', scrapyardRouter);
+app.use('/useddealer', usedDealerRouter);
 
 
 app.listen(PORT, async () => {
