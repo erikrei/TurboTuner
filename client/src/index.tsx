@@ -13,6 +13,8 @@ import userCarsLoader from "./Loaders/userCarsLoader";
 import racesLoader from "./Loaders/racesLoader";
 import generalCarsLoader from "./Loaders/generalCarsLoader";
 import scrapyardDataLoader from "./Loaders/scrapyardDataLoader";
+import usedCarsLoader from "./Loaders/usedCarsLoader";
+import usedSingleCarLoader from "./Loaders/usedSingleCarLoader";
 
 import Authentication, {
   Login,
@@ -27,6 +29,10 @@ import Tuning from "./Pages/Tuning/Tuning";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import Market from "./Pages/Market/Market";
 import MarketDealer from "./Pages/Market/MarketDealer";
+import MarketUsedDealer from "./Pages/Market/MarketUsedDealer/MarketUsedDealer";
+import MarketUsedDealerBuy from "./Pages/Market/MarketUsedDealer/MarketUsedDealerBuy";
+import MarketUsedDealerSell from "./Pages/Market/MarketUsedDealer/MarketUsedDealerSell";
+import MarketUsedDealerSingleView from "./Pages/Market/MarketUsedDealer/MarketUsedDealerSingleView";
 import Race from "./Pages/Race/Race";
 import RaceRanking from "./Pages/Race/RaceRanking";
 
@@ -81,6 +87,26 @@ const router = createBrowserRouter([
         path: "market/dealer",
         element: <MarketDealer />,
         loader: generalCarsLoader,
+      },
+      {
+        path: "market/useddealer",
+        element: <MarketUsedDealer />,
+        children: [
+          {
+            path: "buy",
+            element: <MarketUsedDealerBuy />,
+            loader: usedCarsLoader,
+          },
+          {
+            path: "sell",
+            element: <MarketUsedDealerSell />,
+          },
+          {
+            path: "buy/:car_id",
+            element: <MarketUsedDealerSingleView />,
+            loader: ({ params }) => usedSingleCarLoader(params.car_id!),
+          },
+        ],
       },
       {
         path: "race",

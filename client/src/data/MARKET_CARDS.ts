@@ -11,6 +11,6 @@ export const MARKET_CARDS: TMarketCard[] = [
         name: 'Gebrauchtwagenhändler',
         description: "Ein erfahrener Gebrauchtwagenhändler bietet eine vielfältige Auswahl an qualitätsgeprüften Fahrzeugen. Mit transparenter Beratung und fairen Preisen schafft er Vertrauen, um Kunden zufriedenstellende Gebrauchtwagenlösungen anzubieten.",
         imgSrc: 'used_car_dealer.png',
-        path: 'used_dealer'
+        path: 'useddealer'
     }
 ] 
