@@ -124,3 +124,21 @@ export type TScrapyardCarInformation = {
     scrapyardCar: TScrapyardCar
     scrapyardPrice: number
 }
+
+export type TSellingCar = Omit<TUserCar, 'tuning_information'> & {
+    price: number,
+    bids: TSellingCarBid[]
+}
+
+export type TSellingCarBid = {
+    amount: number,
+    bid_user: string
+}
+
+export type TBuyingCarBid = {
+    _id: string
+    name: string
+    bids: {
+        amount: number
+    }[]
+}
