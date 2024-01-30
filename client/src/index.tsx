@@ -31,7 +31,7 @@ import Market from "./Pages/Market/Market";
 import MarketDealer from "./Pages/Market/MarketDealer";
 import MarketUsedDealer from "./Pages/Market/MarketUsedDealer/MarketUsedDealer";
 import MarketUsedDealerBuy from "./Pages/Market/MarketUsedDealer/MarketUsedDealerBuy";
-import MarketUsedDealerSell from "./Pages/Market/MarketUsedDealer/MarketUsedDealerSell";
+import MarketUsedDealerSell from "./Pages/Market/MarketUsedDealer/MarketUsedDealerSell/MarketUsedDealerSell";
 import MarketUsedDealerSingleView from "./Pages/Market/MarketUsedDealer/MarketUsedDealerSingleView";
 import Race from "./Pages/Race/Race";
 import RaceRanking from "./Pages/Race/RaceRanking";

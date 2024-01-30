@@ -222,3 +222,11 @@ section.used-cars-container {
         }
     }
 }
+
+section.user-cars {
+    
+    > p:hover {
+        cursor: pointer;
+        font-weight: bold;
+    }
+}
