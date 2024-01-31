@@ -142,3 +142,8 @@ export type TBuyingCarBid = {
         amount: number
     }[]
 }
+
+export type TError = {
+    showError: boolean
+    errorMessage: string
+}
