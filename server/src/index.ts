@@ -43,7 +43,7 @@ app.use('/useddealer', usedDealerRouter);
 app.listen(PORT, async () => {
     setTimeZone('Europe/Berlin');
     console.log(getCurrentTime(), `Server auf Port '${PORT}' gestartet`);
-    // await connectToDatabase();
-    await connectToDatabaseCloud();
+    await connectToDatabase();
+    // await connectToDatabaseCloud();
     runRaces();
 })
