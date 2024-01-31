@@ -13,7 +13,7 @@ declare module 'express-session' {
 
 const MongoDBStore = require('connect-mongodb-session')(session);
 const store = new MongoDBStore({
-    uri: mongodbUri,
+    uri: mongodbUriCloud,
     collection: 'userSessions'
 })
 

@@ -3,10 +3,13 @@ import axios from "axios";
 
 import { TBuyingCarBid } from "../../../../types";
 
+import { useUserInfo } from "../../../../Contexts/UserInfoContext";
+
 import MarketUsedDealerSingleBid from "./MarketUsedDealerSingleBid";
 
 export default function MarketUsedDealerBids() {
   const [bids, setBids] = useState<TBuyingCarBid[]>([]);
+  const { userInfo, setUserInfo } = useUserInfo();
 
   useEffect(() => {
     axios
@@ -16,7 +19,7 @@ export default function MarketUsedDealerBids() {
       .then(({ data }: { data: TBuyingCarBid[] }) => setBids(data));
   }, []);
 
-  function handleBidRemove(car_id: string) {
+  function handleBidRemove(car_id: string, bid_amount: number) {
     axios
       .put(`http://localhost:3000/useddealer/bid/remove/${car_id}`, null, {
         withCredentials: true,
@@ -24,6 +27,11 @@ export default function MarketUsedDealerBids() {
       .then(() => {
         const newBids = bids.filter((bid) => bid._id !== car_id);
         setBids(newBids);
+        userInfo &&
+          setUserInfo({
+            ...userInfo,
+            money: userInfo.money + bid_amount,
+          });
       });
   }
 

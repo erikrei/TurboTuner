@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 
 import { useUserInfo } from "../../../../Contexts/UserInfoContext";
 
+import ErrorFeedback from "../../../../Components/ErrorFeedback";
+
 type MarketUsedDealerCarBuyButton = {
   car_id: string;
   disableBtn: boolean;
@@ -33,8 +35,14 @@ export default function MarketUsedDealerCarBuyButton({
   }
 
   return (
-    <button onClick={handleBuyClick} disabled={disableBtn}>
-      Auto kaufen
-    </button>
+    <>
+      <button onClick={handleBuyClick} disabled={disableBtn}>
+        Auto kaufen
+      </button>
+      <ErrorFeedback
+        errorText="Nicht genug Geld, um das Auto zu kaufen."
+        showFeedback={disableBtn}
+      />
+    </>
   );
 }

@@ -144,6 +144,12 @@ usedDealerRouter.put('/bid/add/:car_id', checkIfSessionHasUser, async (req: Requ
                     amount,
                     bid_user: user_id
                 })
+                
+                await UserInfo.findByIdAndUpdate(user_id, {
+                    $inc: {
+                        money: -amount
+                    }
+                })
             }
 
             await sellingCarResponse.save();
@@ -174,6 +180,12 @@ usedDealerRouter.put('/bid/remove/:car_id', checkIfSessionHasUser, async (req: R
             } else {
                 return res.status(404).send('Gebot konnte nicht entfernt werden, da es das Gebot nicht gibt.')
             }
+
+            await UserInfo.findByIdAndUpdate(user_id, {
+                $inc: {
+                    money: userBid.amount
+                }
+            })
 
             await sellingCarResponse.save();
 

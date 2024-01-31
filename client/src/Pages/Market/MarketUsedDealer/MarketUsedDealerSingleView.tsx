@@ -7,7 +7,7 @@ import { useUserInfo } from "../../../Contexts/UserInfoContext";
 
 import MarketUsedDealerCar from "./MarketUsedDealerCar/MarketUsedDealerCar";
 import MarketUsedDealerCarBuyButton from "./MarketUsedDealerCar/MarketUsedDealerCarBuyButton";
-import MarketUsedDealerBidContainer from "./MarketUsedDealerCar/MarketUsedDealerBidContainer";
+import MarketUsedDealerBidContainer from "./MarketUsedDealerBids/MarketUsedDealerBidContainer";
 
 export default function MarketUsedDealerSingleView() {
   const loaderData = useLoaderData() as AxiosResponse;
@@ -29,9 +29,6 @@ export default function MarketUsedDealerSingleView() {
         disableBtn={disableBuyButton}
         price={car.price}
       />
-      {disableBuyButton && (
-        <span>Nicht genug Geld, um das Auto zu kaufen.</span>
-      )}
       <MarketUsedDealerBidContainer price={car.price} car_id={car._id} />
     </>
   );
