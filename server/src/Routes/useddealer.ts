@@ -233,6 +233,47 @@ usedDealerRouter.delete('/buy/price/:car_id', checkIfSessionHasUser, async (req:
     }
 })
 
+usedDealerRouter.delete('/buy/bid/:car_id/:bid_user', checkIfSessionHasUser, async (req: Request, res: Response) => {
+    const user_id = String(req.session.user._id);
+    const { car_id, bid_user } = req.params;
+
+    try {
+        const sellingCarResponse = await SellingCars.findById(car_id);
+
+        if (sellingCarResponse) {
+            if (sellingCarResponse.user_id !== user_id) {
+                return res.status(403).send('Angebot kann nur von dem Benutzer angenommen werden, dem das Auto gehört.')
+            }
+
+            const selectedBid = sellingCarResponse.bids.find((bid) => bid.bid_user === bid_user);
+
+            if (selectedBid) {
+                await UserCar.create({
+                    name: sellingCarResponse.name,
+                    tuning_components: sellingCarResponse.tuning_components,
+                    user_id: bid_user
+                })
+
+                await UserInfo.findByIdAndUpdate(user_id, {
+                    $inc: {
+                        money: selectedBid.amount
+                    }
+                })
+
+                await sellingCarResponse.deleteOne();
+
+                return res.send(`Das Gebot von ${selectedBid.amount} € wurde erfolgreich akzeptiert.`);
+            } else {
+                return res.status(404).send('Das ausgewählte Gebot ist nicht vorhanden.')
+            }
+        } else {
+            return res.status(404).send('Auto mit gegebener ID wurde nicht gefunden.')
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
+
 usedDealerRouter.delete('/:car_id', checkIfSessionHasUser, async (req: Request, res: Response) => {
     const car_id = req.params.car_id;
     const user_id = String(req.session.user._id);
@@ -275,7 +316,7 @@ usedDealerRouter.delete('/:car_id', checkIfSessionHasUser, async (req: Request, 
 
 })
 
-// DEV ROUTE
+// ---------------------------------- DEV ROUTES ----------------------------------
 usedDealerRouter.delete('/all', async (req: Request, res: Response) => {
     await SellingCars.deleteMany();
 
