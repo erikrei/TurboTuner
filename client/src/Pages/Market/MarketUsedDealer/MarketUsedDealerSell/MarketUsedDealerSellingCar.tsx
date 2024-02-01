@@ -1,5 +1,8 @@
 import { TSellingCar } from "../../../../types";
 
+import MarketUsedDealerRemoveCarButton from "./MarketUsedDealerRemoveCarButton";
+import MarketUsedDealerSellingCarBids from "./MarketUsedDealerSellingCarBids";
+
 type MarketUsedDealerSellingCarProps = {
   car: TSellingCar;
 };
@@ -10,13 +13,8 @@ export default function MarketUsedDealerSellingCar({
   return (
     <article className="selling-car">
       <p>{car.name}</p>
-      <div className="bids">
-        {car.bids.length > 0 ? (
-          car.bids.map((bid) => <span key={bid.bid_user}>{bid.amount} €</span>)
-        ) : (
-          <span>Keine Gebote auf das Auto</span>
-        )}
-      </div>
+      <MarketUsedDealerRemoveCarButton car_id={car._id} />
+      <MarketUsedDealerSellingCarBids bids={car.bids} car_id={car._id} />
     </article>
   );
 }

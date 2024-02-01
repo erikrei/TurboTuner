@@ -1,5 +1,7 @@
 # TurboTuner
 
+!! Derzeit kann die Applikation nur ausgeführt werden, wenn in der Datei `server/src/index.ts` Zeile 46 auskommentiert wird und 47 kommentiert wird. Zusätzlich muss in der Datei `server/src/Configs/saveSession.ts` in Zeile 16 _mongoUriCloud_ in _mongoUri_ geändert werden.
+
 Die Applikation kann gestart werden, indem das Projekt mit `git clone https://github.com/erikrei/TurboTuner.git` kopiert wird. Danach muss man ins Verzeichnis des Projekts und folgenden Befehl eingeben: `docker compose up`. Nach kurzer Zeit ist die Applikation unter folgender Adresse erreichbar: `http://localhost:4200/` 
 
 Browsergame, in dem es die Hauptaufgabe ist seine Autos so gut wie möglich zu verbessern und mit denen simulierte Rennen zu fahren.

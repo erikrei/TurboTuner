@@ -1,35 +1,60 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
-import { TUserCar } from "../../../../types";
+import toast, { Toaster } from "react-hot-toast";
+import { TSellingCar } from "../../../../types";
 
-import MarketUsedDealerUserCar from "./MarketUsedDealerUserCar";
+import checkSellingInput from "../../../../Helpers/checkSellingInput";
+
+import MarketUsedDealerUserCarsList from "./MarketUsedDealerUserCarsList";
 import MarketUsedDealerActiveUserCar from "./MarketUsedDealerActiveUserCar";
 
-export default function MarketUsedDealerUserCars() {
-  const [userCars, setUserCars] = useState<TUserCar[]>([]);
-  const [activeCar, setActiveCar] = useState<TUserCar | null>(null);
+import { useUsedDealerSelling } from "../../../../Contexts/UsedDealerSellingContext";
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:3000/car/allUser", { withCredentials: true })
-      .then(({ data }: { data: TUserCar[] }) => setUserCars(data));
-  }, []);
+export default function MarketUsedDealerUserCars() {
+  const {
+    userCars,
+    activeCar,
+    userSellingCars,
+    setUserCars,
+    setActiveCar,
+    setUserSellingCars,
+  } = useUsedDealerSelling();
+
+  function handleSellClick(car_id: string, car_price: number) {
+    if (checkSellingInput(car_price)) {
+      axios
+        .post(
+          `http://localhost:3000/useddealer/${car_id}`,
+          {
+            price: car_price,
+          },
+          { withCredentials: true }
+        )
+        .then(({ data }: { data: TSellingCar }) => {
+          setActiveCar(null);
+          setUserCars(userCars.filter((car) => car._id !== car_id));
+          setUserSellingCars([...userSellingCars, data]);
+          toast.success(
+            `${activeCar?.name} wurde erfolgreich zum Verkauf für ${car_price} € angeboten.`,
+            {
+              duration: 2000,
+              style: {
+                backgroundColor: "green",
+                color: "white",
+              },
+            }
+          );
+        });
+    }
+  }
 
   return (
-    <section className="user-cars">
-      <h2>Deine Autos</h2>
-      {userCars.length > 1 ? (
-        userCars.map((car) => (
-          <MarketUsedDealerUserCar
-            car={car}
-            setActiveCar={setActiveCar}
-            key={car._id}
-          />
-        ))
-      ) : (
-        <span>Du hast kein Auto, das du verkaufen könntest.</span>
-      )}
-      {activeCar && <MarketUsedDealerActiveUserCar activeCar={activeCar} />}
-    </section>
+    <>
+      <section className="user-cars">
+        <h2>Deine Autos</h2>
+        <MarketUsedDealerUserCarsList />
+        <MarketUsedDealerActiveUserCar handleSellClick={handleSellClick} />
+      </section>
+      <Toaster position="bottom-right" />
+    </>
   );
 }

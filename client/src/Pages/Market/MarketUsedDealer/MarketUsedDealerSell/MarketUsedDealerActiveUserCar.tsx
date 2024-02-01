@@ -1,21 +1,28 @@
-import { TUserCar } from "../../../../types";
-
 import MarketUsedDealerSellContainer from "./MarketUsedDealerSellContainer";
 
+import { useUsedDealerSelling } from "../../../../Contexts/UsedDealerSellingContext";
+
 type MarketUsedDealerActiveUserCarProps = {
-  activeCar: TUserCar;
+  handleSellClick: (car_id: string, car_price: number) => void;
 };
 
 export default function MarketUsedDealerActiveUserCar({
-  activeCar,
+  handleSellClick,
 }: MarketUsedDealerActiveUserCarProps) {
+  const { activeCar } = useUsedDealerSelling();
+
+  if (!activeCar) return null;
+
   return (
     <>
       <h2>Ausgewähltes Auto</h2>
       <article className="active-user-car">
         <h3>{activeCar.name}</h3>
+        <MarketUsedDealerSellContainer
+          activeCarId={activeCar._id}
+          handleSellClick={handleSellClick}
+        />
       </article>
-      <MarketUsedDealerSellContainer activeCarId={activeCar._id} />
     </>
   );
 }
