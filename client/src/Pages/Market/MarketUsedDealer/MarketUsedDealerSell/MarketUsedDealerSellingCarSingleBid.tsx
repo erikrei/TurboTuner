@@ -4,6 +4,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { TSellingCarBid } from "../../../../types";
 
 import { useUsedDealerSelling } from "../../../../Contexts/UsedDealerSellingContext";
+import { useUserInfo } from "../../../../Contexts/UserInfoContext";
 
 type MarketUsedDealerSellingCarSingleBidProps = {
   bid: TSellingCarBid;
@@ -15,6 +16,7 @@ export default function MarketUsedDealerSellingCarSingleBid({
   car_id,
 }: MarketUsedDealerSellingCarSingleBidProps) {
   const { userSellingCars, setUserSellingCars } = useUsedDealerSelling();
+  const { userInfo, setUserInfo } = useUserInfo();
 
   function handleRemoveBidClick() {
     axios
@@ -47,10 +49,37 @@ export default function MarketUsedDealerSellingCarSingleBid({
       });
   }
 
+  function handleAcceptBidClick() {
+    axios
+      .delete(
+        `http://localhost:3000/useddealer/buy/bid/${car_id}/${bid.bid_user}`,
+        { withCredentials: true }
+      )
+      .then(({ data }: { data: string }) => {
+        const newUserSellingCars = userSellingCars.filter(
+          (car) => car._id !== car_id
+        );
+        setUserSellingCars(newUserSellingCars);
+        userInfo &&
+          setUserInfo({
+            ...userInfo,
+            money: userInfo.money + bid.amount,
+          });
+        toast.success(data, {
+          duration: 2000,
+          style: {
+            backgroundColor: "green",
+            color: "white",
+          },
+        });
+      });
+  }
+
   return (
     <>
       <div className="bid-container">
         <span>{bid.amount} €</span>
+        <button onClick={handleAcceptBidClick}>Gebot annehmen</button>
         <button onClick={handleRemoveBidClick}>Gebot ablehnen</button>
       </div>
       <Toaster position="bottom-right" />
