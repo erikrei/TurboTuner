@@ -21,9 +21,13 @@ export default function MarketUsedDealerBids() {
 
   function handleBidRemove(car_id: string, bid_amount: number) {
     axios
-      .put(`http://localhost:3000/useddealer/bid/remove/${car_id}`, null, {
-        withCredentials: true,
-      })
+      .put(
+        `http://localhost:3000/useddealer/bid/remove/${car_id}`,
+        { user_id: userInfo?._id },
+        {
+          withCredentials: true,
+        }
+      )
       .then(() => {
         const newBids = bids.filter((bid) => bid._id !== car_id);
         setBids(newBids);

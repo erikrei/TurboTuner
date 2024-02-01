@@ -144,7 +144,7 @@ usedDealerRouter.put('/bid/add/:car_id', checkIfSessionHasUser, async (req: Requ
                     amount,
                     bid_user: user_id
                 })
-                
+
                 await UserInfo.findByIdAndUpdate(user_id, {
                     $inc: {
                         money: -amount
@@ -166,7 +166,7 @@ usedDealerRouter.put('/bid/add/:car_id', checkIfSessionHasUser, async (req: Requ
 
 usedDealerRouter.put('/bid/remove/:car_id', checkIfSessionHasUser, async (req: Request, res: Response) => {
     const car_id = req.params.car_id;
-    const user_id = String(req.session.user._id);
+    const { user_id } = req.body;
 
     try {
         const sellingCarResponse = await SellingCars.findById(car_id);
@@ -231,6 +231,55 @@ usedDealerRouter.delete('/buy/price/:car_id', checkIfSessionHasUser, async (req:
     } catch (error) {
         console.log(error);
     }
+})
+
+usedDealerRouter.delete('/:car_id', checkIfSessionHasUser, async (req: Request, res: Response) => {
+    const car_id = req.params.car_id;
+    const user_id = String(req.session.user._id);
+
+    // Überprüfung ob Auto zum Benutzer gehört
+    // Benutzer bekommt sein Auto wieder
+    // Alle Benutzer die auf das Auto geboten haben, bekommen ihr Geld wieder
+
+    try {
+        const sellingCarResponse = await SellingCars.findById(car_id);
+
+        if (sellingCarResponse) {
+            if (sellingCarResponse.user_id !== user_id) {
+                return res.status(403).send('Auto wurde nicht vom angefragten Benutzer zum Verkauf gestellt.')
+            }
+
+            await UserCar.create({
+                name: sellingCarResponse.name,
+                tuning_components: sellingCarResponse.tuning_components,
+                user_id: sellingCarResponse.user_id
+            });
+
+            sellingCarResponse.bids.map(async (bid) => {
+                await UserInfo.findByIdAndUpdate(bid.bid_user, {
+                    $inc: {
+                        money: bid.amount
+                    }
+                })
+            })
+
+            return res.json(await SellingCars.findByIdAndDelete(car_id))
+
+        } else {
+            return res.status(404).send('Auto mit gegebener ID wurde nicht gefunden.')
+        }
+
+    } catch (error) {
+
+    }
+
+})
+
+// DEV ROUTE
+usedDealerRouter.delete('/all', async (req: Request, res: Response) => {
+    await SellingCars.deleteMany();
+
+    res.send('Alle Autos im Markt gelöscht.');
 })
 
 export default usedDealerRouter;

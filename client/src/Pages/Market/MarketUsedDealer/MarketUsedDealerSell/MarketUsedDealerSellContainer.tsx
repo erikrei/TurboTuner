@@ -1,37 +1,15 @@
 import { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
 
 type MarketUsedDealerSellContainerProps = {
   activeCarId: string;
+  handleSellClick: (car_id: string, car_price: number) => void;
 };
 
 export default function MarketUsedDealerSellContainer({
   activeCarId,
+  handleSellClick,
 }: MarketUsedDealerSellContainerProps) {
   const [sellingPrice, setSellingPrice] = useState("");
-  const navigate = useNavigate();
-
-  function handleSellingPriceChange(
-    event: React.ChangeEvent<HTMLInputElement>
-  ) {
-    const { value } = event.target;
-    setSellingPrice(value);
-  }
-
-  function handleSellClick() {
-    axios
-      .post(
-        `http://localhost:3000/useddealer/${activeCarId}`,
-        {
-          price: Number(sellingPrice),
-        },
-        { withCredentials: true }
-      )
-      .then((response) => {
-        navigate("..");
-      });
-  }
 
   return (
     <div className="user-car-sell-container">
@@ -40,9 +18,14 @@ export default function MarketUsedDealerSellContainer({
         type="number"
         name="selling-price"
         id="selling-price"
-        onChange={(event) => handleSellingPriceChange(event)}
+        value={sellingPrice}
+        onChange={(event) => setSellingPrice(event.target.value)}
       />
-      <button onClick={handleSellClick}>Verkaufen</button>
+      <button
+        onClick={() => handleSellClick(activeCarId, Number(sellingPrice))}
+      >
+        Verkaufen
+      </button>
     </div>
   );
 }

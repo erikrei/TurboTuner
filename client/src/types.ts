@@ -131,7 +131,8 @@ export type TSellingCar = Omit<TUserCar, 'tuning_information'> & {
 }
 
 export type TSellingCarBid = {
-    amount: number,
+    _id: string
+    amount: number
     bid_user: string
 }
 

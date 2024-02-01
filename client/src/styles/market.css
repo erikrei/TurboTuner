@@ -179,14 +179,13 @@ section.used-cars-container {
     }
 
     > div.buying-bids-container {
-        
         > h2 {
-            margin-bottom: .5rem;
+            margin-bottom: 0.5rem;
         }
 
         > div.single-bid {
             display: flex;
-            gap: .5rem;
+            gap: 0.5rem;
             font-weight: bold;
         }
     }
@@ -224,9 +223,23 @@ section.used-cars-container {
 }
 
 section.user-cars {
-    
-    > p:hover {
-        cursor: pointer;
-        font-weight: bold;
+    > div.user-cars-list {
+        > p:hover {
+            cursor: pointer;
+            font-weight: bold;
+        }
+    }
+}
+
+section.user-selling-cars {
+    > div.selling-cars-list {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        > article.selling-car {
+            padding: .5rem;
+            border: 2px solid white;
+        }
     }
 }
