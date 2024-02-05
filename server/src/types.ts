@@ -110,3 +110,20 @@ export type TSellingCarBid = {
     amount: number,
     bid_user: string
 }
+
+export type TBuildings = {
+    user_id: string
+    buildings: TBuildingInformation[]
+}
+
+export type TBuildingInformation = {
+    buildingName: string
+    buildingLevel: number
+    buildingImprovement?: TBuildingImprovement
+}
+
+export type TBuildingImprovement = {
+    buildingNextLevel: number
+    buildingNextLevelCost: number
+    buildingNextLevelTime: number
+}
