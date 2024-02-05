@@ -2,15 +2,18 @@ import { Router, Request, Response } from 'express';
 import { MongoError } from 'mongodb';
 import bcrypt from 'bcryptjs';
 
-import { TUser, TUserInfo, TValidInput } from '../types';
+import { TBuildings, TUser, TUserInfo, TValidInput } from '../types';
 
 import User from '../Models/User';
 import UserInfo from '../Models/UserInfo';
 import UserSession from '../Models/UserSession';
+import Buildings from '../Models/Buildings';
 
 import checkValidRegisterInputs from '../Helpers/checkValidRegisterInputs';
 import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
 import getMongooseObjectId from '../Helpers/getMongooseObjectId';
+
+import { initialBuildingInformation } from '../Data/initBuildings';
 
 const authRouter = Router();
 
@@ -23,8 +26,14 @@ authRouter.post('/register', async (req: Request, res: Response) => {
         try {
             const _id: string = getMongooseObjectId();
             const hashedPassword: string = bcrypt.hashSync(password);
-            const userResponse = await User.create<TUser>({ _id, username, password: hashedPassword });
-            const userInfoResponse = await UserInfo.create<TUserInfo>({ _id, username, money: 100000, points: 0, firstLogin: true });
+            await User.create<TUser>({ _id, username, password: hashedPassword });
+            await UserInfo.create<TUserInfo>({ _id, username, money: 100000, points: 0, firstLogin: true });
+            await Buildings.create<TBuildings>({
+                user_id: _id,
+                buildings: [
+                    initialBuildingInformation
+                ]
+            })
         } catch (error) {
             if ((error as MongoError).code === 11000) {
                 validInput.feedbackMsg = 'Benutzername ist bereits vergeben.';
