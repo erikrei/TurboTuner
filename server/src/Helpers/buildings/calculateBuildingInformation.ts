@@ -2,11 +2,12 @@ import { TBuildingImprovement } from "../../types";
 
 export default function calculateBuildingInformation(buildingName: string, buildingLevel: number): TBuildingImprovement | undefined {
     const improvementData = BUILDINGS_IMPROVEMENT_DATA.find((building) => building.buildingName === buildingName);
+    const msNow = new Date().getTime();
 
     if (improvementData) {
         return {
             buildingNextLevel: buildingLevel + 1,
-            buildingNextLevelTime: improvementData.buildingBaseTime * buildingLevel,
+            buildingNextLevelTime: msNow + (improvementData.buildingBaseTime * buildingLevel),
             buildingNextLevelCost: improvementData.buildingBaseCost * buildingLevel
         }
     }
