@@ -1,6 +1,6 @@
 # TurboTuner
 
-!! Derzeit kann die Applikation nur ausgeführt werden, wenn in der Datei `server/src/index.ts` Zeile 46 auskommentiert wird und 47 kommentiert wird. Zusätzlich muss in der Datei `server/src/Configs/saveSession.ts` in Zeile 16 _mongoUriCloud_ in _mongoUri_ geändert werden.
+!! Derzeit kann die Applikation nur ausgeführt werden, wenn in der Datei `server/src/index.ts` Zeile 48 auskommentiert wird und 49 kommentiert wird. Zusätzlich muss in der Datei `server/src/Configs/saveSession.ts` in Zeile 16 _mongoUriCloud_ in _mongoUri_ geändert werden.
 Der Vorgang ist nötig, da ich in der Entwicklung mit einer Cloud-Datenbank arbeite, während die Applikation für externe Benutzer mit einer Datenbank im Docker Container funktioniert.
 
 Die Applikation kann gestart werden, indem das Projekt mit `git clone https://github.com/erikrei/TurboTuner.git` kopiert wird. Danach muss man ins Verzeichnis des Projekts und folgenden Befehl eingeben: `docker compose up`. Nach kurzer Zeit ist die Applikation unter folgender Adresse erreichbar: `http://localhost:4200/`
