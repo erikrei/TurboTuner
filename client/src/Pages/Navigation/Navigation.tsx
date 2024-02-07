@@ -1,4 +1,5 @@
 import { FaWarehouse, FaHome, FaStore, FaRoad } from "react-icons/fa";
+import { BsBuildingsFill } from "react-icons/bs";
 import { TbEngine } from "react-icons/tb";
 
 import "../../styles/navigation.css";
@@ -17,6 +18,11 @@ export default function Navigation() {
       <NavigationLink icon={<FaRoad />} linkName="Rennen" path="race" />
       <NavigationLink icon={<FaWarehouse />} linkName="Garage" path="garage" />
       <NavigationLink icon={<FaStore />} linkName="Markt" path="market" />
+      <NavigationLink
+        icon={<BsBuildingsFill />}
+        linkName="Gebäude"
+        path="buildings"
+      />
     </nav>
   );
 }
