@@ -67,7 +67,8 @@ carRouter.post('/addToUser', checkIfSessionHasUser, async (req: Request, res: Re
 
         const _id = getMongooseObjectId();
 
-        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name, tuning_components: basicTuningComponents(generalCarResponse.quality) })
+        const tuning_components = await basicTuningComponents(generalCarResponse.quality, user_id)
+        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name, tuning_components })
 
         const userInfoResponse = await UserInfo.findByIdAndUpdate(user_id, {
             $inc: {
@@ -100,7 +101,8 @@ carRouter.post('/addToUserFirstCar', checkIfSessionHasUser, async (req: Request,
 
     try {
         const _id = getMongooseObjectId();
-        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name, tuning_components: basicTuningComponents() });
+        const tuning_components = await basicTuningComponents(3, user_id);
+        const userCarResponse = await UserCar.create<TUserCar>({ _id, user_id, name, tuning_components });
         const userInfoResponse = await UserInfo.findByIdAndUpdate<TUserInfo>(user_id, { firstLogin: false, activeCar: userCarResponse });
         return res.send(`Das Auto ${name} wurde erfolgreich hinzugefügt.`);
     } catch (error) {
