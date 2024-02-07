@@ -35,6 +35,7 @@ import MarketUsedDealerSell from "./Pages/Market/MarketUsedDealer/MarketUsedDeal
 import MarketUsedDealerSingleView from "./Pages/Market/MarketUsedDealer/MarketUsedDealerSingleView";
 import Race from "./Pages/Race/Race";
 import RaceRanking from "./Pages/Race/RaceRanking";
+import Buildings from "./Pages/Buildings/Buildings";
 
 const router = createBrowserRouter([
   {
@@ -116,6 +117,10 @@ const router = createBrowserRouter([
       {
         path: "race/ranking",
         element: <RaceRanking />,
+      },
+      {
+        path: "buildings",
+        element: <Buildings />,
       },
     ],
   },
