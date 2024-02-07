@@ -15,6 +15,7 @@ import getTuningImprovement from '../Helpers/getTuningImprovement';
 const tuningRouter = Router();
 
 tuningRouter.put('/car/:id', checkIfSessionHasUser, async (req: Request, res: Response) => {
+    const user_id = req.session.user._id;
     const car_id: string = req.params.id;
     const { component_name, new_component_level, fast_tuning, car_name } = req.body;
     const tuning_start = new Date().getTime();
@@ -27,7 +28,8 @@ tuningRouter.put('/car/:id', checkIfSessionHasUser, async (req: Request, res: Re
 
         const car_quality = generalCarResponse.quality;
 
-        const tuning_end = tuning_start + getTuningTime(new_component_level, fast_tuning, car_quality);
+        const tuning_time = await getTuningTime(new_component_level, fast_tuning, car_quality, user_id);
+        const tuning_end = tuning_start + tuning_time;
 
         return res.json(await UserCar.findByIdAndUpdate<TUserCar>(car_id, {
             tuning_information: {
@@ -64,7 +66,7 @@ tuningRouter.put('/finish/:id', checkIfSessionHasUser, async (req: Request, res:
             if (tuning_component) {
                 tuning_component.component_level = new_component_level;
                 tuning_component.tuning_cost = getTuningCost(new_component_level + 1, generalCarResponse.quality);
-                tuning_component.tuning_time = getTuningTime(new_component_level + 1, false, generalCarResponse.quality);
+                tuning_component.tuning_time = await getTuningTime(new_component_level + 1, false, generalCarResponse.quality, userCarResponse.user_id);
                 tuning_component.tuning_improvement = getTuningImprovement(component_name, new_component_level, generalCarResponse.quality)
             };
 
@@ -140,7 +142,7 @@ tuningRouter.put('/dev/finish/:id', async (req: Request, res: Response) => {
             if (tuning_component_to_change) {
                 tuning_component_to_change.component_level = component_level;
                 tuning_component_to_change.tuning_cost = getTuningCost(component_level + 1, car_quality);
-                tuning_component_to_change.tuning_time = getTuningTime(component_level + 1, false, car_quality);
+                tuning_component_to_change.tuning_time = await getTuningTime(component_level + 1, false, car_quality, userCarResponse.user_id);
                 tuning_component_to_change.tuning_improvement = getTuningImprovement(component_name, component_level, car_quality);
             }
 
