@@ -15,6 +15,7 @@ import generalCarsLoader from "./Loaders/generalCarsLoader";
 import scrapyardDataLoader from "./Loaders/scrapyardDataLoader";
 import usedCarsLoader from "./Loaders/usedCarsLoader";
 import usedSingleCarLoader from "./Loaders/usedSingleCarLoader";
+import buildingsLoader from "./Loaders/buildingsLoader";
 
 import Authentication, {
   Login,
@@ -121,6 +122,7 @@ const router = createBrowserRouter([
       {
         path: "buildings",
         element: <Buildings />,
+        loader: buildingsLoader,
       },
     ],
   },

@@ -148,3 +148,21 @@ export type TError = {
     showError: boolean
     errorMessage: string
 }
+
+export type TBuildings = {
+    user_id: string
+    buildings: TBuildingInformation[]
+}
+
+export type TBuildingInformation = {
+    _id: string
+    buildingName: string
+    buildingLevel: number
+    buildingImprovement?: TBuildingImprovement
+}
+
+export type TBuildingImprovement = {
+    buildingNextLevel: number
+    buildingNextLevelCost: number
+    buildingNextLevelTime: number
+}
