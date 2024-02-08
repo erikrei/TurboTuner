@@ -6,10 +6,24 @@ div.single-building {
     > div.building-text {
         display: flex;
         flex-direction: column;
-        gap: 0.5rem;
+        gap: 1rem;
 
         > h3.building-header {
             font-size: 1.5rem;
+
+            > span.building-level {
+                margin-left: 0.5rem;
+                padding: 0.25rem 1rem;
+                border-radius: 0.5rem;
+                background-color: var(--auth-focus-outline-color);
+                color: var(--auth-active-bg-color);
+            }
+        }
+
+        > p.building-description {
+            font-size: 1.1rem;
+            line-height: 1.5;
+            letter-spacing: 1px;
         }
     }
 

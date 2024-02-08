@@ -67,7 +67,7 @@ buildingsRouter.put('/improvement/improve', checkIfSessionHasUser, async (req: R
                     if (buildingImprovementObject) {
                         await UserInfo.findByIdAndUpdate(user_id, {
                             $inc: {
-                                money: -buildingImprovementObject.buildingNextLevelCost
+                                money: -building.buildingLevelUpCost
                             }
                         })
 
@@ -86,8 +86,6 @@ buildingsRouter.put('/improvement/improve', checkIfSessionHasUser, async (req: R
     }
 })
 
-// PUT /buildings/improvement/cancel Bricht die Verbesserung des Gebäudes ab
-
 buildingsRouter.put('/improvement/cancel', checkIfSessionHasUser, async (req: Request, res: Response) => {
     const user_id = req.session.user._id;
     const { buildingName } = req.body;
@@ -104,7 +102,7 @@ buildingsRouter.put('/improvement/cancel', checkIfSessionHasUser, async (req: Re
                 } else {
                     await UserInfo.findByIdAndUpdate(user_id, {
                         $inc: {
-                            money: building.buildingImprovement.buildingNextLevelCost
+                            money: building.buildingLevelUpCost
                         }
                     })
 
@@ -135,10 +133,12 @@ buildingsRouter.put('/finish', checkIfSessionHasUser, async (req: Request, res: 
                 if (building.buildingImprovement) {
                     const msNow = new Date().getTime();
 
-                    if (msNow < building.buildingImprovement.buildingNextLevelTime) {
+                    if (msNow < building.buildingImprovement.buildingImprovementEnd) {
                         return res.status(400).send(`Verbesserung von ${buildingName} ist noch nicht abgeschlossen.`)
                     } else {
                         building.buildingLevel = building.buildingImprovement.buildingNextLevel;
+                        building.buildingLevelUpCost = building.buildingLevelUpCost * building.buildingLevel;
+                        building.buildingLevelUpTime = building.buildingLevelUpTime * building.buildingLevel;
                         building.buildingImprovement = undefined;
 
                         await buildingsResponse.save();

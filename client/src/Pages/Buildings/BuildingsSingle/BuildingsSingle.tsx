@@ -10,10 +10,7 @@ type BuildingsSingleProps = {
 export default function BuildingsSingle({ building }: BuildingsSingleProps) {
   return (
     <div className="single-building">
-      <BuildingsSingleText
-        name={building.buildingName}
-        level={building.buildingLevel}
-      />
+      <BuildingsSingleText building={building} />
       <BuildingsSingleImage imgName={building.buildingName} />
     </div>
   );

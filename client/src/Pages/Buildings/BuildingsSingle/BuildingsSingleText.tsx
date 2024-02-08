@@ -1,23 +1,28 @@
 import { BUILDINGS_DESCRIPTIONS } from "../../../data/BUILDINGS_DESCRIPTIONS";
+import { TBuildingInformation } from "../../../types";
+
+import BuildingsSingleEnhancementInfo from "./BuildingsSingleEnhancementInfo";
 
 type BuildingsSingleTextProps = {
-  name: string;
-  level: number;
+  building: TBuildingInformation;
 };
 
 export default function BuildingsSingleText({
-  name,
-  level,
+  building,
 }: BuildingsSingleTextProps) {
   const description = BUILDINGS_DESCRIPTIONS.find(
-    (building) => building.buildingName === name
+    (building) => building.buildingName === building.buildingName
   )?.buildingDescription;
 
   return (
     <div className="building-text">
       <h3 className="building-header">
-        {name} [{level}]
+        {building.buildingName}
+        <span className="building-level">
+          {building.buildingLevel}/{building.buildingMaximumLevel}
+        </span>
       </h3>
+      <BuildingsSingleEnhancementInfo building={building} />
       <p className="building-description">{description}</p>
     </div>
   );

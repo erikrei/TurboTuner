@@ -7,8 +7,8 @@ export default function calculateBuildingInformation(buildingName: string, build
     if (improvementData) {
         return {
             buildingNextLevel: buildingLevel + 1,
-            buildingNextLevelTime: msNow + (improvementData.buildingBaseTime * buildingLevel),
-            buildingNextLevelCost: improvementData.buildingBaseCost * buildingLevel
+            buildingImprovementStart: msNow,
+            buildingImprovementEnd: msNow + (improvementData.buildingBaseTime * buildingLevel),
         }
     }
 
