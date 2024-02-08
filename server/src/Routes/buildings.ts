@@ -72,7 +72,7 @@ buildingsRouter.put('/improvement/improve', checkIfSessionHasUser, async (req: R
                         })
 
                         await buildingsResponse.save();
-                        return res.json(buildingsResponse);
+                        return res.json(building);
                     } else {
                         return res.status(400).send('Unbekannter Fehler aufgetreten.');
                     }
@@ -108,7 +108,7 @@ buildingsRouter.put('/improvement/cancel', checkIfSessionHasUser, async (req: Re
 
                     building.buildingImprovement = undefined;
                     await buildingsResponse.save();
-                    return res.json(buildingsResponse);
+                    return res.json(building);
                 }
             } else {
                 return res.status(404).send(`Gebäude ${buildingName} nicht gefunden.`);
@@ -143,7 +143,7 @@ buildingsRouter.put('/finish', checkIfSessionHasUser, async (req: Request, res: 
 
                         await buildingsResponse.save();
 
-                        return res.json(buildingsResponse);
+                        return res.json(building);
                     }
 
                 } else {
