@@ -119,11 +119,14 @@ export type TBuildings = {
 export type TBuildingInformation = {
     buildingName: string
     buildingLevel: number
+    buildingMaximumLevel: number
+    buildingLevelUpCost: number
+    buildingLevelUpTime: number
     buildingImprovement?: TBuildingImprovement
 }
 
 export type TBuildingImprovement = {
     buildingNextLevel: number
-    buildingNextLevelCost: number
-    buildingNextLevelTime: number
+    buildingImprovementStart: number
+    buildingImprovementEnd: number
 }

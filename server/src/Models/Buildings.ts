@@ -7,11 +7,14 @@ const BuildingsSchema = new Schema<TBuildings>({
     buildings: [{
         buildingName: String,
         buildingLevel: Number,
+        buildingMaximumLevel: Number,
+        buildingLevelUpCost: Number,
+        buildingLevelUpTime: Number,
         buildingImprovement: {
             type: {
                 buildingNextLevel: Number,
-                buildingNextLevelCost: Number,
-                buildingNextLevelTime: Number
+                buildingImprovementStart: Number,
+                buildingImprovementEnd: Number
             },
             required: false
         }

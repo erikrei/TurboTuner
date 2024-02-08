@@ -30,9 +30,7 @@ authRouter.post('/register', async (req: Request, res: Response) => {
             await UserInfo.create<TUserInfo>({ _id, username, money: 100000, points: 0, firstLogin: true });
             await Buildings.create<TBuildings>({
                 user_id: _id,
-                buildings: [
-                    initialBuildingInformation
-                ]
+                buildings: initialBuildingInformation
             })
         } catch (error) {
             if ((error as MongoError).code === 11000) {
