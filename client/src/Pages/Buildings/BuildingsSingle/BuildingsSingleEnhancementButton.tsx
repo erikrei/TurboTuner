@@ -1,5 +1,7 @@
-import { TBuildingInformation, TBuildingImprovement } from "../../../types";
+import { TBuildingInformation } from "../../../types";
 import axios from "axios";
+
+import { useUserInfo } from "../../../Contexts/UserInfoContext";
 
 type BuildingsSingleEnhancementButtonProps = {
   building: TBuildingInformation;
@@ -12,9 +14,16 @@ export default function BuildingsSingleEnhancementButton({
   setBuildings,
   buildings,
 }: BuildingsSingleEnhancementButtonProps) {
+  const { userInfo, setUserInfo } = useUserInfo();
+
   let disableEnhancementButton = true;
 
   if (!building.buildingImprovement) disableEnhancementButton = false;
+
+  if (userInfo) {
+    if (userInfo.money < building.buildingLevelUpCost)
+      disableEnhancementButton = true;
+  }
 
   function handleEnhancementBuildingClick() {
     axios
@@ -34,6 +43,11 @@ export default function BuildingsSingleEnhancementButton({
           }
         });
         setBuildings(updatedBuildings);
+        userInfo &&
+          setUserInfo({
+            ...userInfo,
+            money: userInfo.money - data.buildingLevelUpCost,
+          });
       });
   }
 

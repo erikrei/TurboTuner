@@ -137,8 +137,8 @@ buildingsRouter.put('/finish', checkIfSessionHasUser, async (req: Request, res: 
                         return res.status(400).send(`Verbesserung von ${buildingName} ist noch nicht abgeschlossen.`)
                     } else {
                         building.buildingLevel = building.buildingImprovement.buildingNextLevel;
-                        building.buildingLevelUpCost = building.buildingLevelUpCost * building.buildingLevel;
-                        building.buildingLevelUpTime = building.buildingLevelUpTime * building.buildingLevel;
+                        building.buildingLevelUpCost = building.buildingBaseCost * building.buildingLevel;
+                        building.buildingLevelUpTime = building.buildingBaseTime * building.buildingLevel;
                         building.buildingImprovement = undefined;
 
                         await buildingsResponse.save();
