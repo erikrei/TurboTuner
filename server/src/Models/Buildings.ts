@@ -8,6 +8,8 @@ const BuildingsSchema = new Schema<TBuildings>({
         buildingName: String,
         buildingLevel: Number,
         buildingMaximumLevel: Number,
+        buildingBaseCost: Number,
+        buildingBaseTime: Number,
         buildingLevelUpCost: Number,
         buildingLevelUpTime: Number,
         buildingImprovement: {

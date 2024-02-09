@@ -7,11 +7,11 @@ export default function getTimeStringFromMilliseconds(ms: number): string {
     let timeString = "";
 
     if (dateHours > 0) {
-        timeString += dateHours + 'h';
+        timeString += dateHours + 'h ';
     }
 
     if (dateMinutes > 0) {
-        timeString += dateMinutes + 'min';
+        timeString += dateMinutes + 'min ';
     }
 
     if (dateSeconds > 0) {

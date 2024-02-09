@@ -120,6 +120,8 @@ export type TBuildingInformation = {
     buildingName: string
     buildingLevel: number
     buildingMaximumLevel: number
+    buildingBaseCost: number
+    buildingBaseTime: number
     buildingLevelUpCost: number
     buildingLevelUpTime: number
     buildingImprovement?: TBuildingImprovement
