@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { TBuildingInformation } from "../../../types";
 
 import getTimeStringFromMilliseconds from "../../../Helpers/getTimeStringFromMilliseconds";
+import updateBuildingLevel from "../../../Helpers/Buildings/updateBuildingLevel";
 
 type BuildingsSingleTimerProps = {
   building: TBuildingInformation;
@@ -21,7 +22,12 @@ export default function BuildingsSingleTimer({
       if (building.buildingImprovement) {
         const now = new Date().getTime();
         const endTime = building.buildingImprovement.buildingImprovementEnd;
-        setTimer(endTime - now);
+        const remainingEnhancementTime = endTime - now;
+        setTimer(remainingEnhancementTime);
+
+        if (remainingEnhancementTime < 0) {
+          updateBuildingLevel(building, buildings, setBuildings);
+        }
       }
     }, 1000);
 
