@@ -1,6 +1,6 @@
 import { TBuildingInformation } from "../../../types";
 
-import updateBuildingLevel from "../../../Helpers/Buildings/updateBuildingLevel";
+// import updateBuildingLevel from "../../../Helpers/Buildings/updateBuildingLevel";
 import BuildingsSingleTimer from "./BuildingsSingleTimer";
 import BuildingsSingleEnhancementCancelButton from "./BuildingsSingleEnhancementCancelButton";
 
@@ -22,7 +22,7 @@ export default function BuildingsSingleCheckEnhancement({
     const endTime = building.buildingImprovement.buildingImprovementEnd;
 
     if (now > endTime) {
-      return updateBuildingLevel(building, buildings, setBuildings);
+      // return updateBuildingLevel(building, buildings, setBuildings);
     }
   }
 
