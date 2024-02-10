@@ -2,19 +2,17 @@ import { TBuildingInformation } from "../../../types";
 import axios from "axios";
 
 import { useUserInfo } from "../../../Contexts/UserInfoContext";
+import { useBuildings } from "../../../Contexts/BuildingsContext";
 
 type BuildingsSingleEnhancementButtonProps = {
   building: TBuildingInformation;
-  setBuildings: React.Dispatch<React.SetStateAction<TBuildingInformation[]>>;
-  buildings: TBuildingInformation[];
 };
 
 export default function BuildingsSingleEnhancementButton({
   building,
-  setBuildings,
-  buildings,
 }: BuildingsSingleEnhancementButtonProps) {
   const { userInfo, setUserInfo } = useUserInfo();
+  const { buildings, setBuildings } = useBuildings();
 
   let disableEnhancementButton = true;
 

@@ -4,18 +4,17 @@ import { TBuildingInformation } from "../../../types";
 import getTimeStringFromMilliseconds from "../../../Helpers/getTimeStringFromMilliseconds";
 import updateBuildingLevel from "../../../Helpers/Buildings/updateBuildingLevel";
 
+import { useBuildings } from "../../../Contexts/BuildingsContext";
+
 type BuildingsSingleTimerProps = {
   building: TBuildingInformation;
-  setBuildings: React.Dispatch<React.SetStateAction<TBuildingInformation[]>>;
-  buildings: TBuildingInformation[];
 };
 
 export default function BuildingsSingleTimer({
   building,
-  setBuildings,
-  buildings,
 }: BuildingsSingleTimerProps) {
   const [timer, setTimer] = useState<number | null>(null);
+  const { buildings, setBuildings } = useBuildings();
 
   useEffect(() => {
     const enhancementCountdown = setInterval(() => {

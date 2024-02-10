@@ -4,17 +4,17 @@ import updateBuildingLevel from "../../../Helpers/Buildings/updateBuildingLevel"
 import BuildingsSingleTimer from "./BuildingsSingleTimer";
 import BuildingsSingleEnhancementCancelButton from "./BuildingsSingleEnhancementCancelButton";
 
+import { useBuildings } from "../../../Contexts/BuildingsContext";
+
 type BuildingsSingleCheckEnhancementProps = {
   building: TBuildingInformation;
-  setBuildings: React.Dispatch<React.SetStateAction<TBuildingInformation[]>>;
-  buildings: TBuildingInformation[];
 };
 
 export default function BuildingsSingleCheckEnhancement({
   building,
-  setBuildings,
-  buildings,
 }: BuildingsSingleCheckEnhancementProps) {
+  const { buildings, setBuildings } = useBuildings(); 
+
   if (!building.buildingImprovement) return null;
 
   if (building.buildingImprovement) {
@@ -30,13 +30,9 @@ export default function BuildingsSingleCheckEnhancement({
     <div className="single-building-improvement">
       <BuildingsSingleTimer
         building={building}
-        buildings={buildings}
-        setBuildings={setBuildings}
       />
       <BuildingsSingleEnhancementCancelButton
         building={building}
-        buildings={buildings}
-        setBuildings={setBuildings}
       />
     </div>
   );
