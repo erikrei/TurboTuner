@@ -33,6 +33,8 @@ export default function BuildingsSingleEnhancementCancelButton({
           setUserInfo({
             ...userInfo,
             money: userInfo.money + data.buildingLevelUpCost,
+            points:
+              userInfo.points - Math.round(data.buildingLevelUpCost / 1000),
           });
       });
   }

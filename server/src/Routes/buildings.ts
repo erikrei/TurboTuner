@@ -67,7 +67,8 @@ buildingsRouter.put('/improvement/improve', checkIfSessionHasUser, async (req: R
                     if (buildingImprovementObject) {
                         await UserInfo.findByIdAndUpdate(user_id, {
                             $inc: {
-                                money: -building.buildingLevelUpCost
+                                money: -building.buildingLevelUpCost,
+                                points: Math.round(building.buildingLevelUpCost / 1000)
                             }
                         })
 
@@ -102,7 +103,8 @@ buildingsRouter.put('/improvement/cancel', checkIfSessionHasUser, async (req: Re
                 } else {
                     await UserInfo.findByIdAndUpdate(user_id, {
                         $inc: {
-                            money: building.buildingLevelUpCost
+                            money: building.buildingLevelUpCost,
+                            points: -Math.round(building.buildingLevelUpCost / 1000)
                         }
                     })
 
