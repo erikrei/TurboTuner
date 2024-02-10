@@ -6,14 +6,10 @@ import BuildingsSingleEnhancementButton from "./BuildingsSingleEnhancementButton
 
 type BuildingsSingleTextProps = {
   building: TBuildingInformation;
-  setBuildings: React.Dispatch<React.SetStateAction<TBuildingInformation[]>>;
-  buildings: TBuildingInformation[];
 };
 
 export default function BuildingsSingleText({
   building,
-  setBuildings,
-  buildings,
 }: BuildingsSingleTextProps) {
   const description = BUILDINGS_DESCRIPTIONS.find(
     (building) => building.buildingName === building.buildingName
@@ -31,8 +27,6 @@ export default function BuildingsSingleText({
       <p className="building-description">{description}</p>
       <BuildingsSingleEnhancementButton
         building={building}
-        setBuildings={setBuildings}
-        buildings={buildings}
       />
     </div>
   );
