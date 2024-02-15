@@ -2,7 +2,7 @@ import { Router, Request, Response } from 'express';
 import { MongoError } from 'mongodb';
 import bcrypt from 'bcryptjs';
 
-import { TBuildings, TUser, TUserInfo, TValidInput } from '../types';
+import { TBuildings, TUser, TUserInfo, TValidInput, TUserCar } from '../types';
 
 import User from '../Models/User';
 import UserInfo from '../Models/UserInfo';
@@ -14,6 +14,9 @@ import checkIfSessionHasUser from '../Helpers/checkIfSessionHasUser';
 import getMongooseObjectId from '../Helpers/getMongooseObjectId';
 
 import { initialBuildingInformation } from '../Data/initBuildings';
+
+import UserCar from '../Models/UserCar';
+import basicTuningComponents from '../Helpers/basicTuningComponents';
 
 const authRouter = Router();
 
@@ -81,6 +84,27 @@ authRouter.post('/logout', checkIfSessionHasUser, async (req, res) => {
     }
 
     res.status(500).send('Benutzer konnte aus unbekannten Gründen nicht ausgeloggt werden.');
+})
+
+
+// DEV ROUTE: Registriert X Anzahl von zufälligen Benutzern aus Testgründen
+authRouter.post('/dev/registerUsers/:count', async (req: Request, res: Response) => {
+    const count = Number(req.params.count);
+
+    if (isNaN(count)) return res.send(':count ist keine Zahl');
+
+    try {
+        for (let i = 0; i < count; i++) {
+            const username = (+new Date * Math.random()).toString(36).substring(0, 6);
+            const _id: string = getMongooseObjectId();
+            const points = Math.floor(Math.random() * (134213 - 1500 + 1) + 1500);
+            await UserInfo.create<TUserInfo>({ _id, username, money: 100000, points, firstLogin: false });
+        }
+
+        return res.send('Test');
+    } catch (error) {
+        console.log(error);
+    }
 })
 
 export default authRouter;

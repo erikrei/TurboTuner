@@ -19,6 +19,7 @@ import savedRaceRouter from './Routes/savedrace';
 import scrapyardRouter from './Routes/scrapyard';
 import usedDealerRouter from './Routes/useddealer';
 import buildingsRouter from './Routes/buildings';
+import rankedRouter from './Routes/ranked';
 
 import { runRaces } from './Configs/cronJobs';
 
@@ -40,6 +41,7 @@ app.use('/savedrace', savedRaceRouter);
 app.use('/scrapyard', scrapyardRouter);
 app.use('/useddealer', usedDealerRouter);
 app.use('/buildings', buildingsRouter);
+app.use('/ranked', rankedRouter);
 
 
 app.listen(PORT, async () => {
